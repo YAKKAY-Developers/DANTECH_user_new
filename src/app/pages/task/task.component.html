@@ -1,0 +1,40 @@
+<div class="card">
+    <form #invoiceForm="ngForm" (ngSubmit)="generatePDF(invoiceForm.value)">
+      <!-- Customer Information -->
+      <div class="row">
+      <div class="col-3">
+        <label for="customerName">Customer Name:</label>
+        </div>
+        <div class="col-8">
+        <input class="form-control" type="text" id="customerName" name="customerName" ngModel required>
+      </div>
+    </div>
+  
+      <!-- Product Information Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Cost</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; let i = index">
+            <td><input class="form-control"  type="text" name="products[{{i}}].name" [(ngModel)]="product.name" required></td>
+            <td><input class="form-control" type="number" name="products[{{i}}].cost" [(ngModel)]="product.cost" required></td>
+            <td><input class="form-control"  type="number" name="products[{{i}}].quantity" [(ngModel)]="product.quantity" required></td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <button type="button" class="form-control"  (click)="addProduct()">Add Product</button>
+  
+      <!-- Display Total Cost -->
+      <div>Total Cost: {{ calculateTotalCost() | currency }}</div>
+  
+      <!-- Generate PDF Button -->
+      <button class="form-control" type="submit">Generate PDF</button>
+    </form>
+  </div>
+  

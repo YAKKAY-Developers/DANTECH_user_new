@@ -1,0 +1,47 @@
+<section *ngFor='let ts of user_data'>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Bank details</h4>
+                <h5 class="card-subtitle text-muted">Payment
+                    informations</h5><br>
+                <div class="row">
+                    <div class="col-5">
+                        <h5 class="mb-0 fw-normal ms-3">Bank account number</h5><br>
+                    </div>
+                    <div class="col-7">
+                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{ts.bankacnumber}}</h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-5">
+                        <h5 class="mb-0 fw-normal ms-3">IFSC number</h5><br>
+                    </div>
+                    <div class="col-7">
+                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{ts.ifsc}}</h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-5">
+                        <h5 class="mb-0 fw-normal ms-3">Bank branch</h5><br>
+                    </div>
+                    <div class="col-7">
+                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{ts.bankbranch}}</h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-5">
+                        <h5 class="mb-0 fw-normal ms-3">UPI id</h5><br>
+                    </div>
+                    <div class="col-7">
+                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{ts.upiid}}</h5>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</section>

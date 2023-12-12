@@ -1,0 +1,107 @@
+<div class="card">
+
+
+    <div class="card-body">
+
+
+        <!-- title -->
+        <h4 class="card-title">Top Orders</h4>
+
+
+        <h5 class="card-subtitle">Overview of the projects</h5>
+
+        <div class="row">
+            <div class="col-11">
+                <input class="form-control" type="text" name="search" [(ngModel)]="searchText"
+                    (ngModelChange)="filterData()" autocomplete="off" placeholder="Find your orders">
+            </div>
+            <div class="col-1">
+                <button class="btn btn-primary btn-sm" (click)="exportToCSV()"><i class="bi bi-download"></i></button>
+            </div>
+        </div>
+
+
+        <!-- title -->
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th (click)="sortColumn('workOrder')" class="text-dark font-medium fs-4">Work Order &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th (click)="sortColumn('woStatus')" class="text-dark font-medium fs-4">Status &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th (click)="sortColumn('doctor')" class="text-dark font-medium fs-4">Patient &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th (click)="sortColumn('date')" class="text-dark font-medium fs-4">Required &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th (click)="sortColumn('product')" class="text-dark font-medium fs-4">Product &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th class="text-dark font-medium fs-4">Files</th>
+                        <th class="text-dark font-medium fs-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let ts of filteredData'>
+                        <td class="fs-4">
+                            {{ts.workOrder}}
+                        </td>
+                        <td>
+                            <!-- <span class="p-2 bg-{{ts.status}} rounded-circle d-inline-block ms-3"></span> -->
+                            <span>{{ts.woStatus}}</span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img [src]=ts.image alt="user" width="45" class="rounded-circle">
+                                <div class="ms-3">
+                                    <h5 class="mb-0 font-medium">{{ts.doctor}}</h5>
+                                    <span class="text-muted">{{ts.doctorId}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <h5 class="mb-0 fw-normal">{{ts.date}}</h5>
+                        </td>
+                        <td class="fs-4">
+                            {{ts.product}}
+                        </td>
+                        <td class="fs-4">
+                            <img [src]="ts.files" alt="user" width="50">
+                        </td>
+                        <td>
+                            <button class="btn btn-light-primary btn-sm"
+                                [routerLink]="['/pages/orderdetail/',ts.workOrder]"><i class="bi bi-info"></i></button>
+                            &nbsp;
+
+                            <button *ngIf="ts.woStatus === 'Yet to start'" class="btn btn-warning btn-sm"><i
+                                    class="bi bi-person-plus"></i></button>
+                            <button *ngIf="ts.woStatus === 'In Production'" class="btn btn-warning disabled btn-sm"><i
+                                    class="bi bi-person-plus"></i></button>
+                            &nbsp;
+                            <button *ngIf="ts.woStatus === 'Yet to start'" class="btn btn-success btn-sm"
+                                value="{{ts.workOrder}}" name="workOrder" (click)="start($event)"><i
+                                    class="bi bi-play"></i></button>
+
+                            <button *ngIf="ts.woStatus === 'In Production'" class="btn btn-secondary disabled btn-sm"><i
+                                    class="bi bi-pause"></i></button>
+
+                        </td>
+
+
+
+
+
+
+
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+
+</div>

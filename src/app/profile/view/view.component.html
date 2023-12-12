@@ -1,0 +1,196 @@
+<section *ngFor='let ts of user_data'>
+    <div class="container ">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="{{ts.image}}" alt="avatar" class="rounded-circle img-fluid" style="width: 184px;">
+                        <br>
+                        <br>
+                        <h3 class="card-title">{{ts.clinicName}}</h3>
+                        <div class="row ">
+                            <div class="d-flex justify-content-center flex-row">
+                                <h5 class="">Clinic Id :</h5>
+                                <h5 class="text-muted"> {{ts.clinicid}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body p-2">
+                        <h4 class="card-title" style="padding-top:7%; padding-left:7%">GST number</h4>
+                        <h5 class="card-subtitle text-muted" style="padding-top:3%; padding-left:7%">{{ts.gst}}</h5>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4" style="text-align:center">
+                                <!-- You can now use it in app.component.html -->
+                                <circle-progress class="circle__progress" [percent]="ts.profilecompletionpercentage"
+                                    [animation]=" true" [animationDuration]="300" [startFromZero]="true"
+                                    [showInnerStroke]="true" [titleFontSize]="'28'" [titleFontWeight]="'900'"
+                                    [unitsFontSize]="'28'" [unitsFontWeight]="'900'" [subtitle]="'Progress'"
+                                    [subtitleFontSize]="'12'" [lazy]="false"></circle-progress>
+                            </div>
+                            <div class="col-8" id="progresdesc">
+                                <h2>Profile completion</h2>
+                                <p>Please complete the profile to make orders</p>
+                                <br>
+                                <button type="submit" class="login-button" [routerLink]="['/det/profile/form']">Complete
+                                    profile</button>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 3%;">
+                            <div class="col-6">
+                                <ul style="list-style-type: none;">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <h5 class="mb-0 fw-normal ms-3">Clinic logo</h5><br>
+                                            </div>
+                                            <div class="col-3">
+                                                <i class="bi bi-x-circle" style="font-size: 23px; color: red;"
+                                                    *ngIf="!img_uploaded"></i>
+                                                <i class="bi bi-check-circle" style="font-size: 23px; color: green;"
+                                                    *ngIf="img_uploaded"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <h5 class="mb-0 fw-normal ms-3">Phone number</h5><br>
+                                            </div>
+                                            <div class="col-3">
+
+                                                <i class="bi bi-check-circle"
+                                                    style="font-size: 23px; color: green;"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <h5 class="mb-0 fw-normal ms-3">Email</h5><br>
+                                            </div>
+                                            <div class="col-3">
+                                                <i class="bi bi-check-circle"
+                                                    style="font-size: 23px; color: green;"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul style="list-style-type: none;">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <h5 class="mb-0 fw-normal ms-3">Address</h5><br>
+                                            </div>
+                                            <div class="col-3">
+                                                <i class="bi bi-check-circle"
+                                                    style="font-size: 23px; color: green;"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <h5 class="mb-0 fw-normal ms-3">GST number</h5><br>
+                                            </div>
+                                            <div class="col-3">
+                                                <i class="bi bi-x-circle" style="font-size: 23px; color: red;"
+                                                    *ngIf="!gst_no"></i>
+                                                <i class="bi bi-check-circle" style="font-size: 23px; color: green;"
+                                                    *ngIf="gst_no"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <h5 class="mb-0 fw-normal ms-3">Doctors list</h5><br>
+                                            </div>
+                                            <div class="col-3">
+                                                <i class="bi bi-x-circle" style="font-size: 23px; color: red;"
+                                                    *ngIf="!doc_count"></i>
+                                                <i class="bi bi-check-circle" style="font-size: 23px; color: green;"
+                                                    *ngIf="doc_count"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Clinic/Hospital information</h4><br>
+            <div class="row">
+                <div class="col-5">
+                    <h5 class="mb-0 fw-normal ms-3">Clinic/Hospital name </h5><br>
+                </div>
+                <div class="col-7">
+                    <h5 class="card-subtitle text-muted">{{ts.clinicName}}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-5">
+                    <h5 class="mb-0 fw-normal ms-3">Number </h5>
+                </div>
+                <div class="col-7">
+                    <h5 class="card-subtitle text-muted">{{ts.phonenumber}}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-5">
+                    <h5 class="mb-0 fw-normal ms-3">Email </h5><br>
+                </div>
+                <div class="col-7">
+                    <h5 class="card-subtitle text-muted">{{ts.email}}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-5">
+                    <h5 class="mb-0 fw-normal ms-3">Address </h5><br>
+                </div>
+                <div class="col-7">
+                    <h5 class="card-subtitle text-muted">{{ts.address}}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-5">
+                    <h5 class="mb-0 fw-normal ms-3">City</h5>
+                </div>
+                <div class="col-7">
+                    <h5 class="card-subtitle text-muted">{{ts.city}}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-5">
+                    <h5 class="mb-0 fw-normal ms-3">State</h5>
+                </div>
+                <div class="col-7">
+                    <h5 class="card-subtitle text-muted">{{ts.state}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="container ">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <!-- title -->
+                    <h4 class="card-title">Doctors</h4>
+                    <h5 class="card-subtitle">Overview of doctors list</h5>
+                    <div class="row">
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="search" [(ngModel)]="searchText"
+                                (ngModelChange)="filterData()" autocomplete="off" placeholder="Find your orders">
+                        </div>
+                        <div class="col-2 align-self-center">
+                            <button class="login-button" data-bs-toggle="modal" data-bs-target="#modalid">Add
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th (click)="sortColumn('doctorid')" class="text-dark font-medium fs-4">
+                                            Doctor ID
+                                            &nbsp; <i class="bi bi-arrow-down-up"></i></th>
+                                        <th (click)="sortColumn('Firstname')" class="text-dark font-medium fs-4">
+                                            First name
+                                            &nbsp; <i class="bi bi-arrow-down-up"></i></th>
+                                        <th (click)="sortColumn('Lastname')" class="text-dark font-medium fs-4">
+                                            Last name &nbsp; <i class="bi bi-arrow-down-up"></i></th>
+                                        <th (click)="sortColumn('Specialisation')" class="text-dark font-medium fs-4">
+                                            Specialization &nbsp; <i class="bi bi-arrow-down-up"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor='let ts of filteredData'>
+                                        <td class="fs-4">
+                                            {{ts.doctorid}}
+                                        </td>
+                                        <td>
+                                            {{ts.Firstname}}
+                                        </td>
+                                        <td>
+                                            {{ts.Lastname}}
+                                        </td>
+                                        <td>
+                                            {{ts.Specialisation}}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="!doc_count">
+                                        <td colspan="3" style="text-align: center;"> No Doctors..! </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalid">
+    <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Doctor details</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                <div class="modal-body">
+
+                    <input type="text" formControlName="First_name" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['First_name'].errors }" placeholder="First name" />
+                    <div *ngIf=" submitted && f['First_name'].errors" class="invalid-feedback">
+                        <div *ngIf="f['First_name'].errors && f['First_name'].errors['required']">First name is
+                            required
+                        </div>
+                    </div><br>
+                    <input type="text" formControlName="Last_name" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['Last_name'].errors }" placeholder="Last name" />
+                    <div *ngIf=" submitted && f['Last_name'].errors" class="invalid-feedback">
+                        <div *ngIf="f['Last_name'].errors && f['Last_name'].errors['required']">Last name is
+                            required
+                        </div>
+                    </div><br>
+                    <input type="text" formControlName="Specialisation" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['Specialisation'].errors }"
+                        placeholder="Specialization" />
+                    <div *ngIf=" submitted && f['Specialisation'].errors" class="invalid-feedback">
+                        <div *ngIf="f['Specialisation'].errors && f['Specialisation'].errors['required']">Specialization
+                            is
+                            required
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" data-bs-dismiss="modal">Add
+                        Doctor</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<!-- authentication.component.html -->
+<div>
+    <h1 class="title"><img src="https://www.dantechdentallab.com/wp-content/uploads/2023/08/header-logo.webp"
+            width="200px">
+    </h1>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <!-- <img src="../../../assets/images/logos/logo-dan.png" alt="Dantech"> -->
+                <h1>Sign in</h1>
+                <!-- <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                </div>
+                <span>or use your account</span> -->
+                <input type="email" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" placeholder="Email" />
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors && f['email'].errors['required']">Username is required</div>
+                </div>
+
+
+                <input type="password" formControlName="password" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" placeholder="Password" />
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors && f['password'].errors['required']">Password is required</div>
+                </div>
+
+
+                <a href="#">Forgot your password?</a>
+                <button type="submit">Sign In</button>
+            </form>
+
+        </div>
+        <div class="form-container sign-in-container">
+            <form [formGroup]="register">
+                <h1>Create Account</h1>
+
+                <input type="text" formControlName="name" class="form-control"
+                    [ngClass]="{ 'is-invalid': reg_submitted && r['name'].errors }" placeholder="Clinic name" />
+                <div *ngIf="reg_submitted&& r['name'].errors" class="invalid-feedback">
+                    <div *ngIf="r['name'].errors && r['name'].errors['required']">Name is required</div>
+                </div>
+
+                <input type="email" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': reg_submitted && r['email'].errors }" placeholder="Email" />
+                <div *ngIf="reg_submitted && r['email'].errors" class="invalid-feedback">
+                    <div *ngIf="r['email'].errors && r['email'].errors['required']">Email is required</div>
+                </div>
+                <div *ngIf="reg_submitted && r['email'].errors" class="invalid-feedback">
+                    <div *ngIf="r['email'].errors && r['email'].errors['email']">Check your email address</div>
+                </div>
+
+                <input type="text" formControlName="address" class="form-control"
+                    [ngClass]="{ 'is-invalid': reg_submitted && r['address'].errors }" placeholder="Address" />
+                <div *ngIf="reg_submitted && r['address'].errors" class="invalid-feedback">
+                    <div *ngIf="r['address'].errors && r['address'].errors['required']">Address is required</div>
+                </div>
+                <div *ngIf="reg_submitted && r['address'].errors" class="invalid-feedback">
+                    <div *ngIf="r['address'].errors && r['address'].errors['maxlength']">Use less than 50 word</div>
+                </div>
+
+                <input type="text" formControlName="phonenumber" class="form-control"
+                    [ngClass]="{ 'is-invalid': reg_submitted && r['phonenumber'].errors }" placeholder="Phone Number" />
+                <div *ngIf="reg_submitted && r['phonenumber'].errors" class="invalid-feedback">
+                    <div *ngIf="r['phonenumber'].errors && r['phonenumber'].errors['required']">Phone number is required
+                    </div>
+                </div>
+                <div *ngIf="reg_submitted && r['phonenumber'].errors" class="invalid-feedback">
+                    <div *ngIf="r['phonenumber'].errors && r['phonenumber'].errors['pattern']">Should contain only
+                        numerals(10)</div>
+                </div>
+
+                <input type="password" formControlName="password" class="form-control"
+                    [ngClass]="{ 'is-invalid': reg_submitted && r['password'].errors }" placeholder="password" />
+                <div *ngIf="reg_submitted && r['password'].errors" class="invalid-feedback">
+                    <div *ngIf="r['password'].errors && r['password'].errors['required']">Password is required</div>
+                </div>
+                <input type="password" formControlName="confirmpassword" class="form-control"
+                    [ngClass]="{ 'is-invalid': reg_submitted && r['confirmpassword'].errors }"
+                    placeholder="Confirm Password" />
+                <div *ngIf="reg_submitted && r['confirmpassword'].errors" class="invalid-feedback">
+                    <div *ngIf="r['confirmpassword'].errors && r['confirmpassword'].errors['required']">Retype your
+                        password</div>
+                </div>
+                <div *ngIf="reg_submitted && r['password'].errors" class="invalid-feedback">
+                    <div *ngIf="r['password'].errors && r['password'].errors['pattern']">Password is weak</div>
+                </div>
+
+                <button type="button" (click)="Register()">Sign Up</button>
+            </form>
+
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Hello!</h1>
+                    <p>Enter your details and start the journey</p>
+                    <button class="ghost" (click)="togglePanel(false)">Sign Up</button>
+
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Welcome Back!</h1>
+                    <p>Please login with your info</p>
+                    <button class="ghost" (click)="togglePanel(true)">Sign In</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
