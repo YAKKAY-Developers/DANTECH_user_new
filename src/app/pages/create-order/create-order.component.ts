@@ -153,6 +153,7 @@ export class CreateOrderComponent {
         (res: any) => {
           this.UserDetails = res;
           this.stat_user = this.UserDetails['statuscode'];
+          console.log(this.UserDetails)
           console.log('status', this.stat_user);
           // console.log('My details', this.UserDetails['profile']);
           const userObject = this.UserDetails['profile'];

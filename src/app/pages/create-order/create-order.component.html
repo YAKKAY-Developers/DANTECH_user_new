@@ -19,14 +19,14 @@
                     </div>
                     <div class="col-6">
                         <label name="">Unique registration ID</label>
-                        <input class="form-control" placeholder="Unique registration ID" value="O12345" type="text"
+                        <input class="form-control" placeholder="Unique registration ID" value="{{UserDetails.profile.clinicid}}" type="text"
                             disabled required>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-around">
                     <div class="wd50">
                         <label name="">Phone number</label>
-                        <input class="form-control" placeholder="Phone number" value="4323234233" type="tel" disabled
+                        <input class="form-control" placeholder="Phone number" value="{{UserDetails.profile.phonenumber}}" type="tel" disabled
                             required>
                     </div>
                     <div class="wd50">
@@ -45,7 +45,7 @@
                 <div class="row d-flex justify-content-around">
                     <div class="wd50">
                         <label name="">Clinic name</label>
-                        <input class="form-control" placeholder="Clinic name" value="clinic name" type="tel" disabled
+                        <input class="form-control" placeholder="Clinic name" value="{{UserDetails.clinicname}}" type="tel" disabled
                             required>
                     </div>
                     <div class="wd50">
