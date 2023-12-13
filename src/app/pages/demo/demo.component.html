@@ -87,8 +87,9 @@
                         &nbsp;
                         <label name="">Order Date</label>
                         <input class="form-control" formControlName="orderdate"
-                            [ngClass]="{ 'is-invalid': submitted && f['orderdate'].errors }" placeholder="Order Date"
-                            type="date" required>
+                            [ngClass]="{ 'is-invalid': submitted && f['orderdate'].errors }"
+                            placeholder="Order Date" type="date" required
+                            [min]="getTodayDate()">
                     </div>
                     <div class="col-4">
                         &nbsp;
