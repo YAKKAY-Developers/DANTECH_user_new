@@ -48,7 +48,7 @@ export class DemoComponent {
    // check prescence
    gst_no = false;
    img_uploaded = false;
-   question2Checkboxes = ['Wax-Up', 'Crown', 'Veener', 'Inlay', 'Bridge', 'Onlay'];
+   type1Checkboxes = ['Wax-Up', 'Crown', 'Veener', 'Inlay', 'Bridge', 'Onlay'];
 
 
    constructor(
@@ -68,8 +68,8 @@ export class DemoComponent {
      this.userId = userToken;
      this.userType = fullName;
  
-     const question2Array = this.formBuilder.array(
-      this.question2Checkboxes.map(() => false),
+     const type1Array = this.formBuilder.array(
+      this.type1Checkboxes.map(() => false),
       Validators.required
       );
      //validation
@@ -96,7 +96,7 @@ export class DemoComponent {
        service: ['', [Validators.required]],
        orderdate: ['', [Validators.required]],
        orderduedate: ['', [Validators.required]],
-       question2: question2Array,
+       type1: type1Array,
        
      });
      //user details
@@ -163,17 +163,17 @@ export class DemoComponent {
 
 
    updateCheckbox(index: number): void {
-    const question2Array = this.form.get('question2') as FormArray;
-    question2Array.controls[index].setValue(!question2Array.controls[index].value);
+    const type1Array = this.form.get('type1') as FormArray;
+    type1Array.controls[index].setValue(!type1Array.controls[index].value);
   }
    
   getSelectedOptions(): string {
     const selectedOptions: string[] = [];
-    const question2Array = this.form.get('question2') as FormArray;
+    const type1Array = this.form.get('type1') as FormArray;
 
-    question2Array.controls.forEach((control, index) => {
+    type1Array.controls.forEach((control, index) => {
       if (control.value) {
-        selectedOptions.push(this.question2Checkboxes[index]);
+        selectedOptions.push(this.type1Checkboxes[index]);
       }
     });
 
@@ -195,7 +195,7 @@ export class DemoComponent {
   
     const formdata = {
       result: {
-        question2: 'Crown & Bridge',
+        type1: 'Crown & Bridge',
         answer2: selectedOptions,
       },
     };

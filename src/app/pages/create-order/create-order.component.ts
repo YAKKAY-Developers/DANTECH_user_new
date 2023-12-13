@@ -35,9 +35,9 @@ export function fileExtensionValidator(allowedExtensions: string[]) {
 
 export function getSelectedOptions(question: any): string {
   const selectedOptions: string[] = [];
-  const question2Array = this.form.get(question) as FormArray;
+  const type1Array = this.form.get(question) as FormArray;
 
-  question2Array.controls.forEach((control: AbstractControl) => {
+  type1Array.controls.forEach((control: AbstractControl) => {
     if (control.value) {
       selectedOptions.push(control.value);
     }

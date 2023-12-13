@@ -122,8 +122,8 @@
                             <!-- <p>CROWN & BRIDGE</p> -->
                             <div class="mb-3">
                                 <h4 class="card-subtitle">Crown & Bridge</h4>
-                                <label *ngFor="let checkbox of question2Checkboxes; let i = index">
-                                    <input type="checkbox" [checked]="form.get('question2').get(i.toString()).value" (change)="updateCheckbox(i)" [formControlName]="i" [value]="checkbox"> {{ checkbox }}
+                                <label *ngFor="let checkbox of type1Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type1').get(i.toString()).value" (change)="updateCheckbox(i)" [formControlName]="i" [value]="checkbox"> {{ checkbox }}
                                   </label>
                               </div>
                               
