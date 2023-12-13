@@ -49,6 +49,7 @@ export class DemoComponent {
    gst_no = false;
    img_uploaded = false;
    type1Checkboxes = ['Wax-Up', 'Crown', 'Veener', 'Inlay', 'Bridge', 'Onlay'];
+   type2Checkboxes =['Screw', 'Cement','Hole']
 
 
    constructor(
@@ -79,6 +80,16 @@ export class DemoComponent {
       this.type1Checkboxes.map(() => false),
       Validators.required
       );
+
+      const type2Array = this.formBuilder.array(
+        this.type2Checkboxes.map(() => false),
+        Validators.required
+      );
+
+
+
+
+
      //validation
      this.form = this.formBuilder.group({
        doctor_name: [
@@ -104,6 +115,7 @@ export class DemoComponent {
        orderdate: ['', [Validators.required]],
        orderduedate: ['', [Validators.required]],
        type1: type1Array,
+       type2: type2Array,
        
      });
      //user details
@@ -168,13 +180,12 @@ export class DemoComponent {
      });
    }
 
-
-   updateCheckbox(index: number): void {
-    const type1Array = this.form.get('type1') as FormArray;
-    type1Array.controls[index].setValue(!type1Array.controls[index].value);
+   updateCheckbox(index: number, type: string): void {
+    const checkboxArray = this.form.get(type) as FormArray;
+    checkboxArray.controls[index].setValue(!checkboxArray.controls[index].value);
   }
-   
-  getSelectedOptions(): string {
+   // Rename the original getSelectedOptions method
+   getSelectedOptionsForType1(): string {
     const selectedOptions: string[] = [];
     const type1Array = this.form.get('type1') as FormArray;
 
@@ -186,6 +197,21 @@ export class DemoComponent {
 
     return selectedOptions.join(','); // Convert the array to a string separated by commas
   }
+
+ // Add a new method for getting selected options for type2
+  getSelectedOptionsForType2(): string {
+    const selectedOptions: string[] = [];
+    const type2Array = this.form.get('type2') as FormArray;
+
+    type2Array.controls.forEach((control, index) => {
+      if (control.value) {
+        selectedOptions.push(this.type2Checkboxes[index]);
+      }
+    });
+
+    return selectedOptions.join(','); // Convert the array to a string separated by commas
+  }
+
   
    
    get f() {
@@ -196,17 +222,21 @@ export class DemoComponent {
    onSubmit() {
     this.submitted = true;
   
-    const selectedOptions = this.getSelectedOptions();
-  
-    console.log('Selected Options:', selectedOptions);
+    const selectedOptionsType1 = this.getSelectedOptionsForType1();
+    const selectedOptionsType2 = this.getSelectedOptionsForType2();
+
+    console.log('Selected Options Type1:', selectedOptionsType1);
+    console.log('Selected Options Type2:', selectedOptionsType2);
   
     const formdata = {
       result: {
         type1: 'Crown & Bridge',
-        answer2: selectedOptions,
+        options1: selectedOptionsType1,
+        type2: 'Implant crown & Bridge',
+        options2: selectedOptionsType2,
       },
     };
-  
+
     console.log('My form data', formdata);
   
     if (this.form.invalid) {
