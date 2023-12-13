@@ -11,6 +11,7 @@ import { TaskComponent } from './task/task.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { AddDoctorsComponent } from './add-doctors/add-doctors.component';
 import { BankDetailsComponent } from './bank-details/bank-details.component';
+import { DemoComponent } from './demo/demo.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
         path: 'bank-details',
         component: BankDetailsComponent,
       },
+      {
+        path:'demo',
+        component:DemoComponent
+      }
     ],
   },
 ];
@@ -58,6 +63,7 @@ const routes: Routes = [
     CreateOrderComponent,
     AddDoctorsComponent,
     BankDetailsComponent,
+    DemoComponent,
   ],
   imports: [
     CommonModule,
