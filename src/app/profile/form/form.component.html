@@ -181,6 +181,10 @@
                         <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['required']">Bank account is required
                         </div>
                     </div>
+                    <div *ngIf="submitted && f['bank_acNo'].errors" class="invalid-feedback">
+                        <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['pattern']">Should contain
+                            only numerals(10)</div>
+                    </div>
                 </div>
                 <!-- Form Row-->
                 <div class="row gx-3 mb-3">
