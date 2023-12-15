@@ -160,11 +160,11 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //For teeth selection
 
-    $(document).ready(function () {
+    $(document).ready(function() {
       var selectedTeeth: { [key: string]: boolean } = {}; // Object to store selected teeth states
       var $toothNumber = $('.tooth-number');
 
-      $('.tooth').on('click touchstart', function (event) {
+      $('.tooth').on('click touchstart', function(event) {
         var $this = $(this);
         var toothText: string = $this.data('title');
 
@@ -182,13 +182,10 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       function updateNextStepButton() {
-        var selectedTeethCount =
-          Object.values(selectedTeeth).filter(Boolean).length;
+        var selectedTeethCount = Object.values(selectedTeeth).filter(Boolean).length;
 
         if (selectedTeethCount > 0) {
-          $toothNumber
-            .removeClass('disabled')
-            .data('nextStep', selectedTeethCount);
+          $toothNumber.removeClass('disabled').data('nextStep', selectedTeethCount);
           $toothNumber.html('Selected: ' + selectedTeethCount + ' &times;');
         } else {
           $toothNumber.addClass('disabled').data('nextStep', '');
@@ -197,7 +194,6 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
 
         console.log(selectedTeeth); // Log the selected teeth
       }
-      return selectedTeeth;
     });
   }
 
