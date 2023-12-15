@@ -60,6 +60,7 @@ export class CreateOrderComponent {
   clinicid: any;
   phone_number: any;
   clinic_name: any;
+  description: any;
 
   // authenticate user
   user_data: any;
@@ -87,6 +88,15 @@ export class CreateOrderComponent {
   onServiceSelect(event: any) {
     this.selectedOption = event.target.value;
     console.log(this.selectedOption);
+  }
+
+  getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 
   ngOnInit(): void {
@@ -119,8 +129,8 @@ export class CreateOrderComponent {
           Validators.minLength(3),
         ],
       ],
-      // clinicid: ['', [Validators.required]],
-      // phonenumber: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
+      clinicid: ['', [Validators.required]],
+      phonenumber: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
       patientname: [
         '',
         [
@@ -129,14 +139,14 @@ export class CreateOrderComponent {
           Validators.min(3),
         ],
       ],
-      // clinicname: [
-      //   '',
-      //   [
-      //     Validators.required,
-      //     Validators.pattern(/^[A-z]*$/),
-      //     Validators.min(3),
-      //   ],
-      // ],
+      clinicname: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[A-z]*$/),
+          Validators.min(3),
+        ],
+      ],
       doctorid: ['', [Validators.required]],
       service: ['', [Validators.required]],
       orderdate: ['', [Validators.required]],
@@ -153,7 +163,8 @@ export class CreateOrderComponent {
         (res: any) => {
           this.UserDetails = res;
           this.stat_user = this.UserDetails['statuscode'];
-          console.log(this.UserDetails)
+          console.log(this.UserDetails);
+          this.description = this.UserDetails['description'];
           console.log('status', this.stat_user);
           // console.log('My details', this.UserDetails['profile']);
           const userObject = this.UserDetails['profile'];

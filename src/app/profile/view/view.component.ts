@@ -139,12 +139,13 @@ export class ViewComponent {
       .subscribe(
         (res: any) => {
           this.UserDetails = res;
-          // console.log('My details', this.UserDetails['profile']);
+          console.log('My details', this.UserDetails);
           const userObject = this.UserDetails['profile'];
           const percentageCompletion: string = calculatePercentageCompletion(
             userObject,
             this.doc_count
           );
+
           userObject.profilecompletionpercentage = percentageCompletion;
           this.userdata = convertNullValues(userObject);
           if (this.userdata['image'] != 'assets/images/users/user.svg') {

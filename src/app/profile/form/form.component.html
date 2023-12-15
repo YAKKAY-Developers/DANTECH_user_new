@@ -88,11 +88,13 @@
                             [ngClass]="{ 'is-invalid': submitted && f['alternativenumber'].errors }"
                             placeholder="Enter Alternative number" />
                         <div *ngIf="submitted && f['alternativenumber'].errors" class="invalid-feedback">
-                            <div *ngIf="f['alternativenumber'].errors && f['alternativenumber'].errors['required']">Phone number is
+                            <div *ngIf="f['alternativenumber'].errors && f['alternativenumber'].errors['required']">
+                                Phone number is
                                 required</div>
                         </div>
                         <div *ngIf="submitted && f['alternativenumber'].errors" class="invalid-feedback">
-                            <div *ngIf="f['alternativenumber'].errors && f['alternativenumber'].errors['pattern']">Should contain
+                            <div *ngIf="f['alternativenumber'].errors && f['alternativenumber'].errors['pattern']">
+                                Should contain
                                 only numerals(10)</div>
                         </div>
                     </div>
@@ -143,6 +145,15 @@
                             <div *ngIf="f['pincode'].errors && f['pincode'].errors['required']">Pincode is required
                             </div>
                         </div>
+                        <div *ngIf="submitted && f['pincode'].errors" class="invalid-feedback">
+                            <div *ngIf="f['pincode'].errors && f['pincode'].errors['pattern']">Check your Pincode (Must
+                                contain only numbers)
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && f['pincode'].errors" class="invalid-feedback">
+                            <div *ngIf="f['pincode'].errors && f['pincode'].errors['minLength']">Check your Pincode
+                            </div>
+                        </div>
                     </div>
                     <!-- Form Group (location)-->
                     <div class="col-md-6">
@@ -182,8 +193,8 @@
                         </div>
                     </div>
                     <div *ngIf="submitted && f['bank_acNo'].errors" class="invalid-feedback">
-                        <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['pattern']">Should contain
-                            only numerals(10)</div>
+                        <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['pattern']">Check your Bank account
+                        </div>
                     </div>
                 </div>
                 <!-- Form Row-->
@@ -196,6 +207,9 @@
                             placeholder="Enter IFSC number">
                         <div *ngIf="submitted && f['ifsc'].errors" class="invalid-feedback">
                             <div *ngIf="f['ifsc'].errors && f['ifsc'].errors['required']">IFSC code is required</div>
+                        </div>
+                        <div *ngIf="submitted && f['ifsc'].errors" class="invalid-feedback">
+                            <div *ngIf="f['ifsc'].errors && f['ifsc'].errors['pattern']">Check your IFSC code</div>
                         </div>
                     </div>
                     <!-- Form Group (bank branch)-->
@@ -221,6 +235,9 @@
                         <div *ngIf="submitted && f['upi_id'].errors" class="invalid-feedback">
                             <div *ngIf="f['upi_id'].errors && f['upi_id'].errors['required']">UPI ID is required</div>
                         </div>
+                        <div *ngIf="submitted && f['upi_id'].errors" class="invalid-feedback">
+                            <div *ngIf="f['upi_id'].errors && f['upi_id'].errors['pattern']">Check your UPI ID</div>
+                        </div>
                     </div>
                     <!-- Form Group (gst)-->
                     <div class="col-md-6">
@@ -231,12 +248,15 @@
                         <div *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
                             <div *ngIf="f['gst'].errors && f['gst'].errors['required']">GST is required</div>
                         </div>
+                        <div *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
+                            <div *ngIf="f['gst'].errors && f['gst'].errors['pattern']">Check your GST No.</div>
+                        </div>
                     </div>
                 </div>
-                <!-- Save changes button-->            
-            <div class="d-flex justify-content-end">
-                   <button type="submit">Submit profile</button>
-            </div>
+                <!-- Save changes button-->
+                <div class="d-flex justify-content-end">
+                    <button type="submit">Submit profile</button>
+                </div>
             </div>
         </div>
     </form>

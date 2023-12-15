@@ -19,15 +19,15 @@
                     </div>
                     <div class="col-6">
                         <label name="">Unique registration ID</label>
-                        <input class="form-control" placeholder="Unique registration ID" value="{{UserDetails.profile.clinicid}}" type="text"
-                            disabled required>
+                        <input class="form-control" placeholder="Unique registration ID"
+                            value="{{UserDetails.profile.clinicid}}" type="text" disabled required>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-around">
                     <div class="wd50">
                         <label name="">Phone number</label>
-                        <input class="form-control" placeholder="Phone number" value="{{UserDetails.profile.phonenumber}}" type="tel" disabled
-                            required>
+                        <input class="form-control" placeholder="Phone number"
+                            value="{{UserDetails.profile.phonenumber}}" type="tel" disabled required>
                     </div>
                     <div class="wd50">
                         <label name="">Patient Name</label>
@@ -45,8 +45,8 @@
                 <div class="row d-flex justify-content-around">
                     <div class="wd50">
                         <label name="">Clinic name</label>
-                        <input class="form-control" placeholder="Clinic name" value="{{UserDetails.clinicname}}" type="tel" disabled
-                            required>
+                        <input class="form-control" placeholder="Clinic name" value="{{UserDetails.clinicname}}"
+                            type="tel" disabled required>
                     </div>
                     <div class="wd50">
                         <label name="">Doctor id</label>
@@ -68,7 +68,7 @@
 
             <div class="wd100 colleft question-checkbox" style="padding:2%">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class="row">
                             <label style="margin-bottom:8px;">Service</label>
                             <!-- <select (change)="onServiceSelect($event)"> -->
@@ -83,21 +83,21 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         &nbsp;
                         <label name="">Order Date</label>
                         <input class="form-control" formControlName="orderdate"
                             [ngClass]="{ 'is-invalid': submitted && f['orderdate'].errors }" placeholder="Order Date"
-                            type="date" required>
+                            type="date" required [min]="getTodayDate()">
                     </div>
-                    <div class="col-4">
+                    <!-- <div class="col-4">
                         &nbsp;
                         <label name="">Due Date</label>
                         <input class="form-control" formControlName="orderduedate"
                             [ngClass]="{ 'is-invalid': submitted && f['orderduedate'].errors }" placeholder="Due Date"
                             type="date" required>
                     </div>
-                    <p>we expect atleast a 10 working day difference between order date and due date.</p>
+                    <p>we expect atleast a 10 working day difference between order date and due date.</p> -->
                 </div>
 
             </div>
@@ -482,7 +482,7 @@
             <div class="overlay"></div>
             <div class="body-modal">
                 <div class="inner-body-modal">
-                    Sorry, Your profile has been rejected. "des"
+                    Sorry, Your profile has been rejected. "{{description}}"
                 </div>
             </div>
         </div>

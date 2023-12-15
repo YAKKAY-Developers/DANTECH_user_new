@@ -19,15 +19,15 @@
                     </div>
                     <div class="col-6">
                         <label name="">Unique registration ID</label>
-                        <input class="form-control" placeholder="Unique registration ID" value="{{UserDetails.profile.clinicid}}" type="text"
-                            disabled required>
+                        <input class="form-control" placeholder="Unique registration ID"
+                            value="{{UserDetails.profile.clinicid}}" type="text" disabled required>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-around">
                     <div class="wd50">
                         <label name="">Phone number</label>
-                        <input class="form-control" placeholder="Phone number" value="{{UserDetails.profile.phonenumber}}" type="tel" disabled
-                            required>
+                        <input class="form-control" placeholder="Phone number"
+                            value="{{UserDetails.profile.phonenumber}}" type="tel" disabled required>
                     </div>
                     <div class="wd50">
                         <label name="">Patient Name</label>
@@ -45,8 +45,8 @@
                 <div class="row d-flex justify-content-around">
                     <div class="wd50">
                         <label name="">Clinic name</label>
-                        <input class="form-control" placeholder="Clinic name" value="{{UserDetails.clinicname}}" type="tel" disabled
-                            required>
+                        <input class="form-control" placeholder="Clinic name" value="{{UserDetails.clinicname}}"
+                            type="tel" disabled required>
                     </div>
                     <div class="wd50">
                         <label name="">Doctor id</label>
@@ -68,7 +68,7 @@
 
             <div class="wd100 colleft question-checkbox" style="padding:2%">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class="row">
                             <label style="margin-bottom:8px;">Service</label>
                             <!-- <select (change)="onServiceSelect($event)"> -->
@@ -83,20 +83,12 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         &nbsp;
                         <label name="">Order Date</label>
                         <input class="form-control" formControlName="orderdate"
-                            [ngClass]="{ 'is-invalid': submitted && f['orderdate'].errors }"
-                            placeholder="Order Date" type="date" required
-                            [min]="getTodayDate()">
-                    </div>
-                    <div class="col-4">
-                        &nbsp;
-                        <label name="">Due Date</label>
-                        <input class="form-control" formControlName="orderduedate"
-                            [ngClass]="{ 'is-invalid': submitted && f['orderduedate'].errors }" placeholder="Due Date"
-                            type="date" required>
+                            [ngClass]="{ 'is-invalid': submitted && f['orderdate'].errors }" placeholder="Order Date"
+                            type="date" required [min]="getTodayDate()">
                     </div>
                     <!-- <p>we expect atleast a 10 working day difference between order date and due date.</p> -->
                 </div>
@@ -120,48 +112,77 @@
                 <div class="wd100 question-checkbox">
                     <div class="col50 colleft">
                         <div class="col50 colleft">
-                            <!-- <p>CROWN & BRIDGE</p> -->
-                            <div class="mb-3">
-                                <h4 class="card-subtitle">Crown & Bridge</h4>
+                            <!--CROWN & BRIDGE/ implant prostheses -->
+                            <div class="mb-3 row ">
+                                <h4 class="card-subtitle">Crown & Bridge/ Implant prostheses</h4>
                                 <label *ngFor="let checkbox of type1Checkboxes; let i = index">
-                                    <input type="checkbox" [checked]="form.get('type1').get(i.toString()).value" (change)="updateCheckbox(i, 'type1')" [formControlName]="i" [value]="checkbox">
+                                    <input type="checkbox" [checked]="form.get('type1').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type1')" [value]="checkbox">
                                     {{ checkbox }}
-                                  </label>
-                              </div>
-                              
+                                </label>
+                            </div>
+
                             <!-- <p>IMPLANT CROWN & BRIDGE</p> -->
                             <div class="mb-3">
                                 <h4 class="card-subtitle ">Implant crown & Bridge</h4>
                                 <label *ngFor="let checkbox of type2Checkboxes; let i = index">
-                                    <input type="checkbox" [checked]="form.get('type2').get(i.toString()).value" (change)="updateCheckbox(i, 'type2')" [formControlName]="i" [value]="checkbox"> {{ checkbox }}
-                                  </label>
+                                    <input type="checkbox" [checked]="form.get('type2').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type2')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
                             </div>
 
-                            <!-- <p>METAL FREE</p> -->
+                            <!-- METAL FREE zirconium -->
                             <div class="mb-3">
-                                <h4 class="card-subtitle ">Metal free</h4>
-                                <label name=""><input type="checkbox" value=""> Dantech Reg</label>
-                                <label name=""><input type="checkbox" value=""> Dantech Premium</label>
-                                <label name=""><input type="checkbox" value=""> Dantech Premium Plus</label>
-                                <label name=""><input type="checkbox" value=""> IPE max Zircard</label>
+                                <h4 class="card-subtitle ">Metal Free Zirconium</h4>
+                                <label *ngFor="let checkbox of type3Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type3').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type3')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
                             </div>
                         </div>
 
                         <div class="col50 colright">
-                            <div class="mb-3">
-                                <!-- <p>METAL FREE</p> -->
-                                <h4 class="card-subtitle ">Metal free</h4>
-                                <label name=""><input type="checkbox" value=""> Dantech Reg</label>
-                                <label name=""><input type="checkbox" value=""> Dantech Premium</label>
-                                <label name=""><input type="checkbox" value=""> Dantech Premium Plus</label>
-                                <label name=""><input type="checkbox" value=""> IPE max Zircard</label>
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Removable Prostheses</h4>
+                                <label *ngFor="let checkbox of type4Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type4').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type4')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
                             </div>
-                            <!-- <p>IMPLANT CROWN & BRIDGE</p> -->
-                            <div class="mb-3">
-                                <h4 class="card-subtitle "> Implant crown & Bridge</h4>
-                                <label name=""><input type="checkbox" value=""> Screw</label>
-                                <label name=""><input type="checkbox" value=""> Cement</label>
-                                <label name=""><input type="checkbox" value=""> Hole</label>
+
+
+                            <!-- material -->
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Material</h4>
+                                <label *ngFor="let checkbox of type5Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type5').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type5')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
+                            </div>
+
+                            <!-- material -->
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Orthodontics/ Splints</h4>
+                                <label *ngFor="let checkbox of type6Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type6').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type6')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
+                            </div>
+
+
+                            <!-- Lithium di silicate -->
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Lithium Di Silicate</h4>
+                                <label *ngFor="let checkbox of type7Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type7').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type7')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
                             </div>
                         </div>
 
@@ -169,49 +190,104 @@
 
                     <div class="col50 colright">
                         <div class="col50  colleft">
-                            <div class="mb-3">
-                                <!-- <p>REMOVABLE PROSTHESIS</p> -->
-                                <h4 class="card-subtitle "> Removable prosthesis</h4>
-                                <label name=""><input type="checkbox" value=""> Doctor</label>
-                                <label name=""><input type="checkbox" value=""> Clinic/PRO</label>
-                            </div>
-                            <div class="mb-3">
-                                <!-- <p>METAL FREE</p> -->
-                                <h4 class="card-subtitle"> Metal free</h4>
-                                <label name=""><input type="checkbox" value=""> Dantech Reg</label>
-                                <label name=""><input type="checkbox" value=""> Dantech Premium</label>
-                                <label name=""><input type="checkbox" value=""> Dantech Premium Plus</label>
-                                <label name=""><input type="checkbox" value=""> IPE max Zircard</label>
-                            </div>
-                            <div class="mb-3">
-                                <!-- <p>IMPLANT CROWN & BRIDGE</p> -->
-                                <h4 class="card-subtitle "> Implant crown & Bridge</h4>
-                                <label name=""><input type="checkbox" value=""> Screw</label>
-                                <label name=""><input type="checkbox" value=""> Cement</label>
-                                <label name=""><input type="checkbox" value=""> Hole</label>
+                            <!-- metal ceramic -->
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Metal Ceramic/ Metal</h4>
+                                <label *ngFor="let checkbox of type8Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type8').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type8')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
                             </div>
 
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Removable prostheses</h4>
+                                <label *ngFor="let checkbox of type9Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type9').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type9')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle "> Stump Shade</h4>
+                                <label *ngFor="let checkbox of type10Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type10').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type10')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
+                            </div>
+
+
+                            <!-- items sent to the lab -->
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Items Sent to the lab:</h4>
+                                <label *ngFor="let checkbox of type11Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type11').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type11')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
+                            </div>
+
+
+                            <!-- implant components -->
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle "> Implant Components:</h4>
+                                <label *ngFor="let checkbox of type12Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type12').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type12')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
+                            </div>
+
+
+                            <!-- text box others -->
+
+                            <div class="mb-3">
+                                <h4 class="card-subtitle "> Others</h4>
+                                <textarea class="form-control" placeholder="Add comments"></textarea>
+                            </div>
                         </div>
 
                         <div class="col50 colright">
-                            <!-- <p>PROFILE DESIGN</p> -->
-                            <h4 class="card-subtitle ">Implant crown & Bridge</h4>
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle "> Translucency</h4>
+                                <label *ngFor="let checkbox of type13Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type13').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type13')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
+                            </div>
 
 
-                            <div class="col50 colleft">
-                                <div class="mb-3">
-                                    <label name=""><input type="checkbox" value=""> Glaze</label>
-                                    <label name=""><input type="checkbox" value=""> Value</label>
-                                    <label name=""><input type="checkbox" value=""> Texture</label>
-                                </div>
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Glaze</h4>
+                                <label *ngFor="let checkbox of type14Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type14').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type14')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
                             </div>
-                            <div class="col50 colright">
-                                <div class="mb-3">
-                                    <label name=""><input type="checkbox" value=""> Regular</label>
-                                    <label name=""><input type="checkbox" value=""> Low</label>
-                                    <label name=""><input type="checkbox" value=""> Low</label>
-                                </div>
+
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Value</h4>
+                                <label *ngFor="let checkbox of type15Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type15').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type15')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
                             </div>
+
+                            <div class="mb-3 row">
+                                <h4 class="card-subtitle ">Texture</h4>
+                                <label *ngFor="let checkbox of type16Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type16').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type16')" [value]="checkbox">
+                                    {{ checkbox }}
+                                </label>
+                            </div>
+
+
                             <div class="mb-3">
                                 <div class="tooth-wrapper">
                                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="49mm"
@@ -460,6 +536,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- <div [class]="selectedOption === 'Denture' ? '1' : '2'" *ngIf="selectedOption === 'Denture'"> -->
 

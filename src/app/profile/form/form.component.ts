@@ -102,6 +102,7 @@ export class FormComponent {
         [
           Validators.required,
           Validators.maxLength(6),
+          Validators.minLength(6),
           Validators.pattern('^[1-9][0-9]+$'),
         ],
       ],
