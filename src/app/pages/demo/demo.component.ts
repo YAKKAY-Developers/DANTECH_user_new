@@ -229,6 +229,9 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
       doctorid: ['', [Validators.required]],
       service: ['', [Validators.required]],
       orderdate: ['', [Validators.required]],
+      phonenumber: [''],
+      clinicname: [''],
+      uniqueid: [''],
       type1: this.formBuilder.array(
         this.type1Checkboxes.map(() => false),
         Validators.required
