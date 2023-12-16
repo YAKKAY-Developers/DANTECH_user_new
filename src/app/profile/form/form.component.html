@@ -146,12 +146,15 @@
                             </div>
                         </div>
                         <div *ngIf="submitted && f['pincode'].errors" class="invalid-feedback">
-                            <div *ngIf="f['pincode'].errors && f['pincode'].errors['pattern']">Check your Pincode (Must
+                            <div *ngIf="f['pincode'].errors && f['pincode'].errors['minlength']">Check your Pincode
+                                (Must
                                 contain only numbers)
                             </div>
                         </div>
                         <div *ngIf="submitted && f['pincode'].errors" class="invalid-feedback">
-                            <div *ngIf="f['pincode'].errors && f['pincode'].errors['minLength']">Check your Pincode
+                            <div *ngIf="f['pincode'].errors && f['pincode'].errors['maxlength']">Check your Pincode
+                                (Must
+                                contain only numbers)
                             </div>
                         </div>
                     </div>

@@ -74,6 +74,8 @@
                         <div *ngIf="f['First_name'].errors && f['First_name'].errors['required']">First name is
                             required
                         </div>
+                        <div *ngIf="f['First_name'].errors && f['First_name'].errors['minlength']">Enter valid name
+                        </div>
                     </div><br>
                     <input type="text" formControlName="Last_name" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f['Last_name'].errors }" placeholder="Last name" />
@@ -81,7 +83,11 @@
                         <div *ngIf="f['Last_name'].errors && f['Last_name'].errors['required']">Last name is
                             required
                         </div>
-                    </div><br>
+                    </div>
+                    <div *ngIf=" submitted && f['Last_name'].errors" class="invalid-feedback">
+
+                    </div>
+                    <br>
                     <input type="text" formControlName="Specialisation" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f['Specialisation'].errors }"
                         placeholder="Specialization" />
@@ -89,6 +95,9 @@
                         <div *ngIf="f['Specialisation'].errors && f['Specialisation'].errors['required']">Specialization
                             is
                             required
+                        </div>
+                        <div *ngIf="f['Specialisation'].errors && f['Specialisation'].errors['minlength']">Enter a valid
+                            Specialization
                         </div>
                     </div>
 

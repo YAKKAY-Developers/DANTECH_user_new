@@ -15,19 +15,23 @@
                         <div *ngIf=" submitted && f['doctor_name'].errors" class="invalid-feedback">
                             <div *ngIf="f['doctor_name'].errors && f['doctor_name'].errors['required']">Name is required
                             </div>
+                            <div *ngIf="f['doctor_name'].errors && f['doctor_name'].errors['minlength']">Enter valid
+                                name(Should contain atleast 3 charectors)
+                            </div>
                         </div>
+
                     </div>
                     <div class="col-6">
                         <label name="">Unique registration ID</label>
-                        <input class="form-control" placeholder="Unique registration ID"
-                            value="{{UserDetails.profile.clinicid}}" type="text" disabled required>
+                        <input class="form-control" placeholder="Unique registration ID" formControlName="uniqueid"
+                            [(ngModel)]="UserDetails.profile.clinicid" readonly type="text"  readonly required>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-around">
                     <div class="wd50">
                         <label name="">Phone number</label>
-                        <input class="form-control" placeholder="Phone number"
-                            value="{{UserDetails.profile.phonenumber}}" type="tel" disabled required>
+                        <input class="form-control" formControlName="phonenumber"
+                            [(ngModel)]="UserDetails.profile.phonenumber"  readonly type="tel" required>
                     </div>
                     <div class="wd50">
                         <label name="">Patient Name</label>
@@ -38,6 +42,9 @@
                             <div *ngIf="f['patientname'].errors && f['patientname'].errors['required']">Patientname is
                                 required
                             </div>
+                            <div *ngIf="f['patientname'].errors && f['patientname'].errors['minlength']">Enter valid
+                                name(Should contain atleast 3 charectors)
+                            </div>
                         </div>
 
                     </div>
@@ -45,8 +52,9 @@
                 <div class="row d-flex justify-content-around">
                     <div class="wd50">
                         <label name="">Clinic name</label>
-                        <input class="form-control" placeholder="Clinic name" value="{{UserDetails.clinicname}}"
-                            type="tel" disabled required>
+                        <input class="form-control" formControlName="clinicname" [(ngModel)]="UserDetails.clinicname"
+                            readonly type="tel" required>
+
                     </div>
                     <div class="wd50">
                         <label name="">Doctor id</label>
@@ -56,6 +64,8 @@
                         <div *ngIf=" submitted && f['doctorid'].errors" class="invalid-feedback">
                             <div *ngIf="f['doctorid'].errors && f['doctorid'].errors['required']">Doctor id is
                                 required
+                            </div>
+                            <div *ngIf="f['doctorid'].errors && f['doctorid'].errors['pattern']">Enter valid Doctor ID
                             </div>
                         </div>
                     </div>

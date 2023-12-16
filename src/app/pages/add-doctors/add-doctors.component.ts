@@ -113,7 +113,7 @@ export class AddDoctorsComponent {
     this.form = this.formBuilder.group({
       First_name: ['', [Validators.required, Validators.minLength(3)]],
       Last_name: ['', [Validators.required, Validators.minLength(1)]],
-      Specialisation: ['', [Validators.required, Validators.minLength(3)]],
+      Specialisation: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
   get f() {
@@ -125,6 +125,7 @@ export class AddDoctorsComponent {
     this.submitted = true;
 
     if (this.form.invalid) {
+      console.log(this.form.controls);
       return;
     }
     this.loading = true;
@@ -177,9 +178,13 @@ export class AddDoctorsComponent {
         // Customize the filtering logic as needed
         return (
           item.doctorid.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          item.Firstname.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          item.Firstname.toLowerCase().includes(
+            this.searchText.toLowerCase()
+          ) ||
           item.Lastname.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          item.Specialisation.toLowerCase().includes(this.searchText.toLowerCase())
+          item.Specialisation.toLowerCase().includes(
+            this.searchText.toLowerCase()
+          )
           // .includes(this.searchText)
         );
       });

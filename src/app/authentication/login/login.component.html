@@ -75,24 +75,14 @@
                         [ngClass]="{ 'is-invalid': reg_submitted && r['confirmpassword'].errors }"
                         placeholder="Confirm Password" />
                     <div *ngIf="reg_submitted && r['confirmpassword'].errors" class="invalid-feedback">
-                        <div *ngIf="r['confirmpassword'].errors && r['confirmpassword'].errors['required']">Retype your
-                            password</div>
+                        <div *ngIf="r['confirmpassword'].errors && r['confirmpassword'].errors['required']">Confirm
+                            password
+                            is required</div>
                     </div>
                     <div *ngIf="reg_submitted && r['confirmpassword'].errors" class="invalid-feedback">
-                        <div *ngIf="r['confirmpassword'].errors && r['confirmpassword'].errors['pattern']">Password is
-                            weak.
-                            <ul style="align-items: start;"> Must contain atleast
-                                <li>
-                                    A capital letter
-                                </li>
-                                <li>
-                                    A symbol
-                                </li>
-                                <li>
-                                    A number
-                                </li>
-
-                            </ul>
+                        <div *ngIf="r['confirmpassword'].errors && r['confirmpassword'].errors['pattern']">Password
+                            does
+                            not match
                         </div>
                     </div>
 
@@ -118,25 +108,33 @@
                 <input type="email" formControlName="email" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" placeholder="Email" />
 
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required</div>
+                </div>
 
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors && f['email'].errors['email']">Check your email address</div>
+                </div>
 
                 <input type="password" formControlName="password" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" placeholder="Password" />
 
-                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                    <div *ngIf="f['email'].errors && f['email'].errors['required']">Username is required</div>
-                </div>
 
+
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors && f['password'].errors['pattern']">check your password</div>
+                </div>
 
 
                 <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
                     <div *ngIf="f['password'].errors && f['password'].errors['required']">Password is required</div>
                 </div>
+                <p class="p-0 m-0" style="font-style: italic;color: #ff0000;font-size: small;" *ngIf="loginError">
+                    Invalid email or password</p>
 
 
                 <a href="#">Forgot your password?</a>
-                <p class="p-0 m-0" style="font-style: italic;color: #ff0000;font-size: small;" *ngIf="loginError">
-                    Invalid email or password</p>
+
                 <!-- <div style="font-style: italic;color: #ff0000;font-size: xx-small;" id="error-message"><p *ngIf="">{{message}}</p></div> -->
                 <button type="submit">Sign In</button>
             </form>

@@ -197,7 +197,6 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
 
         console.log(selectedTeeth); // Log the selected teeth
       }
-      return selectedTeeth;
     });
   }
 
@@ -214,7 +213,7 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
         '',
         [
           Validators.required,
-          Validators.pattern(/^[A-z]*$/),
+          Validators.pattern(/^[A-z].*$/),
           Validators.minLength(3),
         ],
       ],
@@ -222,13 +221,19 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
         '',
         [
           Validators.required,
-          Validators.pattern(/^[A-z]*$/),
+          Validators.pattern(/^[A-z].*$/),
           Validators.minLength(3),
         ],
       ],
-      doctorid: ['', [Validators.required]],
+      doctorid: [
+        '',
+        [Validators.required, Validators.pattern('DOC[0-9]{5,6}$')],
+      ],
       service: ['', [Validators.required]],
       orderdate: ['', [Validators.required]],
+      phonenumber: [''],
+      clinicname: [''],
+      uniqueid: [''],
       type1: this.formBuilder.array(
         this.type1Checkboxes.map(() => false),
         Validators.required
@@ -512,13 +517,13 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
-    this.form_values = {
-      clinicid: this.UserDetails.profile.clinicid,
-      doctorid: this.form.value['doctorid'],
-    };
+    // this.form_values = {
+    //   clinicid: this.UserDetails.profile.clinicid,
+    //   doctorid: this.form.value['doctorid'],
+    // };
 
     this.authservice
-      .orderreg(this.form_values, formdata, this.selected_tooth)
+      .orderreg(this.form.value, formdata, this.selected_tooth)
       .pipe(first())
       .subscribe({
         next: (res) => {

@@ -113,7 +113,7 @@ export class FormComponent {
           Validators.required,
           Validators.minLength(9),
           Validators.maxLength(16),
-          Validators.pattern('[0-9]+'),
+          Validators.pattern('[0-9]{9,18}'),
         ],
       ],
       ifsc: [
@@ -156,6 +156,7 @@ export class FormComponent {
     this.submitted = true;
 
     if (this.form.invalid) {
+      // console.log(this.form.controls);
       return;
     }
     this.loading = true;
