@@ -1,0 +1,16 @@
+/* Custom border color for the card */
+.border-dark-blue {
+    border-color: #20c997 !important;
+    /* The !important flag ensures the custom style takes precedence */
+}
+
+/* Custom button color */
+.btn-outline-dark-blue {
+    color: #20c997;
+    border-color: #20c997;
+}
+
+.btn-outline-dark-blue:hover {
+    background-color: #20c997;
+    color: #ffffff;
+}

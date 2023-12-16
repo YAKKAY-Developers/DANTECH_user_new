@@ -12,7 +12,8 @@ import { CreateOrderComponent } from './create-order/create-order.component';
 import { AddDoctorsComponent } from './add-doctors/add-doctors.component';
 import { BankDetailsComponent } from './bank-details/bank-details.component';
 import { DemoComponent } from './demo/demo.component';
-
+import { OrderSuccessComponent } from './order-success/order-success.component';
+import { authGuard } from '../helpers/auth.guard';
 const routes: Routes = [
   {
     path: '',
@@ -36,6 +37,7 @@ const routes: Routes = [
       {
         path: 'create-order',
         component: CreateOrderComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'add-doctors',
@@ -46,9 +48,13 @@ const routes: Routes = [
         component: BankDetailsComponent,
       },
       {
-        path:'demo',
-        component:DemoComponent
-      }
+        path: 'demo',
+        component: DemoComponent,
+      },
+      {
+        path: 'success',
+        component: OrderSuccessComponent,
+      },
     ],
   },
 ];
@@ -64,6 +70,7 @@ const routes: Routes = [
     AddDoctorsComponent,
     BankDetailsComponent,
     DemoComponent,
+    OrderSuccessComponent,
   ],
   imports: [
     CommonModule,

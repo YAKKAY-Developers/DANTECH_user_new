@@ -62,6 +62,11 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/api/user/register`, user);
   }
 
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/auth/login']);
+  }
+
   adminregister(user: User) {
     return this.http.post(`${environment.apiUrl}/api/admin/register`, user);
   }
@@ -119,5 +124,9 @@ export class AuthService {
     };
     console.log(body);
     return this.http.post(`${environment.apiUrl}/api/order/createorder`, body);
+  }
+
+  loggedIn() {
+    return !!localStorage.getItem('user');
   }
 }

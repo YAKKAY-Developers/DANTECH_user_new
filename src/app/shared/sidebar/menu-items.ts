@@ -17,14 +17,14 @@ export const ROUTES: RouteInfo[] = [
     extralink: false,
     submenu: [],
   },
-  {
-    path: '/det/dashboard',
-    title: 'Dashboard',
-    icon: 'bi bi-speedometer2',
-    class: '',
-    extralink: false,
-    submenu: [],
-  },
+  // {
+  //   path: '/det/dashboard',
+  //   title: 'Dashboard',
+  //   icon: 'bi bi-speedometer2',
+  //   class: '',
+  //   extralink: false,
+  //   submenu: [],
+  // },
 
   // {
   //   path: '/auth/login',

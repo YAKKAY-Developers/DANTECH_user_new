@@ -3,7 +3,7 @@
 <!-- ============================================================== -->
 <ul class="navbar-nav float-start me-auto">
   <li class="nav-item">
-    <a class="nav-link waves-effect waves-dark" href="/dashboard"> Dashboard </a>
+    <!-- <a class="nav-link waves-effect waves-dark" href="/dashboard"> Dashboard </a> -->
   </li>
   <!-- <li class="nav-item">
     <a class="nav-link waves-effect waves-dark" href="/about"> About </a>
@@ -30,28 +30,17 @@
   <!-- User profile and search -->
   <!-- ============================================================== -->
   <li class="nav-item" ngbDropdown placement="bottom-end">
-    <a
-      ngbDropdownToggle
-      class="nav-link waves-effect waves-dark pro-pic"
-      href="javascript:void(0)"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      <img
-        src="assets/images/users/user.svg"
-        alt="user"
-        class="rounded-circle"
-        width="31"
-      />
+    <a ngbDropdownToggle class="nav-link waves-effect waves-dark pro-pic" href="javascript:void(0)"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="assets/images/users/user.svg" alt="user" class="rounded-circle" width="31" />
       <span class="ms-2">Admin</span>
     </a>
     <div class="dropdown-menu-right" ngbDropdownMenu>
-      <a class="dropdown-item" href="javascript:void(0)"> My Profile</a>
-     
-      <a class="dropdown-item" href="javascript:void(0)"> Account Setting</a>
+      <a class="dropdown-item" href="/det/profile/view"> My Profile</a>
+
+      <!-- <a class="dropdown-item" href="javascript:void(0)"> Account Setting</a> -->
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="javascript:void(0)"> Logout</a>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="logout()"> Logout</a>
     </div>
   </li>
   <!-- ============================================================== -->

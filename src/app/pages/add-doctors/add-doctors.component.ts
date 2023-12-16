@@ -47,6 +47,8 @@ export class AddDoctorsComponent {
   gst_no = false;
   img_uploaded = false;
 
+  isModalVisible = false;
+
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,

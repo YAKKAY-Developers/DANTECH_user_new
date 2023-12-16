@@ -576,7 +576,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
           // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           // this.router.navigateByUrl(returnUrl);
           // this.router.navigate(['/det/profile/view']);
-          window.location.reload();
+          this.router.navigate(['/det/pages/success']);
+          // window.location.reload();
         },
         error: (error) => {
           this.loading = false;
