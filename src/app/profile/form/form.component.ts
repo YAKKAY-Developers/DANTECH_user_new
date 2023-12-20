@@ -6,6 +6,9 @@ import {
   FormControl,
 } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { OrderService } from 'src/app/services/order.service';
+
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,7 +36,9 @@ export class FormComponent {
     private route: ActivatedRoute,
     private router: Router,
     private authservice: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private userservice: UserService,
+    private orderservice: OrderService
   ) {}
 
   // profile image
@@ -160,7 +165,7 @@ export class FormComponent {
       return;
     }
     this.loading = true;
-    this.authservice
+    this.userservice
       .profilereg(this.form.value, this.userId)
       .pipe(first())
       .subscribe({

@@ -31,7 +31,7 @@
                     <div class="wd50">
                         <label name="">Phone number</label>
                         <input class="form-control" formControlName="phonenumber"
-                            [(ngModel)]="UserDetails.profile.phonenumber" type="tel" required>
+                            [(ngModel)]="UserDetails.profile.phonenumber" type="tel" readonly required>
                     </div>
                     <div class="wd50">
                         <label name="">Patient Name</label>
@@ -121,6 +121,7 @@
 
                 <div class="wd100 question-checkbox">
                     <div class="col50 colleft">
+
                         <div class="col50 colleft">
                             <!--CROWN & BRIDGE/ implant prostheses -->
                             <div class="mb-3 row ">
@@ -152,6 +153,7 @@
                                 </label>
                             </div>
                         </div>
+
 
                         <div class="col50 colright">
                             <div class="mb-3 row">
@@ -195,10 +197,42 @@
                                 </label>
                             </div>
                         </div>
+                        <!-- implant components -->
+                        <div class="mb-3 row">
+                            <h4 class="card-subtitle "> Implant Components:</h4>
+                            <label *ngFor="let checkbox of type12Checkboxes; let i = index">
+                                <input type="checkbox" [checked]="form.get('type12').get(i.toString()).value"
+                                    (change)="updateCheckbox(i, 'type12')" [value]="checkbox">
+                                {{ checkbox }}
+                            </label>
+                        </div>
+
 
                     </div>
 
                     <div class="col50 colright">
+
+                        <div class="col100 colleft">
+                            <h4 class="card-subtitle ">Pontic Design </h4>
+                            <p style="font-size: xx-small;font-style: italic;">please pick one type</p>
+                            <div class="checkbox-wrapper-16">
+
+
+                                <label class="checkbox-wrapper"
+                                    *ngFor="let checkbox of type19Checkboxes; let i = index">
+                                    <input type="checkbox" [checked]="form.get('type19').get(i.toString()).value"
+                                        (change)="updateCheckbox(i, 'type19')" [value]="checkbox" name="design"
+                                        class="checkbox-input">
+                                    <!-- {{ checkbox }} -->
+                                    <span class="checkbox-tile">
+                                        <span class="checkbox-icon">
+                                            <img src="assets/images/tooth/{{checkbox}}.jpg">
+                                        </span>
+                                        <span class="checkbox-label">{{checkbox}}</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
                         <div class="col50  colleft">
                             <!-- metal ceramic -->
                             <div class="mb-3 row">
@@ -240,15 +274,7 @@
                             </div>
 
 
-                            <!-- implant components -->
-                            <div class="mb-3 row">
-                                <h4 class="card-subtitle "> Implant Components:</h4>
-                                <label *ngFor="let checkbox of type12Checkboxes; let i = index">
-                                    <input type="checkbox" [checked]="form.get('type12').get(i.toString()).value"
-                                        (change)="updateCheckbox(i, 'type12')" [value]="checkbox">
-                                    {{ checkbox }}
-                                </label>
-                            </div>
+
 
 
                             <!-- text box others -->
@@ -260,6 +286,8 @@
                         </div>
 
                         <div class="col50 colright">
+
+
                             <div class="mb-3 row">
                                 <h4 class="card-subtitle "> Translucency</h4>
                                 <label *ngFor="let checkbox of type13Checkboxes; let i = index">
@@ -536,13 +564,21 @@
 
 
 
+
                 <div class="wd100 px-4">
                     <h4 class="card-title">Notes</h4>
                     <div class="row">
                         <!-- <label name="" class='primary'>Notes</label> -->
                         <p><input class="form-control" type="file" value=""></p>
 
-                        <textarea class="form-control" placeholder="Add your comments ..." required></textarea>
+                        <textarea formControlName="type18" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f['type18'].errors }"
+                            placeholder="Add your comments ..." required></textarea>
+                        <div *ngIf=" submitted && f['type18'].errors" class="invalid-feedback">
+                            <div *ngIf="f['type18'].errors && f['type18'].errors['required']">Additional comments are
+                                requierd.If nothing fill nill
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

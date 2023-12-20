@@ -71,61 +71,6 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/api/admin/register`, user);
   }
 
-  profilereg(profile: Profileinformation, userToken: any) {
-    const body = {
-      userToken: userToken,
-      profile,
-    };
-    console.log(body);
-    return this.http.put(`${environment.apiUrl}/api/profile/save`, body);
-  }
-
-  profilereg_admin(profile: Profileinformation) {
-    return this.http.post(`${environment.apiUrl}/api/profile/save`, profile);
-  }
-
-  adddoctor(doc: doctors, userToken: any) {
-    const body = {
-      userToken: userToken,
-      doc,
-    };
-    return this.http.post(`${environment.apiUrl}/api/doctor/save`, body);
-  }
-
-  getUserDetails(userToken: any) {
-    const body = {
-      userToken: userToken,
-    };
-    var URL = `${environment.apiUrl}/api/user/oneuser`;
-    return this.http.post<any>(URL, body).pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
-  }
-
-  getalldoc(userToken: any) {
-    const body = {
-      userToken: userToken,
-    };
-    var URL = `${environment.apiUrl}/api/doctor/getalldoctor`;
-    return this.http.post<any>(URL, body).pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
-  }
-
-  orderreg(form: any, formdata: any, selected_tooth: any) {
-    const body = {
-      form: form,
-      formdata: formdata,
-      tooth: selected_tooth,
-    };
-    console.log(body);
-    return this.http.post(`${environment.apiUrl}/api/order/createorder`, body);
-  }
-
   loggedIn() {
     return !!localStorage.getItem('user');
   }

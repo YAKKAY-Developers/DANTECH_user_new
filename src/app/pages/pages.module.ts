@@ -21,6 +21,7 @@ const routes: Routes = [
       {
         path: 'toporders',
         component: TopOrdersComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'orderdetail/:id',
@@ -33,6 +34,7 @@ const routes: Routes = [
       {
         path: 'task',
         component: TaskComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'create-order',
@@ -42,18 +44,22 @@ const routes: Routes = [
       {
         path: 'add-doctors',
         component: AddDoctorsComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'bank-details',
         component: BankDetailsComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'demo',
         component: DemoComponent,
+        canActivate: [authGuard],
       },
       {
         path: 'success',
         component: OrderSuccessComponent,
+        canActivate: [authGuard],
       },
     ],
   },

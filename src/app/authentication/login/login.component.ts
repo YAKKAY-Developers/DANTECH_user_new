@@ -37,6 +37,7 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
+    this.authservice.logout();
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: [
@@ -146,6 +147,7 @@ export class LoginComponent {
         error: (error) => {
           this.error_message = error.error.message;
           console.log(error);
+
           this.RegisterError = true;
         },
       });

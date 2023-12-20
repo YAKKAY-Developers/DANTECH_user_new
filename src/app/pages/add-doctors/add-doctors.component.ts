@@ -8,6 +8,9 @@ import {
   FormControl,
 } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { OrderService } from 'src/app/services/order.service';
+
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 @Component({
@@ -54,7 +57,9 @@ export class AddDoctorsComponent {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private userservice: UserService,
+    private orderservice: OrderService
   ) {}
 
   ngOnInit(): void {
@@ -70,7 +75,7 @@ export class AddDoctorsComponent {
     // console.log(this.userId, this.accessToken, this.userType);
 
     //user details
-    this.userDetailsSubscription = this.authservice
+    this.userDetailsSubscription = this.userservice
       .getUserDetails(this.userId)
       .subscribe(
         (res: any) => {
@@ -93,7 +98,7 @@ export class AddDoctorsComponent {
       );
 
     //doc data
-    this.docDetailsSubscription = this.authservice
+    this.docDetailsSubscription = this.userservice
       .getalldoc(this.userId)
       .subscribe(
         (res: any) => {
@@ -131,7 +136,7 @@ export class AddDoctorsComponent {
       return;
     }
     this.loading = true;
-    this.authservice
+    this.userservice
       .adddoctor(this.form.value, this.userId)
       .pipe(first())
       .subscribe({

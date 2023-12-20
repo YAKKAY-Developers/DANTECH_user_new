@@ -7,6 +7,9 @@ import {
   FormControl,
 } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { OrderService } from 'src/app/services/order.service';
+
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
@@ -67,7 +70,9 @@ export class BankDetailsComponent {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private userservice: UserService,
+    private orderservice: OrderService
   ) {}
 
   ngOnInit(): void {
@@ -83,7 +88,7 @@ export class BankDetailsComponent {
     // console.log(this.userId, this.accessToken, this.userType);
 
     //user details
-    this.userDetailsSubscription = this.authservice
+    this.userDetailsSubscription = this.userservice
       .getUserDetails(this.userId)
       .subscribe(
         (res: any) => {

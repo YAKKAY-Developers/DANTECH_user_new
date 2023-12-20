@@ -18,6 +18,9 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { OrderService } from 'src/app/services/order.service';
+
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
@@ -152,13 +155,16 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   type14Checkboxes = ['Low', 'Regular', 'High'];
   type15Checkboxes = ['Low', 'Regular', 'High'];
   type16Checkboxes = ['No', 'Low', 'High', 'Follow adjacent tooth texture'];
+  type19Checkboxes = ['Sanitary', 'FullRidge', 'Modified', 'Bullet', 'Ovate'];
 
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
     private authservice: AuthService,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private userservice: UserService,
+    private orderservice: OrderService
   ) {}
 
   getTodayDate(): string {
@@ -171,38 +177,6 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.initializeForm();
-    // this.fetchUserData();
-    this.populateCheckboxes();
-
-    const { userToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
-    const { fullName } = JSON.parse(localStorage.getItem('user') ?? '{}');
-    const { accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
-    this.accessToken = accessToken;
-    this.userId = userToken;
-    this.userType = fullName;
-
-    //user details
-    this.userDetailsSubscription = this.authservice
-      .getUserDetails(this.userId)
-      .subscribe(
-        (res: any) => {
-          this.UserDetails = res;
-          this.stat_user = this.UserDetails['statuscode'];
-          console.log('My User details', this.UserDetails);
-          const userObject = this.UserDetails['profile'];
-          this.descriptions = this.UserDetails['description'];
-
-          this.user_data = [this.userdata];
-          // console.log(this.user_data);
-        },
-        (error: any) => {
-          console.log('Error fetching user details:', error);
-        }
-      );
-
-    //For teeth selection
-
     $(document).ready(function () {
       var selectedTeeth: { [key: string]: boolean } = {}; // Object to store selected teeth states
       var $toothNumber = $('.tooth-number');
@@ -241,6 +215,36 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(selectedTeeth); // Log the selected teeth
       }
     });
+
+    this.initializeForm();
+    // this.fetchUserData();
+    this.populateCheckboxes();
+
+    const { userToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
+    const { fullName } = JSON.parse(localStorage.getItem('user') ?? '{}');
+    const { accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
+    this.accessToken = accessToken;
+    this.userId = userToken;
+    this.userType = fullName;
+
+    //user details
+    this.userDetailsSubscription = this.userservice
+      .getUserDetails(this.userId)
+      .subscribe(
+        (res: any) => {
+          this.UserDetails = res;
+          this.stat_user = this.UserDetails['statuscode'];
+          console.log('My User details', this.UserDetails);
+          const userObject = this.UserDetails['profile'];
+          this.descriptions = this.UserDetails['description'];
+
+          this.user_data = [this.userdata];
+          // console.log(this.user_data);
+        },
+        (error: any) => {
+          console.log('Error fetching user details:', error);
+        }
+      );
   }
 
   ngAfterViewInit(): void {
@@ -341,6 +345,11 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.type16Checkboxes.map(() => false),
         Validators.required
       ),
+      type18: ['', [Validators.required, Validators.maxLength(700)]],
+      type19: this.formBuilder.array(
+        this.type19Checkboxes.map(() => false),
+        Validators.required
+      ),
     });
   }
 
@@ -368,6 +377,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     const type14Array = this.form.get('type14') as FormArray;
     const type15Array = this.form.get('type15') as FormArray;
     const type16Array = this.form.get('type16') as FormArray;
+    const type19Array = this.form.get('type19') as FormArray;
 
     this.type1Checkboxes.forEach(() =>
       type1Array.push(this.formBuilder.control(false))
@@ -417,6 +427,9 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.type16Checkboxes.forEach(() =>
       type16Array.push(this.formBuilder.control(false))
     );
+    this.type19Checkboxes.forEach(() =>
+      type19Array.push(this.formBuilder.control(false))
+    );
 
     // Manually trigger change detection
     this.cdr.detectChanges();
@@ -427,6 +440,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     checkboxArray.controls[index].setValue(
       !checkboxArray.controls[index].value
     );
+    // console.log(checkboxArray);
   }
 
   // Rename the original getSelectedOptions method
@@ -441,6 +455,21 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     return selectedOptions.join(','); // Convert the array to a string separated by commas
+  }
+  getSelectedOptionsForType19(Type: any, checkbox: any): string {
+    const selectedOptions: string[] = [];
+    var selecteoption = String;
+    const typeArray = this.form.get(Type) as FormArray;
+
+    typeArray.controls.forEach((control, index) => {
+      if (control.value) {
+        selectedOptions.push(checkbox[index]);
+        selecteoption = checkbox[index];
+      }
+    });
+    console.log('type19', selectedOptions, selecteoption);
+
+    return selectedOptions[0]; // Convert the array to a string separated by commas
   }
 
   get f() {
@@ -514,6 +543,10 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
       'type16',
       this.type16Checkboxes
     );
+    const selectedOptionsType19 = this.getSelectedOptionsForType19(
+      'type19',
+      this.type19Checkboxes
+    );
 
     const formdata = {
       result: {
@@ -549,6 +582,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         option15: selectedOptionsType15,
         type16: 'Texture',
         option16: selectedOptionsType16,
+        type19: 'Pontic Design',
+        option19: selectedOptionsType19,
       },
     };
 
@@ -565,8 +600,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     //   doctorid: this.form.value['doctorid'],
     // };
 
-    this.authservice
-      .orderreg(this.form.value, formdata, this.selected_tooth)
+    this.orderservice
+      .orderreg(this.form.value, formdata, this.selected_tooth, this.userId)
       .pipe(first())
       .subscribe({
         next: (res) => {
