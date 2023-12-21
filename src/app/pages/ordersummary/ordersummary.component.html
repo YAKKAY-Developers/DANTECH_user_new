@@ -1,0 +1,654 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button"
+            role="tab" aria-controls="details" aria-selected="true">Details</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button"
+            role="tab" aria-controls="history" aria-selected="false">History</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+            aria-controls="home" aria-selected="false">Invoice</button>
+    </li>
+</ul>
+
+
+<div class="tab-content" id="myTabContent">
+
+    <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+        <div class="container py-5">
+            <div class="row">
+
+                <div class="col-md-12 col-lg-12">
+                    <div id="tracking-pre"></div>
+                    <div id="tracking">
+                        <div class="tracking-list">
+                            <div class="tracking-item">
+                                <div class="tracking-icon status-intransit">
+                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
+                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="tracking-date"><img
+                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
+                                        class="img-responsive" alt="order-placed" /></div>
+                                <div class="tracking-content">Order Placed<span>09 Aug 2023, 10:00am</span></div>
+                            </div>
+                            <div class="tracking-item">
+                                <div class="tracking-icon status-intransit">
+                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
+                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="tracking-date"><img
+                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
+                                        class="img-responsive" alt="order-placed" /></div>
+                                <div class="tracking-content">Order Confirmed<span>09 Aug 2023, 10:30am</span></div>
+                            </div>
+                            <div class="tracking-item">
+                                <div class="tracking-icon status-intransit">
+                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
+                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="tracking-date"><img
+                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
+                                        class="img-responsive" alt="order-placed" /></div>
+                                <div class="tracking-content">Mold creation<span>15 Aug 2023, 12:00pm</span></div>
+                            </div>
+                            <div class="tracking-item">
+                                <div class="tracking-icon status-intransit">
+                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
+                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="tracking-date"><img
+                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
+                                        class="img-responsive" alt="order-placed" /></div>
+                                <div class="tracking-content">Doctors'Approval<span>16 Aug 2023, 02:00pm</span></div>
+                            </div>
+                            <div class="tracking-item">
+                                <div class="tracking-icon status-current blinker">
+                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
+                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="tracking-date"><img
+                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
+                                        class="img-responsive" alt="order-placed" /></div>
+                                <div class="tracking-content">Production<span>20 Aug 2025, 03:00pm</span></div>
+                            </div>
+
+                            <div class="tracking-item-pending">
+                                <div class="tracking-icon status-intransit">
+                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
+                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="tracking-date"><img
+                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
+                                        class="img-responsive" alt="order-placed" /></div>
+                                <div class="tracking-content">Out for Delivery<span>12 Aug 2023, 05:00pm</span></div>
+                            </div>
+                            <div class="tracking-item-pending">
+                                <div class="tracking-icon status-intransit">
+                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
+                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="tracking-date"><img
+                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
+                                        class="img-responsive" alt="order-placed" /></div>
+                                <div class="tracking-content">Delivered<span>12 Aug 2025, 09:00pm</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Order-->
+    <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+        <div class="container-fluid">
+
+            <div class="container">
+                <!-- Title -->
+                <div class="d-flex justify-content-between align-items-center py-3">
+                    <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #16123222</h2>
+                </div>
+
+                <!-- Main content -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Details -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <div>
+                                        <span class="me-3">22-11-2021</span>
+                                        <span class="me-3">#16123222</span>
+                                        <span class="me-3">Visa -1234</span>
+                                        <span class="badge rounded-pill bg-info">OUT FOR DELIVERY</span>
+                                    </div>
+                                    <div class="d-flex">
+                                        <!-- <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button> -->
+                                        <div class="dropdown">
+                                            <button class="btn btn-link p-0 text-muted" type="button"
+                                                data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i>
+                                                        Edit</a></li>
+                                                <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i>
+                                                        Print</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mb-2">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="assets/images/files/2.jpg" alt="" width="35"
+                                                            class="img-fluid">
+                                                    </div>
+                                                    <div class="flex-lg-grow-1 ms-3">
+                                                        <h6 class="small mb-0"><a href="#" class="text-reset">Teeth
+                                                                Impression Kit Putty Silicone Material Tray Teeth
+                                                                Molding Kit for Dental Impression Medium</a></h6>
+                                                        <span class="small">Color: Black</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>1</td>
+                                            <td class="text-end">Rs 79.99</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mb-2">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="assets/images/files/2.jpg" alt="" width="35"
+                                                            class="img-fluid">
+                                                    </div>
+                                                    <div class="flex-lg-grow-1 ms-3">
+                                                        <h6 class="small mb-0"><a href="#" class="text-reset">Custom
+                                                                Grillz Mold Kit - Teeth Dental Impression Kit w/Putty
+                                                                Full Kit Medium</a></h6>
+                                                        <span class="small">Color: White</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>1</td>
+                                            <td class="text-end">Rs 79.99</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2">Subtotal</td>
+                                            <td class="text-end">Rs 159,98</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Shipping</td>
+                                            <td class="text-end">Rs 20.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Discount (Code: NEWYEAR)</td>
+                                            <td class="text-danger text-end">-Rs 10.00</td>
+                                        </tr>
+                                        <tr class="fw-bold">
+                                            <td colspan="2">TOTAL</td>
+                                            <td class="text-end">Rs 169,98</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Payment -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h3 class="h6">Payment Method</h3>
+                                        <p>Visa -1234 <br>
+                                            Total: Rs 169,98 <span class="badge bg-warning rounded-pill">NOT PAID</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h3 class="h6">Billing address</h3>
+                                        <address>
+                                            <strong>John Doe</strong><br>
+                                            1355 Market St, Suite 900<br>
+                                            San Francisco, CA 94103<br>
+                                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                                        </address>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <!-- Customer Notes -->
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h3 class="h6">Product Description</h3>
+                                <p>Impression materials are used to copy the teeth and surrounding oral structures by
+                                    creating a dental impression poured with dental plaster to fabricate a dental cast.
+                                    This procedure provides a tridimensional and accurate mouth replica, allowing dental
+                                    work even in the absence of the patient.</p>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <!-- Shipping information -->
+                            <div class="card-body">
+                                <h3 class="h6">Shipping Information</h3>
+                                <strong>FedEx</strong>
+                                <span><a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a> <i
+                                        class="bi bi-box-arrow-up-right"></i> </span>
+                                <hr>
+                                <h3 class="h6">Address</h3>
+                                <address>
+                                    <strong>John Doe</strong><br>
+                                    1355 Market St, Suite 900<br>
+                                    San Francisco, CA 94103<br>
+                                    <abbr title="Phone">P:</abbr> (123) 456-7890
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="row">
+            <div class="col-9"></div>
+            <div class="col-3">
+                <button type="button" class="btn btn-primary btn-sm float-right" (click)="printPDF()">Print PDF</button>
+            </div>
+
+        </div>
+
+
+        <br>
+
+        <!--Invoice version ---1  -->
+
+        <div class="row">
+            <div class="card" id="invoiceToPrint">
+                <div class="container invoice">
+                    <div class="invoice-header">
+                        <div class="row">
+                            <div class="col-xs-4 col-xs-offset-8 text-right">
+
+                                <img class="media-object logo"
+                                    src="https://www.dantechdentallab.com/wp-content/uploads/2023/08/header-logo.webp"
+                                    style="width: 100px; height: 100px;" />
+
+                            </div>
+
+
+                            <div class="col-xs-8">
+                                <h1>Invoice <small>With Credit</small></h1>
+                                <h4 class="text-muted">NO: 554775/R1 | Date: 30/10/223</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="invoice-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-bordered table-condensed">
+                                            <div class="col-sm-6">
+                                                <h6 class="mb-3">From:</h6>
+                                                <div>
+                                                    <strong>Webz Poland</strong>
+                                                </div>
+                                                <div>Madalinskiego 8</div>
+                                                <div>71-101 Szczecin, Poland</div>
+                                                <div>Email: info@webz.com.pl</div>
+                                                <div>Phone: +48 444 666 3333</div>
+                                            </div>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-bordered table-condensed">
+                                            <div class="col-sm-6">
+                                                <h6 class="mb-3">To:</h6>
+                                                <div>
+                                                    <strong>Webz Poland</strong>
+                                                </div>
+                                                <div>Madalinskiego 8</div>
+                                                <div>71-101 Szczecin, Poland</div>
+                                                <div>Email: info@webz.com.pl</div>
+                                                <div>Phone: +48 444 666 3333</div>
+                                            </div>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Services / Products</h3>
+                            </div>
+                            <table class="table table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Item / Details</th>
+                                        <th class="text-center colfix">Unit Cost</th>
+                                        <th class="text-center colfix">Sum Cost</th>
+                                        <th class="text-center colfix">Discount</th>
+                                        <th class="text-center colfix">Tax</th>
+                                        <th class="text-center colfix">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            Lorem Ipsum Dolor
+                                            <br>
+                                            <small class="text-muted">The best lorem in town, try it now or leave
+                                                forever</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="mono">Rs 1,000.00</span>
+                                            <br>
+                                            <small class="text-muted">Before Tax</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="mono">Rs 18,000.00</span>
+                                            <br>
+                                            <small class="text-muted">18 Units</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="mono">- Rs 1,800.00</span>
+                                            <br>
+                                            <small class="text-muted">Special -10%</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="mono">+ Rs 3,240.00</span>
+                                            <br>
+                                            <small class="text-muted">VAT 20%</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong class="mono">Rs 19,440.00</strong>
+                                            <br>
+                                            <small class="text-muted mono">Rs 16,200.00</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Sit Amet Dolo
+                                            <br>
+                                            <small class="text-muted">Now you may sit</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="mono">Rs 120.00</span>
+                                            <br>
+                                            <small class="text-muted">Before Tax</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="mono">Rs 240.00</span>
+                                            <br>
+                                            <small class="text-muted">2 Units</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="mono">- Rs 0.00</span>
+                                            <br>
+                                            <small class="text-muted">-</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="mono">+ Rs 72.00</span>
+                                            <br>
+                                            <small class="text-muted">VAT:20% S:10%</small>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong class="mono">Rs 312.00</strong>
+                                            <br>
+                                            <small class="text-muted mono">Rs 240.00</small>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panel panel-default">
+                            <table class="table table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td class="text-center col-xs-1">Sub Total</td>
+                                        <td class="text-center col-xs-1">Discount</td>
+                                        <td class="text-center col-xs-1">Total</td>
+                                        <td class="text-center col-xs-1">Tax</td>
+                                        <td class="text-center col-xs-1">Final</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="text-center rowtotal mono">Rs 18,240.00</th>
+                                        <th class="text-center rowtotal mono">-Rs 1,800.00</th>
+                                        <th class="text-center rowtotal mono">Rs 16,440.00</th>
+                                        <th class="text-center rowtotal mono">Rs 3,312.00</th>
+                                        <th class="text-center rowtotal mono">Rs 19,752.00</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <i>Comments / Notes</i>
+                                        <hr style="margin: 3px 0 5px" /> Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit. Odit repudiandae numquam sit facere blanditiis, quasi
+                                        distinctio ipsam? Libero odit ex expedita, facere sunt, possimus consectetur
+                                        dolore, nobis iure amet vero.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="invoice-footer">
+                        Thank you for choosing our services.
+                        <br /> We hope to see you again soon
+                        <br />
+                        <strong>~Dantech~</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Invoice version ---1 ends  -->
+        <!--Invoice version ---2  -->
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+  
+    <div class="container" id="invoiceToPrint">
+    <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="invoice-title">
+                            <h4 class="float-end font-size-15">Invoice #DS0204 <span class="badge bg-success font-size-12 ms-2">Paid</span></h4>
+                            <div class="mb-4">
+                               <h2 class="mb-1 text-muted">Dantech</h2>
+                            </div>
+                            <div class="text-muted">
+                                <p class="mb-1">3184 Spruce Drive Pittsburgh, PA 15201</p>
+                                <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i> xyz@987.com</p>
+                                <p><i class="uil uil-phone me-1"></i> 012-345-6789</p>
+                            </div>
+                        </div>
+    
+                        <hr class="my-4">
+    
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="text-muted">
+                                    <h5 class="font-size-16 mb-3">Billed To:</h5>
+                                    <h5 class="font-size-15 mb-2">Preston Miller</h5>
+                                    <p class="mb-1">4068 Post Avenue Newfolden, MN 56738</p>
+                                    <p class="mb-1">PrestonMiller@armyspy.com</p>
+                                    <p>001-234-5678</p>
+                                </div>
+                            </div>
+                      
+                            <div class="col-sm-6">
+                                <div class="text-muted text-sm-end">
+                                    <div>
+                                        <h5 class="font-size-15 mb-1">Invoice No:</h5>
+                                        <p>#DZ0112</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h5 class="font-size-15 mb-1">Invoice Date:</h5>
+                                        <p>12 Oct, 2020</p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h5 class="font-size-15 mb-1">Order No:</h5>
+                                        <p>#1123456</p>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                 
+                        
+                        <div class="py-2">
+                            <h5 class="font-size-15">Order Summary</h5>
+    
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap table-centered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 70px;">No.</th>
+                                            <th>Item</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th class="text-end" style="width: 120px;">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">01</th>
+                                            <td>
+                                                <div>
+                                                    <h5 class="text-truncate font-size-14 mb-1">Black Strap A012</h5>
+                                                    <p class="text-muted mb-0">Watch, Black</p>
+                                                </div>
+                                            </td>
+                                            <td>$ 245.50</td>
+                                            <td>1</td>
+                                            <td class="text-end">$ 245.50</td>
+                                        </tr>
+                           
+                                        <tr>
+                                            <th scope="row">02</th>
+                                            <td>
+                                                <div>
+                                                    <h5 class="text-truncate font-size-14 mb-1">Stainless Steel S010</h5>
+                                                    <p class="text-muted mb-0">Watch, Gold</p>
+                                                </div>
+                                            </td>
+                                            <td>$ 245.50</td>
+                                            <td>2</td>
+                                            <td class="text-end">$491.00</td>
+                                        </tr>
+                                       
+                                        <tr>
+                                            <th scope="row" colspan="4" class="text-end">Sub Total</th>
+                                            <td class="text-end">$732.50</td>
+                                        </tr>
+                                     
+                                        <tr>
+                                            <th scope="row" colspan="4" class="border-0 text-end">
+                                                Discount :</th>
+                                            <td class="border-0 text-end">- $25.50</td>
+                                        </tr>
+                                
+                                        <tr>
+                                            <th scope="row" colspan="4" class="border-0 text-end">
+                                                Shipping Charge :</th>
+                                            <td class="border-0 text-end">$20.00</td>
+                                        </tr>
+                                 
+                                        <tr>
+                                            <th scope="row" colspan="4" class="border-0 text-end">
+                                                Tax</th>
+                                            <td class="border-0 text-end">$12.00</td>
+                                        </tr>
+                                      
+                                        <tr>
+                                            <th scope="row" colspan="4" class="border-0 text-end">Total</th>
+                                            <td class="border-0 text-end"><h4 class="m-0 fw-semibold">$739.00</h4></td>
+                                        </tr>
+                               
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="d-print-none mt-4">
+                                <div class="float-end">
+                                    <a href="javascript:window.print()" (click)="printPDF()" class="btn btn-success me-1"><i class="fa fa-print"></i></a>
+                                    <a href="#" class="btn btn-primary w-md">Send</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+        <!--Invoice version ---2 ends -->
+
+
+
+
+    </div>
+
+
+
+</div>

@@ -8,11 +8,58 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { OrderService } from 'src/app/services/order.service';
-
+import { Subscribable, Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import { DisableRightClickService } from 'src/app/services/disable-right-click.service';
+
+function calculatePercentageCompletion(obj: any, doc: any): string {
+  let totalFields = 0;
+  let filledFields = 0;
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      totalFields++;
+
+      // Check if the key is "image" and the value is "assests/images/users/user.svg"
+      if (key === 'image' && obj[key] === 'assets/images/users/user.svg') {
+        // Reduce the filledFields count by 1
+        filledFields--;
+      } else if (obj[key] !== null) {
+        filledFields++;
+      }
+    }
+  }
+
+  if (doc) {
+    filledFields++;
+  }
+
+  filledFields--;
+
+  return String(
+    totalFields === 0
+      ? 0
+      : Number(((filledFields / totalFields) * 100).toFixed(0))
+  );
+}
+
+function convertNullValues(data: any) {
+  const convertedData = {};
+
+  for (const key in data) {
+    if (data[key] === null) {
+      // Check the type of the original value and assign the appropriate replacement
+      convertedData[key] = typeof data[key] === 'number' ? 0 : 'None';
+    } else {
+      convertedData[key] = data[key];
+    }
+  }
+
+  return convertedData;
+}
 
 @Component({
   selector: 'app-form',
@@ -30,6 +77,16 @@ export class FormComponent {
   userType: string;
   accessToken: string;
   userToken: any;
+  // authenticate user
+  userdata: any;
+  UserDetails: any;
+  userDetailsSubscription: Subscription;
+  userObject: void;
+  doc_count = false;
+  user_data: any;
+  // check prescence
+  gst_no = false;
+  img_uploaded = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,7 +95,8 @@ export class FormComponent {
     private authservice: AuthService,
     private http: HttpClient,
     private userservice: UserService,
-    private orderservice: OrderService
+    private orderservice: OrderService,
+    private rightClickDisable: DisableRightClickService
   ) {}
 
   // profile image
@@ -82,6 +140,8 @@ export class FormComponent {
     this.userType = fullName;
     this.stat_user = status;
     // console.log(this.userId);
+
+    this.rightClickDisable.disableRightClick();
 
     this.form = this.formBuilder.group({
       // image: ['',[Validators.required]],
@@ -146,6 +206,36 @@ export class FormComponent {
         ],
       ],
     });
+
+    //user details
+    this.userDetailsSubscription = this.userservice
+      .getUserDetails(this.userId)
+      .subscribe(
+        (res: any) => {
+          this.UserDetails = res;
+          console.log('My details', this.UserDetails);
+          const userObject = this.UserDetails['profile'];
+          const percentageCompletion: string = calculatePercentageCompletion(
+            userObject,
+            this.doc_count
+          );
+
+          userObject.profilecompletionpercentage = percentageCompletion;
+          this.userdata = convertNullValues(userObject);
+          if (this.userdata['image'] != 'assets/images/users/user.svg') {
+            this.img_uploaded = true;
+          }
+          if (this.userdata['gst'] != 'None') {
+            this.gst_no = true;
+          }
+
+          this.user_data = [this.userdata];
+          // console.log(this.user_data);
+        },
+        (error: any) => {
+          console.log('Error fetching user details:', error);
+        }
+      );
   }
 
   get f() {

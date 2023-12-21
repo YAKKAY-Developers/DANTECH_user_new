@@ -80,11 +80,18 @@
                             is required</div>
                     </div>
                     <div *ngIf="reg_submitted && r['confirmpassword'].errors" class="invalid-feedback">
-                        <div *ngIf="r['confirmpassword'].errors && r['confirmpassword'].errors['pattern']">Password
-                            does
-                            not match
+                        <div *ngIf="r['confirmpassword'].errors && r['confirmpassword'].errors['pattern']">Password is
+                            weak
+
                         </div>
+
                     </div>
+                    <!-- <div>
+                        <div class="error_message_match">
+                            {{ register.errors['message'] }}
+
+                        </div>
+                    </div> -->
 
 
                     <p class="p-0 m-0" style="font-style: italic;color: #ff0000;font-size: small;"

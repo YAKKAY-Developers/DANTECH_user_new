@@ -1,0 +1,70 @@
+<div class="card">
+
+
+    <div class="card-body">
+
+
+        <!-- title -->
+        <h4 class="card-title">Orders</h4>
+
+
+        <h5 class="card-subtitle">Overview of the orders</h5>
+
+        <div class="row">
+            <div class="col-11">
+                <input class="form-control" type="text" name="search" [(ngModel)]="searchText"
+                    (ngModelChange)="filterData()" autocomplete="off" placeholder="Find your orders">
+            </div>
+            <div class="col-1">
+                <button class="btn btn-primary btn-sm" (click)="exportToCSV()"><i class="bi bi-download"></i></button>
+            </div>
+        </div>
+
+
+        <!-- title -->
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th (click)="sortColumn('reference')" class="text-dark font-medium fs-4">Work Order id &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th (click)="sortColumn('status')" class="text-dark font-medium fs-4">Status &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th (click)="sortColumn('patient')" class="text-dark font-medium fs-4">Patient &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th (click)="sortColumn('required')" class="text-dark font-medium fs-4">Required &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th (click)="sortColumn('product')" class="text-dark font-medium fs-4">Product &nbsp; <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th (click)="sortColumn('Files')" class="text-dark font-medium fs-4">files</th>
+                        <th (click)="sortColumn('Action')" class="text-dark font-medium fs-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let ts of filteredData'>
+                        <td>{{ts.reference}}</td>
+                        <td>{{ts.status}}</td>
+                        <td>{{ts.patient}}</td>
+                        <td>{{ts.required}}</td>
+                        <td>{{ts.product}}</td>
+                        <td>
+                            <img [src]="ts.image" alt="user" width="50">
+                        </td>
+                        <td>
+                            <button class="btn btn-light-primary btn-sm"
+                                [routerLink]="['/det/pages/ordersummary',ts.reference]"><i
+                                    class="bi bi-info"></i></button>
+                            &nbsp;
+                            <button class="btn btn-outline-light-danger btn-sm" (click)="openModal()"><i
+                                    class="bi bi-trash3"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+
+</div>

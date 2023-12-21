@@ -23,6 +23,7 @@ import { OrderService } from 'src/app/services/order.service';
 
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { DisableRightClickService } from 'src/app/services/disable-right-click.service';
 
 export function fileExtensionValidator(allowedExtensions: string[]) {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -86,6 +87,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   form_values: any;
   //form
   selectedOption: string = '';
+  add_comments = 'Nill..!';
   // check prescence
   gst_no = false;
   img_uploaded = false;
@@ -164,7 +166,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private userservice: UserService,
-    private orderservice: OrderService
+    private orderservice: OrderService,
+    private rightClickDisable: DisableRightClickService
   ) {}
 
   getTodayDate(): string {
@@ -215,6 +218,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(selectedTeeth); // Log the selected teeth
       }
     });
+
+    this.rightClickDisable.disableRightClick();
 
     this.initializeForm();
     // this.fetchUserData();

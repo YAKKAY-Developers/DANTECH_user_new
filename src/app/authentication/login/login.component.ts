@@ -36,6 +36,14 @@ export class LoginComponent {
     private authservice: AuthService
   ) {}
 
+  // password(formGroup: FormGroup) {
+  //   const { value: password } = formGroup.get('password');
+  //   const { value: confirmPassword } = formGroup.get('confirmpassword');
+  //   return password === confirmPassword
+  //     ? { passwordNotMatch: false, message: '' }
+  //     : { passwordNotMatch: true, message: 'Password does not match!' };
+  // }
+
   ngOnInit() {
     this.authservice.logout();
     this.form = this.formBuilder.group({
@@ -52,39 +60,47 @@ export class LoginComponent {
       ],
     });
 
-    this.register = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      name: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^[A-z]*$/),
-          Validators.min(3),
+    this.register = this.formBuilder.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        name: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^[A-z]*$/),
+            Validators.min(3),
+          ],
         ],
-      ],
-      address: ['', [Validators.required, Validators.maxLength(50)]],
-      phonenumber: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
-          ),
-          Validators.minLength(8),
+        address: ['', [Validators.required, Validators.maxLength(50)]],
+        phonenumber: [
+          '',
+          [Validators.required, Validators.pattern('[0-9]{10}')],
         ],
-      ],
-      confirmpassword: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
-          ),
-          Validators.minLength(8),
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+            ),
+            Validators.minLength(8),
+          ],
         ],
-      ],
-    });
+        confirmpassword: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+            ),
+            Validators.minLength(8),
+          ],
+        ],
+      }
+      // {
+      //   validators: this.password.bind(this),
+      // }
+    );
   }
 
   // convenience getter for easy access to form fields
@@ -97,6 +113,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.submitted = true;
+    console.log(this.form.value);
     // reset alerts on submit
     // this.alertService.clear();
     // stop here if form is invalid
@@ -130,6 +147,7 @@ export class LoginComponent {
 
   Register() {
     this.reg_submitted = true;
+    console.log(this.register.value);
 
     if (this.register.invalid) {
       return;

@@ -568,15 +568,18 @@
                 <div class="wd100 px-4">
                     <h4 class="card-title">Notes</h4>
                     <div class="row">
+                        <br>
                         <!-- <label name="" class='primary'>Notes</label> -->
-                        <p><input class="form-control" type="file" value=""></p>
-
+                        <input class="form-control" type="file" value="">
+                        <br><br>
+                        <h4 class="card-title">Add additonal comments</h4>
+                        <br>
                         <textarea formControlName="type18" class="form-control"
                             [ngClass]="{ 'is-invalid': submitted && f['type18'].errors }"
-                            placeholder="Add your comments ..." required></textarea>
+                            placeholder="Add your comments ..." [(ngModel)]="add_comments" required=""></textarea>
                         <div *ngIf=" submitted && f['type18'].errors" class="invalid-feedback">
                             <div *ngIf="f['type18'].errors && f['type18'].errors['required']">Additional comments are
-                                requierd.If nothing fill nill
+                                requierd.
                             </div>
                         </div>
                     </div>
