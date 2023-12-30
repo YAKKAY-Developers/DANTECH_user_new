@@ -87,10 +87,13 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   form_values: any;
   //form
   selectedOption: string = '';
-  add_comments = 'Nill..!';
+  add_comments = 'Nill!';
   // check prescence
   gst_no = false;
   img_uploaded = false;
+  //date
+  today_date: any;
+  // questions
   type1Checkboxes = [
     'Wax-Up',
     'Crown',
@@ -219,6 +222,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
+    this.today_date = this.getTodayDate();
+
     this.rightClickDisable.disableRightClick();
 
     this.initializeForm();
@@ -238,10 +243,12 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(
         (res: any) => {
           this.UserDetails = res;
-          this.stat_user = this.UserDetails['statuscode'];
+          this.stat_user = this.UserDetails.userDetail[0]['statuscode'];
+          // console.log('status', this.UserDetails.userDetail[0]['statuscode']);
           console.log('My User details', this.UserDetails);
           const userObject = this.UserDetails['profile'];
-          this.descriptions = this.UserDetails['description'];
+          this.descriptions = this.UserDetails.userDesc['description'];
+          console.log(this.descriptions);
 
           this.user_data = [this.userdata];
           // console.log(this.user_data);
@@ -277,13 +284,28 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
           Validators.minLength(3),
         ],
       ],
-      doctorid: [
-        '',
-        [Validators.required, Validators.pattern('DOC[0-9]{5,6}$')],
-      ],
+      doctorid: ['', [Validators.required]],
       service: ['', [Validators.required]],
       orderdate: ['', [Validators.required]],
-      phonenumber: [''],
+      duedate: ['', [Validators.required]],
+      patientage: [
+        '',
+        [
+          Validators.required,
+          Validators.max(100),
+          Validators.min(18),
+          Validators.pattern('[0-9]+'),
+        ],
+      ],
+      patientsex: ['', [Validators.required]],
+      phonenumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
       clinicname: [''],
       uniqueid: [''],
       type1: this.formBuilder.array(

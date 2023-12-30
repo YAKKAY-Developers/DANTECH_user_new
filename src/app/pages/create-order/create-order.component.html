@@ -28,26 +28,25 @@
                     </div>
                 </div>
                 <div class="row d-flex justify-content-around">
-                    <div class="wd50">
+                    <div class="wd100">
                         <label name="">Phone number</label>
-                        <input class="form-control" formControlName="phonenumber"
-                            [(ngModel)]="UserDetails.profile.phonenumber" type="tel" readonly required>
-                    </div>
-                    <div class="wd50">
-                        <label name="">Patient Name</label>
-                        <input formControlName="patientname" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['patientname'].errors }"
-                            placeholder="Patient Name" type="url" required>
-                        <div *ngIf=" submitted && f['patientname'].errors" class="invalid-feedback">
-                            <div *ngIf="f['patientname'].errors && f['patientname'].errors['required']">Patientname is
+                        <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f['phonenumber'].errors }"
+                            formControlName="phonenumber" placeholder="Phone Number" type="tel" required>
+                        <div *ngIf=" submitted && f['phonenumber'].errors" class="invalid-feedback">
+                            <div *ngIf="f['phonenumber'].errors && f['phonenumber'].errors['required']">Phone number is
                                 required
                             </div>
-                            <div *ngIf="f['patientname'].errors && f['patientname'].errors['minlength']">Enter valid
-                                name(Should contain atleast 3 charectors)
+                            <div *ngIf="f['phonenumber'].errors && f['phonenumber'].errors['minlength']">Enter valid
+                                Phone number
+                            </div>
+                            <div *ngIf="f['phonenumber'].errors && f['phonenumber'].errors['maxlength']">Enter valid
+                                Phone number
                             </div>
                         </div>
-
                     </div>
+                    <!-- <div class="wd50">
+
+                    </div> -->
                 </div>
                 <div class="row d-flex justify-content-around">
                     <div class="wd50">
@@ -57,32 +56,93 @@
 
                     </div>
                     <div class="wd50">
-                        <label name="">Doctor id</label>
+                        <label name="">DCI id</label>
                         <input formControlName="doctorid" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['doctorid'].errors }" placeholder="Doctor id"
+                            [ngClass]="{ 'is-invalid': submitted && f['doctorid'].errors }" placeholder="DCI id"
                             type="url" required>
                         <div *ngIf=" submitted && f['doctorid'].errors" class="invalid-feedback">
-                            <div *ngIf="f['doctorid'].errors && f['doctorid'].errors['required']">Doctor id is
+                            <div *ngIf="f['doctorid'].errors && f['doctorid'].errors['required']">DCI id is
                                 required
-                            </div>
-                            <div *ngIf="f['doctorid'].errors && f['doctorid'].errors['pattern']">Enter valid Doctor ID
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
+            <!-- Patient -->
+            <h4 class="card-title">Patient details</h4>
+            <br>
 
+            <div class="row d-flex justify-content-around">
+                <div class="col-12">
+
+                    <label name="">Patient Name</label>
+                    <input formControlName="patientname" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['patientname'].errors }" placeholder="Patient Name"
+                        type="url" required>
+                    <div *ngIf=" submitted && f['patientname'].errors" class="invalid-feedback">
+                        <div *ngIf="f['patientname'].errors && f['patientname'].errors['required']">
+                            Patient name is
+                            required
+                        </div>
+                        <div *ngIf="f['patientname'].errors && f['patientname'].errors['minlength']">Enter
+                            valid
+                            name(Should contain atleast 3 charectors)
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="col-6">
+
+                    <label name="">Patient Age</label>
+                    <input formControlName="patientage" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['patientage'].errors }" placeholder="Patient Name"
+                        type="url" required>
+                    <div *ngIf=" submitted && f['patientage'].errors" class="invalid-feedback">
+                        <div *ngIf="f['patientage'].errors && f['patientage'].errors['required']">
+                            Patient age is
+                            required
+                        </div>
+                        <div *ngIf="f['patientage'].errors && f['patientage'].errors['min']">
+                            Enter age only above 18
+                        </div>
+                        <div *ngIf="f['patientage'].errors && f['patientage'].errors['max']">
+                            Enter age only below 100
+                        </div>
+                        <div *ngIf="f['patientage'].errors && f['patientage'].errors['pattern']">
+                            Enter valid age
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-6">
+
+                    <label name="">Patient Sex</label>
+                    <select formControlName="patientsex" class="form-control form-select d-inline-flex p-2"
+                        [ngClass]="{ 'is-invalid': submitted && f['patientsex'].errors }" style="padding-right:15px;">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <!-- <option value="Partials">Partials</option>
+                        <option value="Implants">Implants</option>
+                        <option value="Removable">Removable</option> -->
+                    </select>
+
+                </div>
+            </div>
+
+            <hr>
             <!-- Service -->
 
 
             <div class="wd100 colleft question-checkbox" style="padding:2%">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="row">
                             <label style="margin-bottom:8px;">Service</label>
                             <!-- <select (change)="onServiceSelect($event)"> -->
-                            <select formControlName="service" class="form-control d-inline-flex p-2"
+                            <select formControlName="service" class="form-control form-select d-inline-flex p-2"
                                 [ngClass]="{ 'is-invalid': submitted && f['service'].errors }"
                                 style="padding-right:15px;">
                                 <option value="Crown">Crown</option>
@@ -93,12 +153,19 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         &nbsp;
                         <label name="">Order Date</label>
                         <input class="form-control" formControlName="orderdate"
                             [ngClass]="{ 'is-invalid': submitted && f['orderdate'].errors }" placeholder="Order Date"
-                            type="date" required [min]="getTodayDate()">
+                            type="date" [(ngModel)]="today_date" readonly>
+                    </div>
+                    <div class="col-4">
+                        &nbsp;
+                        <label name="">Due Date</label>
+                        <input class="form-control" formControlName="duedate"
+                            [ngClass]="{ 'is-invalid': submitted && f['duedate'].errors }" placeholder="Due Date"
+                            type="date" [min]="getTodayDate()">
                     </div>
                     <!-- <p>we expect atleast a 10 working day difference between order date and due date.</p> -->
                 </div>
@@ -107,7 +174,7 @@
 
 
 
-            <div class="wd100">
+            <div class=" wd100">
                 <hr>
             </div>
             <!--Form starting-->
@@ -279,10 +346,10 @@
 
                             <!-- text box others -->
 
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <h4 class="card-subtitle "> Others</h4>
                                 <textarea class="form-control" placeholder="Add comments"></textarea>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="col50 colright">
@@ -571,6 +638,7 @@
                         <br>
                         <!-- <label name="" class='primary'>Notes</label> -->
                         <input class="form-control" type="file" value="">
+                        <p>Acceptable file formats - images, pdf, stl, ply</p>
                         <br><br>
                         <h4 class="card-title">Add additonal comments</h4>
                         <br>
@@ -578,7 +646,8 @@
                             [ngClass]="{ 'is-invalid': submitted && f['type18'].errors }"
                             placeholder="Add your comments ..." [(ngModel)]="add_comments" required=""></textarea>
                         <div *ngIf=" submitted && f['type18'].errors" class="invalid-feedback">
-                            <div *ngIf="f['type18'].errors && f['type18'].errors['required']">Additional comments are
+                            <div *ngIf="f['type18'].errors && f['type18'].errors['required']">Additional
+                                comments are
                                 requierd.
                             </div>
                         </div>

@@ -268,6 +268,6 @@ export class FormComponent {
         },
       });
 
-    // this.router.navigate(['/det/profile/view']);
+    this.router.navigate(['/det/profile/view']);
   }
 }

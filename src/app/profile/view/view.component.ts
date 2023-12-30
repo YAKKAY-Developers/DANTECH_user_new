@@ -35,8 +35,6 @@ function calculatePercentageCompletion(obj: any, doc: any): string {
     filledFields++;
   }
 
-  filledFields--;
-
   return String(
     totalFields === 0
       ? 0
@@ -125,10 +123,8 @@ export class ViewComponent {
           this.docdetails = res;
           // console.log(this.docdetails['doctor']);
           this.doc_data = this.docdetails['doctor'];
-          console.log('data', this.doc_data);
-          if (this.doc_data['length'] > 0) {
-            this.doc_count = true;
-          }
+          console.log('data', this.doc_data.length);
+
           this.filteredData = this.doc_data;
           console.log(this.filteredData);
         },
@@ -136,7 +132,6 @@ export class ViewComponent {
           console.log('Error fetching doc details:', error);
         }
       );
-
     //user details
     this.userDetailsSubscription = this.userservice
       .getUserDetails(this.userId)
@@ -145,6 +140,7 @@ export class ViewComponent {
           this.UserDetails = res;
           console.log('My details', this.UserDetails);
           const userObject = this.UserDetails['profile'];
+          this.doc_count = this.UserDetails['doctor_count'];
           const percentageCompletion: string = calculatePercentageCompletion(
             userObject,
             this.doc_count

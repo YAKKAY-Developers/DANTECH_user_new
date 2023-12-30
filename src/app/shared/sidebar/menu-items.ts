@@ -44,7 +44,7 @@ export const ROUTES: RouteInfo[] = [
   // },
   {
     path: '/det/pages/add-doctors',
-    title: 'Add doctors',
+    title: 'Add consultant',
     icon: 'bi bi-person-add',
     class: '',
     extralink: false,
@@ -53,6 +53,14 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '/det/pages/create-order',
     title: 'Create order',
+    icon: 'bi bi-bag-plus',
+    class: '',
+    extralink: false,
+    submenu: [],
+  },
+  {
+    path: '/det/pages/orderlist',
+    title: 'Orders',
     icon: 'bi bi-bag-plus',
     class: '',
     extralink: false,
