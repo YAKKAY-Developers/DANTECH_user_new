@@ -71,26 +71,16 @@ export class AddDoctorsComponent {
     this.accessToken = accessToken;
     this.userId = userToken;
     this.userType = fullName;
+    
 
-    // console.log(this.userId, this.accessToken, this.userType);
-
-    //user details
+  //user details
     this.userDetailsSubscription = this.userservice
       .getUserDetails(this.userId)
       .subscribe(
         (res: any) => {
           this.UserDetails = res;
-          // console.log('My details', this.UserDetails['profile']);
           const userObject = this.UserDetails['profile'];
-          // if (this.userdata['image'] != 'assets/images/users/user.svg') {
-          //   this.img_uploaded = true;
-          // }
-          // if (this.userdata['gst'] != 'None') {
-          //   this.gst_no = true;
-          // }
-
           this.user_data = [this.userdata];
-          // console.log(this.user_data);
         },
         (error: any) => {
           console.log('Error fetching user details:', error);
@@ -103,19 +93,19 @@ export class AddDoctorsComponent {
       .subscribe(
         (res: any) => {
           this.docdetails = res;
-          // console.log(this.docdetails['doctor']);
           this.doc_data = this.docdetails['doctor'];
-          // console.log('data', this.doc_data);
           if (this.doc_data['length'] > 0) {
             this.doc_count = true;
           }
           this.filteredData = this.doc_data;
-          console.log(this.filteredData);
+          console.log("DOctor count",this.doc_count );
         },
         (error: any) => {
           console.log('Error fetching doc details:', error);
         }
       );
+
+
     //form
     this.form = this.formBuilder.group({
       First_name: ['', [Validators.required, Validators.minLength(3)]],
@@ -130,7 +120,6 @@ export class AddDoctorsComponent {
   //form submit
   onSubmit() {
     this.submitted = true;
-
     if (this.form.invalid) {
       console.log(this.form.controls);
       return;
@@ -141,18 +130,17 @@ export class AddDoctorsComponent {
       .pipe(first())
       .subscribe({
         next: () => {
-          // this.router.navigate(['/det/profile/view']);
           window.location.reload();
         },
         error: (error) => {
-          // this.alertService.error(error);
           this.loading = false;
+          console.log(error)
         },
       });
   }
 
-  //table doctors
-  //sort coloumn
+
+
   sortColumn(column: string) {
     // Check if the column is already sorted
     if (this.sortcolumn === column) {
@@ -179,10 +167,9 @@ export class AddDoctorsComponent {
 
   filterData() {
     if (this.searchText) {
-      // console.log('Hi');
+   
       this.filteredData = this.doc_data.filter((item: any) => {
-        // console.log('My data', this.filteredData);
-        // Customize the filtering logic as needed
+
         return (
           item.doctorid.toLowerCase().includes(this.searchText.toLowerCase()) ||
           item.Firstname.toLowerCase().includes(
@@ -192,10 +179,12 @@ export class AddDoctorsComponent {
           item.Specialisation.toLowerCase().includes(
             this.searchText.toLowerCase()
           )
-          // .includes(this.searchText)
+
         );
       });
-    } else {
+    } 
+    
+    else {
       this.filteredData = this.doc_data; // If searchText is empty, show all data
     }
   }

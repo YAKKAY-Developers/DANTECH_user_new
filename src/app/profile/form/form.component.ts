@@ -77,6 +77,7 @@ export class FormComponent {
   userType: string;
   accessToken: string;
   userToken: any;
+
   // authenticate user
   userdata: any;
   UserDetails: any;
@@ -84,6 +85,7 @@ export class FormComponent {
   userObject: void;
   doc_count = false;
   user_data: any;
+
   // check prescence
   gst_no = false;
   img_uploaded = false;
@@ -109,26 +111,10 @@ export class FormComponent {
       const file = target.files[0];
       image.src = URL.createObjectURL(target.files[0]);
 
-      // this.saveFileLocally(file);
+     
     }
   }
-  // profile image save try
-  // saveFileLocally(file: File): void {
-  //   const reader = new FileReader();
-
-  //   reader.onload = (event) => {
-  //     const base64Data = (event.target as any).result;
-  //     const fileName = file.name;
-
-  //     // Save the base64 data to local storage
-  //     localStorage.setItem(fileName, base64Data);
-
-  //     console.log('File saved locally:', fileName);
-  //   };
-
-  //   // Read the file as data URL
-  //   reader.readAsDataURL(file);
-  // }
+  
 
   ngOnInit() {
     const { userToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
@@ -139,7 +125,7 @@ export class FormComponent {
     this.userId = userToken;
     this.userType = fullName;
     this.stat_user = status;
-    // console.log(this.userId);
+   
 
     this.rightClickDisable.disableRightClick();
 
@@ -153,6 +139,8 @@ export class FormComponent {
           Validators.min(3),
         ],
       ],
+
+      
       email: ['', [Validators.required, Validators.email]],
       phonenumber: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
       alternativenumber: [

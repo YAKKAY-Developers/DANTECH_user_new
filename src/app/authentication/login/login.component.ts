@@ -67,11 +67,11 @@ export class LoginComponent {
           '',
           [
             Validators.required,
-            Validators.pattern(/^[A-z]*$/),
-            Validators.min(3),
+            Validators.pattern(/^([A-z]+\s*)+$/),
+            Validators.minLength(3),
           ],
         ],
-        address: ['', [Validators.required, Validators.maxLength(50)]],
+        address: ['', [Validators.required, Validators.maxLength(100)]],
         phonenumber: [
           '',
           [Validators.required, Validators.pattern('[0-9]{10}')],

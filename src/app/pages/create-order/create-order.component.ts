@@ -93,6 +93,11 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   img_uploaded = false;
   //date
   today_date: any;
+    // doctor list
+    docdetails: any;
+    doc_count = false;
+    doc_data: any;
+    docDetailsSubscription: Subscription;
   // questions
   type1Checkboxes = [
     'Wax-Up',
@@ -257,6 +262,24 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
           console.log('Error fetching user details:', error);
         }
       );
+          //doc data
+    this.docDetailsSubscription = this.userservice
+    .getalldoc(this.userId)
+    .subscribe(
+      (res: any) => {
+        this.docdetails = res;
+        // console.log(this.docdetails['doctor']);
+        this.doc_data = this.docdetails['doctor'];
+        console.log('data', this.doc_data);
+        if (this.doc_data['length'] > 0) {
+          this.doc_count = true;
+        }
+
+      },
+      (error: any) => {
+        console.log('Error fetching doc details:', error);
+      }
+    );
   }
 
   ngAfterViewInit(): void {
@@ -268,14 +291,15 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   initializeForm(): void {
     this.form = this.formBuilder.group({
-      doctor_name: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^[A-z].*$/),
-          Validators.minLength(3),
-        ],
-      ],
+      // doctor_name: [
+      //   '',
+      //   [
+      //     Validators.required,
+      //     Validators.pattern(/^[A-z].*$/),
+      //     Validators.minLength(3),
+      //   ],
+      // ],
+      doctor_name: ['', Validators.required],
       patientname: [
         '',
         [
@@ -616,6 +640,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     console.log('My form data', formdata);
     console.log('formdata', this.form.value);
+    console.log('Doctor name',this.form.value.doctor_name);
     console.log(this.selected_tooth);
     this.selected_tooth = 'None';
 
