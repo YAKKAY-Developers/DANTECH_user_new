@@ -7,9 +7,9 @@ import {
 } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
-
+import { ErrorInterceptor } from './helpers/error.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FullComponent } from './layouts/full/full.component';
 import { NavigationComponent } from './shared/header/navigation.component';
@@ -21,6 +21,10 @@ import { SpinnerComponent } from './shared/spinner.component';
 import { BlankComponent } from './layouts/blank/blank.component';
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ToastrModule } from 'ngx-toastr';
+import { CustomToastComponent } from './dialogs/custom-toast/custom-toast.component';
+
+
 
 @NgModule({
   declarations: [AppComponent, SpinnerComponent],
@@ -33,31 +37,45 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     HttpClientModule,
     NgbModule,
     RouterModule.forRoot(Approutes, { useHash: false }),
+    ToastrModule.forRoot({
+   
+
+      // toastComponent: CustomToastComponent,
+timeOut: 3000, // Time to close the toaster (in milliseconds)
+      positionClass: 'toast-top-right', // Toast position
+      closeButton: false, // Show close button
+      progressBar: true, // Show progress bar
+      // Apply the custom style class to toastr container
+      toastClass: 'custom-toast',
+
+    }),
     FullComponent,
     BlankComponent,
     NavigationComponent,
     SidebarComponent,
-    NgCircleProgressModule.forRoot({
-      // set defaults here
-      backgroundColor: 'teal',
-      backgroundPadding: 8,
-      radius: 60,
-      space: -15,
-      maxPercent: 100,
-      unitsColor: '#ffffff',
-      outerStrokeWidth: 7.5,
-      outerStrokeColor: 'white',
-      innerStrokeColor: 'teal',
-      innerStrokeWidth: 3,
-      titleColor: '#ffffff',
-      subtitleColor: '#ffffff',
-    }),
+    NgCircleProgressModule.forRoot(
+    //   {
+    //   backgroundColor: 'teal',
+    //   backgroundPadding: 8,
+    //   radius: 60,
+    //   space: -15,
+    //   maxPercent: 100,
+    //   unitsColor: '#ffffff',
+    //   outerStrokeWidth: 7.5,
+    //   outerStrokeColor: 'white',
+    //   innerStrokeColor: 'teal',
+    //   innerStrokeWidth: 3,
+    //   titleColor: '#ffffff',
+    //   subtitleColor: '#ffffff',
+    // }
+    ),
   ],
   providers: [
     {
       provide: LocationStrategy,
       useClass: PathLocationStrategy,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

@@ -43,7 +43,19 @@
                 <tbody>
                     <tr *ngFor='let ts of filteredData'>
                         <td>{{ts.reference}}</td>
-                        <td>{{ts.status}}</td>
+                        <td>
+                            <!-- <span ng-if="ts.status === 'In Production'" class="badge text-bg-primary">{{ts.status}}</span>
+                            <span ng-if="ts.status === 'Completed'" class="badge text-bg-success" ng-if="ts.status !== 'In Production' && ts.status !== 'Completed'">{{ts.status}}</span>
+                           -->
+                            <span [ngClass]="{
+                                'badge text-bg-warning': ts.status === 'In Production',
+                                'badge text-bg-success': ts.status === 'Completed',
+                                'badge text-bg-danger': ts.status === 'Not yet started'
+                              }">
+                            {{ts.status }}
+                          </span>
+                        </td>
+                          
                         <td>{{ts.patient}}</td>
                         <td>{{ts.required}}</td>
                         <td>{{ts.product}}</td>

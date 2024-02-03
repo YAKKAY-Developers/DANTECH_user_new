@@ -19,3 +19,52 @@
 
 //In This scss you can write your scss
 @import "custom";
+
+
+.custom-toast {
+    width: 300px;
+    background-color: orange;
+    color: #ffffff;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    z-index: 9999;
+   
+  }
+
+
+  .custom-toast-success {
+    width: 300px;
+    background-color: green;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .custom-toast-error {
+    width: 300px;
+    background-color: red;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .custom-toast-warning {
+    width: 300px;
+    background-color: orange;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .custom-toast-info {
+    width: 300px;
+    background-color: blue;
+    color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .toast-top-right {
+    top: 0;
+    right: 0;
+  }

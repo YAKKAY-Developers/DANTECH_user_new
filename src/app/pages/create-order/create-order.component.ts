@@ -24,6 +24,7 @@ import { OrderService } from 'src/app/services/order.service';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { DisableRightClickService } from 'src/app/services/disable-right-click.service';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 export function fileExtensionValidator(allowedExtensions: string[]) {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -175,7 +176,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private userservice: UserService,
     private orderservice: OrderService,
-    private rightClickDisable: DisableRightClickService
+    private rightClickDisable: DisableRightClickService,
+    private toaster :ToasterService
   ) {}
 
   getTodayDate(): string {
@@ -658,6 +660,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe({
         next: (res) => {
           this.result = res;
+          // this.toaster.showToast(this.result.status, title, messageType);
+          this.toaster.showToast(this.result.message, 'success' , 'success');
           // window.confirm(this.result.message);
           // get return url from query parameters or default to home page
           // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

@@ -139,11 +139,11 @@
                             <select formControlName="service" class="form-control form-select d-inline-flex p-2"
                                 [ngClass]="{ 'is-invalid': submitted && f['service'].errors }"
                                 style="padding-right:15px;">
-                                <option value="Crown">Crown</option>
-                                <option value="Denture">Denture</option>
-                                <option value="Partials">Partials</option>
+                                <option value="Offline">Offline - Tooth Support Cercon Crown & Bridges </option>
+                                <option value="Online">Online - Tooth Support Cercon Crown & Bridges </option>
+                                <!-- <option value="Partials">Partials</option>
                                 <option value="Implants">Implants</option>
-                                <option value="Removable">Removable</option>
+                                <option value="Removable">Removable</option> -->
                             </select>
                         </div>
                     </div>
@@ -156,15 +156,18 @@
                     </div>
                     <div class="col-4">
                         &nbsp;
-                        <label name="">Due Date</label>
+                        <label name="">Required Date</label>
                         <input class="form-control" formControlName="duedate"
-                            [ngClass]="{ 'is-invalid': submitted && f['duedate'].errors }" placeholder="Due Date"
+                            [ngClass]="{ 'is-invalid': submitted && f['duedate'].errors }" placeholder="DD/MM/YYYY"
                             type="date" [min]="getTodayDate()">
                     </div>
+
+                
                     <!-- <p>we expect atleast a 10 working day difference between order date and due date.</p> -->
                 </div>
-
-            </div>
+                <input type="checkbox" id="priority" name="priority" value="priority">
+                <label for="priority"> Check the option if you want the order to be delivered within 3 days </label><br>
+            </div>  
 
 
 

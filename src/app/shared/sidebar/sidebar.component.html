@@ -1,15 +1,50 @@
 <nav class="sidebar-nav">
+    <style>
+.d-flex.justify-content-end i {
+  display: flex;
+  transition: all 0.4s ease;
+}
+
+.d-flex.justify-content-end i:hover {
+  transform: rotateZ(90deg);
+}
+    </style>
     <ul id="sidebarnav">
         <!-- First level menu -->
-        <li class="sidebar-item" [class.active]="showMenu === sidebarnavItem.title" *ngFor="let sidebarnavItem of sidebarnavItems"
+        <li class="sidebar-item" [class.active]="showMenu === sidebarnavItem.title"
+            *ngFor="let sidebarnavItem of sidebarnavItems"
             [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
-            <div class="nav-small-cap" *ngIf="sidebarnavItem.extralink === true">{{sidebarnavItem.title}}</div>
-            <a class="sidebar-link waves-effect waves-dark" [routerLink]="sidebarnavItem.class === '' ? [sidebarnavItem.path] : null"
-                [ngClass]="[sidebarnavItem.class]" *ngIf="!sidebarnavItem.extralink;" (click)="addExpandClass(sidebarnavItem.title)"
+            <!-- <div class="nav-small-cap" *ngIf="sidebarnavItem.extralink === true">{{sidebarnavItem.title}}</div> -->
+            <a class="sidebar-link waves-effect waves-dark"
+                [routerLink]="sidebarnavItem.class === '' ? [sidebarnavItem.path] : null"
+                [ngClass]="[sidebarnavItem.class]" *ngIf="!sidebarnavItem.extralink;"
+                (click)="addExpandClass(sidebarnavItem.title)"
                 [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
                 <i [ngClass]="[sidebarnavItem.icon]"></i>
                 <span class="hide-menu">{{sidebarnavItem.title}}</span>
             </a>
+        </li>
+        <li class="sidebar-item" [class.active]="showMenu === sidebarnavItem.title"
+            *ngFor="let sidebarnavItem of sidebarnavItems"
+            [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
+            <div *ngIf="sidebarnavItem.submenu.length !== 0">
+                <a class="sidebar-link waves-effect waves-dark" (click)="toggleSubMenu(sidebarnavItem)">
+                    <i [ngClass]="[sidebarnavItem.icon]"></i>
+                    <span class="hide-menu">{{sidebarnavItem.title}}</span>
+                    <div class="d-flex justify-content-end" style="width: 70%;"><i class="bi bi-chevron-right"></i></div>
+                    
+                </a>
+                
+                <ul *ngIf="sidebarnavItem.expanded">
+                    <li *ngFor="let submenuItem of sidebarnavItem.submenu">
+                        <a class="sidebar-link waves-effect waves-dark" [routerLink]="[submenuItem.path]"
+                            [routerLinkActive]="'active'">
+                            <i [ngClass]="[submenuItem.icon]"></i>
+                            <span class="hide-menu">{{submenuItem.title}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
         <!-- <li class="text-center p-3 upgrade-btn">
             <a href="htthttps://www.wrappixel.com/templates/monster-angular-dashboard/" class="btn d-block w-100 btn-danger">Upgrade to Pro</a>

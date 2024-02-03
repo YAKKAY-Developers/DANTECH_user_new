@@ -25,6 +25,10 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  toggleSubMenu(item: any): void {
+    item.expanded = !item.expanded;
+  }
+
   constructor(
     private modalService: NgbModal,
     private router: Router,

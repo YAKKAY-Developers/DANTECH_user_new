@@ -173,7 +173,7 @@ export class FormComponent {
         '',
         [
           Validators.required,
-          Validators.pattern('^[A-Za-z]{4}[a-zA-Z0-9]{7}$'),
+          Validators.pattern('^[A-Za-z]{4}0[0-9]{6}$'),
         ],
       ],
       bank_brnch: ['', [Validators.required]],
