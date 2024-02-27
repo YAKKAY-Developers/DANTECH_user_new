@@ -40,15 +40,24 @@ export class ResetPasswordComponent implements OnInit{
       confirmPassword: ['', Validators.required],
     });
 
-  //to extract the token value from the route
-  this.route.queryParams
-  .subscribe(params => {
-  this.token=params['token'];
-  console.log(this.token)//To print the token
-}
-    );
-let token=this.token;
+
+     // Retrieve token from query parameters
+     this.route.queryParams.subscribe(params => {
+      this.token = params['token'];
+      // Now you can use this.token in your component logic
+    });
+
+    let token=this.token;
 console.log("Token value is", token);
+
+//   //to extract the token value from the route
+//   this.route.queryParams
+//   .subscribe(params => {
+//   this.token=params['token'];
+//   console.log(this.token)//To print the token
+// }
+//     );
+
 
 
 this.authservice.validateResetToken(token)
