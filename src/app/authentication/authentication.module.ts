@@ -8,9 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationRoutes } from './authentication.routing';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { PagesLoginComponent } from './pages-login/pages-login.component';
-import { PagesRegisterComponent } from './pages-register/pages-register.component';
+
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -27,9 +27,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
   
     LoginComponent,
         RegisterComponent,
-        PagesLoginComponent,
-        PagesRegisterComponent,
+       
         ForgotPasswordComponent,
+                 ResetPasswordComponent,
         
   ],
 })
