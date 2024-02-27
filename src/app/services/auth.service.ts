@@ -75,4 +75,26 @@ export class AuthService {
   loggedIn() {
     return !!localStorage.getItem('user');
   }
+
+
+
+  forgotPassword(userToken: any, accessToken: any, email: string): Observable<any> {
+      let headers = new HttpHeaders({
+        'x-access-token': `${accessToken}`
+      });
+    
+      let body = {
+        "userToken": userToken,
+        "email": email
+      };
+    
+      return this.http.post(`${environment.apiUrl}/api/surveyForm/createSurveyinfo`, body, { headers })
+        .pipe(map((res: any) => {
+          console.log("test", res);
+          return res;
+        }));
+    }
+
+
+
 }
