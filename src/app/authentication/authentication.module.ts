@@ -30,6 +30,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
        
         ForgotPasswordComponent,
                  ResetPasswordComponent,
+             
         
   ],
 })

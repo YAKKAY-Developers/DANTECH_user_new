@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { first, finalize } from 'rxjs/operators';
-import { AlertService } from 'src/app/services/alert.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -18,7 +19,9 @@ export class ForgotPasswordComponent implements OnInit {
   loading = false;
   result:any;
 
-  constructor(private formBuilder: FormBuilder, private authservice: AuthService, private alertService:AlertService )
+  constructor(private formBuilder: FormBuilder, 
+    private authservice: AuthService,
+    private router: Router,)
   
   { }
 
@@ -46,20 +49,28 @@ export class ForgotPasswordComponent implements OnInit {
   // Define onSubmit method
   onSubmit() {
     this.submitted = true;
-    this.authservice.forgotPassword(this.userToken, this.accessToken, this.f['email'].value).pipe(first())
-    .pipe(finalize(() => this.loading = false))
-    .subscribe(
 
-      (res: any) => {
+
+     // stop here if form is invalid
+     if (this.form.invalid) {
+      return;
+  }
+
+  this.loading = true;
+    this.authservice.forgotPassword(this.f['email'].value).pipe(first())
+    .pipe(first())
+    .subscribe({
+      next: (res) => {
         this.result = res;
-        console.log(this.result)
-     
+        this.router.navigate(['/det/auth/reset-password']);
       },
-      (error: any) => {
-        console.log('Error fetching doc details:', error);
-      }
+      error: (error) => {
+        this.loading = false;
+        this.loginError = true;
+        console.log(error);
+      },
       
-);
+    });
   
 
   }

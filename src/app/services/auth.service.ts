@@ -77,23 +77,36 @@ export class AuthService {
   }
 
 
+  validateResetToken(resetToken: string) {
+    console.log("Hello from validate reset token auth service");
+    return this.http.post(`${environment.apiUrl}/api/resetpassword`, { resetToken });
+  
+  }
 
-  forgotPassword(userToken: any, accessToken: any, email: string): Observable<any> {
-      let headers = new HttpHeaders({
-        'x-access-token': `${accessToken}`
-      });
+  
+
+  forgotPassword(email: string): Observable<any> {
+      // let headers = new HttpHeaders({
+      //   'x-access-token': `${accessToken}`
+      // });
     
       let body = {
-        "userToken": userToken,
+      
         "email": email
       };
     
-      return this.http.post(`${environment.apiUrl}/api/surveyForm/createSurveyinfo`, body, { headers })
+      return this.http.post(`${environment.apiUrl}/api/user/forgotpassword`, body)
         .pipe(map((res: any) => {
           console.log("test", res);
           return res;
         }));
     }
+
+
+    resetPassword(resetToken: string, password: string, confirmPassword: string) {
+      return this.http.post(`${environment.apiUrl}/api/user/resetpassword`, { resetToken, password, confirmPassword });
+    }
+    
 
 
 
