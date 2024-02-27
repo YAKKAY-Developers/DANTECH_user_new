@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -36,4 +36,30 @@ export class OrderService {
     console.log(body);
     return this.http.post(`${environment.apiUrl}/api/order/createorder`, body);
   }
+
+
+
+  //Justto check
+  submitSurvey(userToken: any, accessToken: any, surveyResponse: any): Observable<any> {
+    let headers = new HttpHeaders({
+      'x-access-token': `${accessToken}`
+    });
+  
+    let body = {
+      "userToken": userToken,
+      "surveyData": surveyResponse.surveyData, // Pass the surveyData object
+      "organizationName": surveyResponse.organizationName, // Add the organizationName property
+      "appartmentNumber": surveyResponse.appartmentNumber, // Add the appartmentNumber property
+      "customerName": surveyResponse.customerName, // Add the customerName property
+    };
+  
+    return this.http.post(`${environment.apiUrl}/api/surveyForm/createSurveyinfo`, body, { headers })
+      .pipe(map((res: any) => {
+        console.log("test", res);
+        return res;
+      }));
+  }
+
+  
+  
 }

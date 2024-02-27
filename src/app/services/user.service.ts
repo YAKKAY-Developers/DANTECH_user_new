@@ -52,6 +52,7 @@ export class UserService {
   }
 
   getUserDetails(userToken: any) {
+    console.log("I am here")
     const body = {
       userToken: userToken,
     };

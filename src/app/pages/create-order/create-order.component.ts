@@ -485,7 +485,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     // Manually trigger change detection
-    this.cdr.detectChanges();
+    // this.cdr.detectChanges();
   }
 
   updateCheckbox(index: number, type: string): void {

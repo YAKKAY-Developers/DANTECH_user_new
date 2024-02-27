@@ -36,13 +36,6 @@ export class LoginComponent {
     private authservice: AuthService
   ) {}
 
-  // password(formGroup: FormGroup) {
-  //   const { value: password } = formGroup.get('password');
-  //   const { value: confirmPassword } = formGroup.get('confirmpassword');
-  //   return password === confirmPassword
-  //     ? { passwordNotMatch: false, message: '' }
-  //     : { passwordNotMatch: true, message: 'Password does not match!' };
-  // }
 
   ngOnInit() {
     this.authservice.logout();
@@ -63,7 +56,7 @@ export class LoginComponent {
     this.register = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        name: [
+        firstName: [
           '',
           [
             Validators.required,
@@ -71,11 +64,21 @@ export class LoginComponent {
             Validators.minLength(3),
           ],
         ],
-        address: ['', [Validators.required, Validators.maxLength(100)]],
-        phonenumber: [
+        lastName: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^([A-z]+\s*)+$/),
+            Validators.minLength(3),
+          ],
+        ],
+        // address: ['', [Validators.required, Validators.maxLength(100)]],
+        mobileNumber: [
           '',
           [Validators.required, Validators.pattern('[0-9]{10}')],
         ],
+
+        registerNumber:['', [Validators.required]],
         password: [
           '',
           [
@@ -86,16 +89,16 @@ export class LoginComponent {
             Validators.minLength(8),
           ],
         ],
-        confirmpassword: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(
-              /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
-            ),
-            Validators.minLength(8),
-          ],
-        ],
+        // confirmpassword: [
+        //   '',
+        //   [
+        //     Validators.required,
+        //     Validators.pattern(
+        //       /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+        //     ),
+        //     Validators.minLength(8),
+        //   ],
+        // ],
       }
       // {
       //   validators: this.password.bind(this),
@@ -114,9 +117,7 @@ export class LoginComponent {
   onSubmit() {
     this.submitted = true;
     console.log(this.form.value);
-    // reset alerts on submit
-    // this.alertService.clear();
-    // stop here if form is invalid
+
     if (this.form.invalid) {
       return;
     }
@@ -146,6 +147,8 @@ export class LoginComponent {
   }
 
   Register() {
+    console.log("I am inside register")
+
     this.reg_submitted = true;
     console.log(this.register.value);
 
@@ -157,13 +160,22 @@ export class LoginComponent {
       .register(this.register.value)
       .pipe(first())
       .subscribe({
-        next: () => {
-          // this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-          this.router.navigate(['../pages-login'], { relativeTo: this.route });
-          window.location.reload();
+        // next: () => {
+        //   // this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+        //   this.router.navigate(['/det/auth/login'], { relativeTo: this.route });
+        //   window.location.reload();
+        // },
+
+        next: (res) => {
+          this.result = res;
+          window.confirm(this.result.message);
+          this.router.navigate(['/det/auth/login']);
+          // get return url from query parameters or default to home page
+          // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          // this.router.navigateByUrl(returnUrl);
         },
         error: (error) => {
-          this.error_message = error.error.message;
+          // this.error_message = error.error.message;
           console.log(error);
 
           this.RegisterError = true;

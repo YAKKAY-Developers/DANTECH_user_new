@@ -1,5 +1,6 @@
 <div class="container">
-    <ng-container *ngIf="stat_user == 'AC2000'">
+    <!-- <ng-container *ngIf="stat_user == 'AC2000'"> -->
+        <ng-container>
         <form class="contact" (ngSubmit)="onSubmit()" [formGroup]="form">
             <!-- <h3>Lab Form</h3> -->
             <h4 class="card-title">Lab form</h4>
@@ -671,6 +672,8 @@
             </div>
         </div>
     </ng-container>
+
+    
     <ng-container *ngIf="stat_user == 'WA4000'">
         <!-- content pop up  -->
         <div class="box-modal modal-show">

@@ -69,4 +69,9 @@ export class AlertService {
         allowClose: true,
       });
   }
+
+
+  clear(){
+    
+  }
 }

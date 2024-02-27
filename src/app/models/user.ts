@@ -1,10 +1,10 @@
 export class User {
-    id: string;
-    name: string;
+  
+    firstName: string;
+    lastName: string;
     email: string;
     phonenumber: number;
-    address: string;
     password: string;
-    clinic_id: string;
+    registerNumber:number;
     token: string;
 }

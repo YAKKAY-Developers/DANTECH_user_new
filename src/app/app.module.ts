@@ -75,7 +75,9 @@ timeOut: 3000, // Time to close the toaster (in milliseconds)
       provide: LocationStrategy,
       useClass: PathLocationStrategy,
     },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, 
+      useClass: ErrorInterceptor, 
+      multi: true },
   ],
   bootstrap: [AppComponent],
 })

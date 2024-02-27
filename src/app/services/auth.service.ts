@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -59,6 +59,7 @@ export class AuthService {
   }
 
   register(user: User) {
+    console.log("Im in register service")
     return this.http.post(`${environment.apiUrl}/api/user/register`, user);
   }
 
