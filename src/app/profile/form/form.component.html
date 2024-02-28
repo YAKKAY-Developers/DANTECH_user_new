@@ -1,4 +1,3 @@
-
 <div class="container">
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
@@ -35,8 +34,9 @@
 
                             <label for="inputUsername">Organization name</label>
                             <input type="text" formControlName="name" class="form-control"
+                                value="{{ result?.firstName}}"
                                 [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
-                                placeholder="Enter organization" [(ngModel)]="UserDetails.clinicname" readonly required>
+                                placeholder="Enter organization" [(ngModel)]="result.firstName"  readonly>
                             <div *ngIf=" submitted && f['name'].errors" class="invalid-feedback">
                                 <div *ngIf="f['name'].errors && f['name'].errors['required']">Name is required</div>
                             </div>
@@ -44,8 +44,8 @@
                         <div class="mb-3">
 
                             <label for="inputUsername">Email</label>
-                            <input type="email" formControlName="email" class="form-control"
-                                [(ngModel)]="UserDetails.email" readonly
+                            <input type="email" formControlName="email" class="form-control" value="{{ result?.email}}"
+                                [(ngModel)]="result.email" readonly
                                 [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" placeholder="Email" />
                             <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                                 <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required</div>
@@ -65,8 +65,9 @@
                     <div class="col-md-6">
                         <label for="inputFirstName">Phone number</label>
                         <input type="text" formControlName="phonenumber" class="form-control"
+                            value="{{ result?.mobileNumber}}"
                             [ngClass]="{ 'is-invalid': submitted && f['phonenumber'].errors }"
-                            [(ngModel)]="UserDetails.profile.phonenumber" readonly placeholder="Phone Number" />
+                            [(ngModel)]="result.mobileNumber" readonly placeholder="Phone Number" />
                         <div *ngIf="submitted && f['phonenumber'].errors" class="invalid-feedback">
                             <div *ngIf="f['phonenumber'].errors && f['phonenumber'].errors['required']">Phone number is
                                 required</div>
@@ -80,8 +81,9 @@
                     <div class="col-md-6">
                         <label for="inputLastName">Alternate number</label>
                         <input type="text" formControlName="alternativenumber" class="form-control"
+                            value="{{ basicInfo?.alternatePhoneNumber }}"
                             [ngClass]="{ 'is-invalid': submitted && f['alternativenumber'].errors }"
-                            placeholder="Enter Alternative number" />
+                            [(ngModel)]="basicInfo.alternatePhoneNumber" placeholder="Enter Alternative number" />
                         <div *ngIf="submitted && f['alternativenumber'].errors" class="invalid-feedback">
                             <div *ngIf="f['alternativenumber'].errors && f['alternativenumber'].errors['required']">
                                 Phone number is
@@ -97,9 +99,9 @@
                 <!-- Form Group (address)-->
                 <div class="mb-3">
                     <label for="inputEmailAddress">Address</label>
-                    <input type="text" formControlName="address" class="form-control"
+                    <input type="text" formControlName="address" class="form-control" value="{{ basicInfo?.address }}"
                         [ngClass]="{ 'is-invalid': submitted && f['address'].errors }" placeholder="Address"
-                        [(ngModel)]="UserDetails.profile.address" readonly />
+                        [(ngModel)]="basicInfo.address" />
                     <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
                         <div *ngIf="f['address'].errors && f['address'].errors['required']">Address is required</div>
                     </div>
@@ -112,9 +114,9 @@
                     <!-- Form Group (organization name)-->
                     <div class="col-md-6">
                         <label for="inputOrgName">City</label>
-                        <input formControlName="city" class="form-control"
+                        <input formControlName="city" class="form-control" value="{{ basicInfo?.city }}"
                             [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" type="text"
-                            placeholder="Enter your organization city">
+                            [(ngModel)]="basicInfo.city"  placeholder="Enter your organization city"/>  
                         <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
                             <div *ngIf="f['city'].errors && f['city'].errors['required']">City is required</div>
                         </div>
@@ -122,9 +124,9 @@
                     <!-- Form Group (location)-->
                     <div class="col-md-6">
                         <label for="inputLocation">State</label>
-                        <input id="inputLocation" formControlName="state" class="form-control"
+                        <input id="inputLocation" formControlName="state" class="form-control" value="{{ basicInfo?.state }}"
                             [ngClass]="{ 'is-invalid': submitted && f['state'].errors }" type="text"
-                            placeholder="Enter your organization state">
+                            [(ngModel)]="basicInfo.state" placeholder="Enter your organization state">
                         <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">
                             <div *ngIf="f['state'].errors && f['state'].errors['required']">State is required</div>
                         </div>
@@ -134,9 +136,9 @@
                     <!-- Form Group (organization name)-->
                     <div class="col-md-6">
                         <label for="inputOrgName">Pincode</label>
-                        <input formControlName="pincode" class="form-control"
+                        <input formControlName="pincode" class="form-control" value="{{ basicInfo?.pincode }}"
                             [ngClass]="{ 'is-invalid': submitted && f['pincode'].errors }" type="text"
-                            placeholder="Enter your organization location pincode">
+                            [(ngModel)]="basicInfo.pincode" placeholder="Enter your organization location pincode">
                         <div *ngIf="submitted && f['pincode'].errors" class="invalid-feedback">
                             <div *ngIf="f['pincode'].errors && f['pincode'].errors['required']">Pincode is required
                             </div>
@@ -157,9 +159,9 @@
                     <!-- Form Group (location)-->
                     <div class="col-md-6">
                         <label for="inputLocation">Country</label>
-                        <input id="inputLocation" formControlName="country" class="form-control"
+                        <input id="inputLocation" formControlName="country" class="form-control"  value="{{ basicInfo?.country }}"
                             [ngClass]="{ 'is-invalid': submitted && f['country'].errors }" type="text"
-                            placeholder="Enter your Country">
+                            [(ngModel)]="basicInfo.country"  placeholder="Enter your Country">
                         <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
                             <div *ngIf="f['country'].errors && f['country'].errors['required']">Country is required
                             </div>
@@ -170,93 +172,9 @@
         </div>
 
 
-
-        <div class="card mb-4">
-            <div class="card-header">
-                <h2 class="card-title">
-                    Step 2
-                </h2>
-                <h4 class="card-subtitle">
-                    Bank details
-                </h4>
-            </div>
-            <div class="card-body">
-                <!-- Form Group (bank acc number-->
-                <div class="mb-3">
-                    <label for="inputUsername">Bank account number </label>
-                    <input formControlName="bank_acNo" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f['bank_acNo'].errors }" type="text"
-                        placeholder="Enter bank account number">
-                    <div *ngIf="submitted && f['bank_acNo'].errors" class="invalid-feedback">
-                        <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['required']">Bank account is required
-                        </div>
-                    </div>
-                    <div *ngIf="submitted && f['bank_acNo'].errors" class="invalid-feedback">
-                        <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['pattern']">Check your Bank account
-                        </div>
-                    </div>
-                </div>
-                <!-- Form Row-->
-                <div class="row gx-3 mb-3">
-                    <!-- Form Group (ifsc number)-->
-                    <div class="col-md-6">
-                        <label for="inputFirstName">IFSC number</label>
-                        <input formControlName="ifsc" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['ifsc'].errors }" type="text"
-                            placeholder="Enter IFSC number">
-                        <div *ngIf="submitted && f['ifsc'].errors" class="invalid-feedback">
-                            <div *ngIf="f['ifsc'].errors && f['ifsc'].errors['required']">IFSC code is required</div>
-                        </div>
-                        <div *ngIf="submitted && f['ifsc'].errors" class="invalid-feedback">
-                            <div *ngIf="f['ifsc'].errors && f['ifsc'].errors['pattern']">Check your IFSC code</div>
-                        </div>
-                    </div>
-                    <!-- Form Group (bank branch)-->
-                    <div class="col-md-6">
-                        <label for="inputLastName">Bank branch</label>
-                        <input formControlName="bank_brnch" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['bank_brnch'].errors }" type="text"
-                            placeholder="Enter the bank branch">
-                        <div *ngIf="submitted && f['bank_brnch'].errors" class="invalid-feedback">
-                            <div *ngIf="f['bank_brnch'].errors && f['bank_brnch'].errors['required']">Bank branch is
-                                required</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Form Row -->
-                <div class="row gx-3 mb-3">
-                    <!-- Form Group (upiid)-->
-                    <div class="col-md-6">
-                        <label for="inputOrgName">UPI ID</label>
-                        <input formControlName="upi_id" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['upi_id'].errors }" type="text"
-                            placeholder="Enter UPI ID">
-                        <div *ngIf="submitted && f['upi_id'].errors" class="invalid-feedback">
-                            <div *ngIf="f['upi_id'].errors && f['upi_id'].errors['required']">UPI ID is required</div>
-                        </div>
-                        <div *ngIf="submitted && f['upi_id'].errors" class="invalid-feedback">
-                            <div *ngIf="f['upi_id'].errors && f['upi_id'].errors['pattern']">Check your UPI ID</div>
-                        </div>
-                    </div>
-                    <!-- Form Group (gst)-->
-                    <div class="col-md-6">
-                        <label for="inputLocation">GST</label>
-                        <input formControlName="gst" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['gst'].errors }" type="text"
-                            placeholder="Enter GST number">
-                        <div *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
-                            <div *ngIf="f['gst'].errors && f['gst'].errors['required']">GST is required</div>
-                        </div>
-                        <div *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
-                            <div *ngIf="f['gst'].errors && f['gst'].errors['pattern']">Check your GST No.</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Save changes button-->
-                <div class="d-flex justify-content-end">
-                    <button type="submit">Submit profile</button>
-                </div>
-            </div>
+        <div class="d-flex justify-content-end">
+            <button type="submit">Submit profile</button>
         </div>
+
     </form>
 </div>

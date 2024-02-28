@@ -64,8 +64,6 @@ export class UserService {
     );
   }
 
-
-
   getOneUserDetails(userToken: any, accessToken: any): Observable<any> {
     let headers = new HttpHeaders({
       'x-access-token': `${accessToken}`
@@ -81,7 +79,6 @@ export class UserService {
       }));
   }
 
-
   getallConsultants(userToken: any, accessToken: any): Observable<any> {
     let headers = new HttpHeaders({
       'x-access-token': `${accessToken}`
@@ -96,9 +93,6 @@ export class UserService {
         return res;
       }));
   }
-
-
-
   getalldoc(userToken: any) {
     const body = {
       userToken: userToken,
@@ -109,5 +103,21 @@ export class UserService {
         return res;
       })
     );
+  }
+
+  updateUserInfo(userToken: any, accessToken: any, userInfo:any): Observable<any> {
+    let headers = new HttpHeaders({
+      'x-access-token': `${accessToken}`
+    });
+  
+    let body = {
+      "userToken": userToken,
+      "userInfo":userInfo
+    };
+  
+    return this.http.put(`${environment.apiUrl}/api/user/updateUserInfo`, body, { headers })
+      .pipe(map((res: any) => {
+        return res;
+      }));
   }
 }

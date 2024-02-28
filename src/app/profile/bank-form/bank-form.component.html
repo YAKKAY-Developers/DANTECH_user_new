@@ -1,1 +1,86 @@
-<p>bank-form works!</p>
+<!-- <div class="card mb-4">
+    <div class="card-header">
+        <h2 class="card-title">
+            Step 2
+        </h2>
+        <h4 class="card-subtitle">
+            Bank details
+        </h4>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="inputUsername">Bank account number </label>
+            <input formControlName="bank_acNo" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['bank_acNo'].errors }" type="text"
+                placeholder="Enter bank account number">
+            <div *ngIf="submitted && f['bank_acNo'].errors" class="invalid-feedback">
+                <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['required']">Bank account is required
+                </div>
+            </div>
+            <div *ngIf="submitted && f['bank_acNo'].errors" class="invalid-feedback">
+                <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['pattern']">Check your Bank account
+                </div>
+            </div>
+        </div>
+      
+        <div class="row gx-3 mb-3">
+     
+            <div class="col-md-6">
+                <label for="inputFirstName">IFSC number</label>
+                <input formControlName="ifsc" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['ifsc'].errors }" type="text"
+                    placeholder="Enter IFSC number">
+                <div *ngIf="submitted && f['ifsc'].errors" class="invalid-feedback">
+                    <div *ngIf="f['ifsc'].errors && f['ifsc'].errors['required']">IFSC code is required</div>
+                </div>
+                <div *ngIf="submitted && f['ifsc'].errors" class="invalid-feedback">
+                    <div *ngIf="f['ifsc'].errors && f['ifsc'].errors['pattern']">Check your IFSC code</div>
+                </div>
+            </div>
+          
+            <div class="col-md-6">
+                <label for="inputLastName">Bank branch</label>
+                <input formControlName="bank_brnch" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['bank_brnch'].errors }" type="text"
+                    placeholder="Enter the bank branch">
+                <div *ngIf="submitted && f['bank_brnch'].errors" class="invalid-feedback">
+                    <div *ngIf="f['bank_brnch'].errors && f['bank_brnch'].errors['required']">Bank branch is
+                        required</div>
+                </div>
+            </div>
+        </div>
+      
+        <div class="row gx-3 mb-3">
+         
+            <div class="col-md-6">
+                <label for="inputOrgName">UPI ID</label>
+                <input formControlName="upi_id" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['upi_id'].errors }" type="text"
+                    placeholder="Enter UPI ID">
+                <div *ngIf="submitted && f['upi_id'].errors" class="invalid-feedback">
+                    <div *ngIf="f['upi_id'].errors && f['upi_id'].errors['required']">UPI ID is required</div>
+                </div>
+                <div *ngIf="submitted && f['upi_id'].errors" class="invalid-feedback">
+                    <div *ngIf="f['upi_id'].errors && f['upi_id'].errors['pattern']">Check your UPI ID</div>
+                </div>
+            </div>
+           
+            <div class="col-md-6">
+                <label for="inputLocation">GST</label>
+                <input formControlName="gst" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['gst'].errors }" type="text"
+                    placeholder="Enter GST number">
+                <div *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
+                    <div *ngIf="f['gst'].errors && f['gst'].errors['required']">GST is required</div>
+                </div>
+                <div *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
+                    <div *ngIf="f['gst'].errors && f['gst'].errors['pattern']">Check your GST No.</div>
+                </div>
+            </div>
+        </div>
+   
+        <div class="d-flex justify-content-end">
+            <button type="submit">Submit profile</button>
+        </div>
+    </div>
+</div> -->
