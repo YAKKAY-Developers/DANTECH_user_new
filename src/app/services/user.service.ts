@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, RouterStateSnapshot } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -63,6 +63,41 @@ export class UserService {
       })
     );
   }
+
+
+
+  getOneUserDetails(userToken: any, accessToken: any): Observable<any> {
+    let headers = new HttpHeaders({
+      'x-access-token': `${accessToken}`
+    });
+  
+    let body = {
+      "userToken": userToken,
+    };
+  
+    return this.http.post(`${environment.apiUrl}/api/user/oneuser`, body, { headers })
+      .pipe(map((res: any) => {
+        return res;
+      }));
+  }
+
+
+  getallConsultants(userToken: any, accessToken: any): Observable<any> {
+    let headers = new HttpHeaders({
+      'x-access-token': `${accessToken}`
+    });
+  
+    let body = {
+      "userToken": userToken,
+    };
+  
+    return this.http.post(`${environment.apiUrl}/api/user/getConsultantDetails`, body, { headers })
+      .pipe(map((res: any) => {
+        return res;
+      }));
+  }
+
+
 
   getalldoc(userToken: any) {
     const body = {

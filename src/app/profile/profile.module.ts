@@ -6,9 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewComponent } from './view/view.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FormComponent } from './form/form.component';
+import { BankFormComponent } from './bank-form/bank-form.component';
 
 @NgModule({
-  declarations: [ViewComponent, FormComponent],
+  declarations: [ViewComponent, FormComponent, BankFormComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(ProfileRoutes),
