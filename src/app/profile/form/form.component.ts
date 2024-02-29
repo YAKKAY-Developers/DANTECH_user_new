@@ -118,10 +118,10 @@ export class FormComponent {
 
       
       email: ['', [Validators.required, Validators.email]],
-      phonenumber: ['', [Validators.required, 
+      mobileNumber: ['', [Validators.required, 
         Validators.pattern('[0-9]{10}'
         )]],
-      alternativenumber: [
+        alternatePhoneNumber: [
         '',
         [Validators.required],
       ],
@@ -208,12 +208,12 @@ export class FormComponent {
     if (this.form.invalid) {
       return;
     }
-    // this.loading = true;
+    this.loading = true;
     this.userservice.updateUserInfo(this.userToken, this.accessToken, this.form.value, )
       .pipe(first())
       .subscribe({
         next: () => {
-          // this.router.navigate(['/det/profile/view']);
+          this.router.navigate(['/det/profile/bank']);
         },
         error: (error) => {
           // this.alertService.error(error);

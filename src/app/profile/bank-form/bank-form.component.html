@@ -1,4 +1,7 @@
-<!-- <div class="card mb-4">
+<div class="container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+
+<div class="card mb-4">
     <div class="card-header">
         <h2 class="card-title">
             Step 2
@@ -10,15 +13,15 @@
     <div class="card-body">
         <div class="mb-3">
             <label for="inputUsername">Bank account number </label>
-            <input formControlName="bank_acNo" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['bank_acNo'].errors }" type="text"
-                placeholder="Enter bank account number">
-            <div *ngIf="submitted && f['bank_acNo'].errors" class="invalid-feedback">
-                <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['required']">Bank account is required
+            <input formControlName="bankacNumber" class="form-control"  value="{{ bankInfo?.bankacNumber}}"
+                [ngClass]="{ 'is-invalid': submitted && f['bankacNumber'].errors }" type="text"
+                [(ngModel)]="bankInfo.bankacNumber" placeholder="Enter bank account number">
+            <div *ngIf="submitted && f['bankacNumber'].errors" class="invalid-feedback">
+                <div *ngIf="f['bankacNumber'].errors && f['bankacNumber'].errors['required']">Bank account is required
                 </div>
             </div>
-            <div *ngIf="submitted && f['bank_acNo'].errors" class="invalid-feedback">
-                <div *ngIf="f['bank_acNo'].errors && f['bank_acNo'].errors['pattern']">Check your Bank account
+            <div *ngIf="submitted && f['bankacNumber'].errors" class="invalid-feedback">
+                <div *ngIf="f['bankacNumber'].errors && f['bankacNumber'].errors['pattern']">Check your Bank account
                 </div>
             </div>
         </div>
@@ -27,9 +30,9 @@
      
             <div class="col-md-6">
                 <label for="inputFirstName">IFSC number</label>
-                <input formControlName="ifsc" class="form-control"
+                <input formControlName="ifsc" class="form-control" value="{{ bankInfo?.ifsc}}"
                     [ngClass]="{ 'is-invalid': submitted && f['ifsc'].errors }" type="text"
-                    placeholder="Enter IFSC number">
+                    [(ngModel)]="bankInfo.ifsc" placeholder="Enter IFSC number">
                 <div *ngIf="submitted && f['ifsc'].errors" class="invalid-feedback">
                     <div *ngIf="f['ifsc'].errors && f['ifsc'].errors['required']">IFSC code is required</div>
                 </div>
@@ -40,11 +43,11 @@
           
             <div class="col-md-6">
                 <label for="inputLastName">Bank branch</label>
-                <input formControlName="bank_brnch" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f['bank_brnch'].errors }" type="text"
-                    placeholder="Enter the bank branch">
-                <div *ngIf="submitted && f['bank_brnch'].errors" class="invalid-feedback">
-                    <div *ngIf="f['bank_brnch'].errors && f['bank_brnch'].errors['required']">Bank branch is
+                <input formControlName="bankBranch" class="form-control" value="{{ bankInfo?.bankBranch}}"
+                    [ngClass]="{ 'is-invalid': submitted && f['bankBranch'].errors }" type="text"
+                    [(ngModel)]="bankInfo.bankBranch"  placeholder="Enter the bank branch">
+                <div *ngIf="submitted && f['bankBranch'].errors" class="invalid-feedback">
+                    <div *ngIf="f['bankBranch'].errors && f['bankBranch'].errors['required']">Bank branch is
                         required</div>
                 </div>
             </div>
@@ -54,22 +57,22 @@
          
             <div class="col-md-6">
                 <label for="inputOrgName">UPI ID</label>
-                <input formControlName="upi_id" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f['upi_id'].errors }" type="text"
-                    placeholder="Enter UPI ID">
-                <div *ngIf="submitted && f['upi_id'].errors" class="invalid-feedback">
-                    <div *ngIf="f['upi_id'].errors && f['upi_id'].errors['required']">UPI ID is required</div>
+                <input formControlName="upiId" class="form-control" value="{{ bankInfo?.upiId}}"
+                    [ngClass]="{ 'is-invalid': submitted && f['upiId'].errors }" type="text"
+                    [(ngModel)]="bankInfo.upiId"   placeholder="Enter UPI ID">
+                <div *ngIf="submitted && f['upiId'].errors" class="invalid-feedback">
+                    <div *ngIf="f['upiId'].errors && f['upiId'].errors['required']">UPI ID is required</div>
                 </div>
-                <div *ngIf="submitted && f['upi_id'].errors" class="invalid-feedback">
-                    <div *ngIf="f['upi_id'].errors && f['upi_id'].errors['pattern']">Check your UPI ID</div>
+                <div *ngIf="submitted && f['upiId'].errors" class="invalid-feedback">
+                    <div *ngIf="f['upiId'].errors && f['upiId'].errors['pattern']">Check your UPI ID</div>
                 </div>
             </div>
            
             <div class="col-md-6">
                 <label for="inputLocation">GST</label>
-                <input formControlName="gst" class="form-control"
+                <input formControlName="gst" class="form-control" value="{{ bankInfo?.gst}}"
                     [ngClass]="{ 'is-invalid': submitted && f['gst'].errors }" type="text"
-                    placeholder="Enter GST number">
+                    [(ngModel)]="bankInfo.gst"   placeholder="Enter GST number">
                 <div *ngIf="submitted && f['gst'].errors" class="invalid-feedback">
                     <div *ngIf="f['gst'].errors && f['gst'].errors['required']">GST is required</div>
                 </div>
@@ -83,4 +86,9 @@
             <button type="submit">Submit profile</button>
         </div>
     </div>
-</div> -->
+</div> 
+
+
+
+</form>
+</div>

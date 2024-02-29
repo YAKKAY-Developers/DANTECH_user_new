@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,24 +8,12 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { OrderService } from 'src/app/services/order.service';
-
-import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { DisableRightClickService } from 'src/app/services/disable-right-click.service';
 
-function convertNullValues(data: any) {
-  const convertedData = {};
-
-  for (const key in data) {
-    if (data[key] === null) {
-      // Check the type of the original value and assign the appropriate replacement
-      convertedData[key] = typeof data[key] === 'number' ? 0 : 'None';
-    } else {
-      convertedData[key] = data[key];
-    }
-  }
-
-  return convertedData;
-}
 
 @Component({
   selector: 'app-bank-details',
@@ -34,81 +21,90 @@ function convertNullValues(data: any) {
   styleUrls: ['./bank-details.component.scss'],
 })
 export class BankDetailsComponent {
-  user_data: any;
-  viewdatalist: any[] = [];
-  // doctor list
-  docdetails: any;
-  doc_count = false;
-  doc_data: any;
-  docDetailsSubscription: Subscription;
-  //search table
-  searchText: string = '';
-  filteredData: any[] = [];
-  sortcolumn: string = '';
-  sortDirection: string = 'asc';
-  // adddoctors form
   form: FormGroup;
   loading = false;
   submitted = false;
-  resut: any;
-  // authenticate user
+  selected_image = null;
   stat_user: string;
-  userId: string;
   userType: string;
   accessToken: string;
   userToken: any;
+
+  // authenticate user
   userdata: any;
   UserDetails: any;
   userDetailsSubscription: Subscription;
   userObject: void;
+  doc_count = false;
+  user_data: any;
+
   // check prescence
   gst_no = false;
   img_uploaded = false;
 
+
+   //api results
+   result: any
+   basicInfo: any;
+   bankInfo: any
+   response: any;
+   consultantDetails: any;
+   consultantCount: any;
+   fullName:any
+
+
   constructor(
-    public router: Router,
-    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private authservice: AuthService,
+    private http: HttpClient,
     private userservice: UserService,
-    private orderservice: OrderService
+    private orderservice: OrderService,
+    private rightClickDisable: DisableRightClickService
   ) {}
 
   ngOnInit(): void {
-    // user
+
     const { userToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
     const { fullName } = JSON.parse(localStorage.getItem('user') ?? '{}');
     const { accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
     const { status } = JSON.parse(localStorage.getItem('user') ?? '{}');
     this.accessToken = accessToken;
-    this.userId = userToken;
+    this.userToken = userToken;
     this.userType = fullName;
+    this.stat_user = status;
+   
 
-    // console.log(this.userId, this.accessToken, this.userType);
+    this.rightClickDisable.disableRightClick();
 
-    //user details
-    this.userDetailsSubscription = this.userservice
-      .getUserDetails(this.userId)
-      .subscribe(
-        (res: any) => {
-          this.UserDetails = res;
-          // console.log('My details', this.UserDetails['profile']);
-          const userObject = this.UserDetails['profile'];
-          this.userdata = convertNullValues(userObject);
-          if (this.userdata['image'] != 'assets/images/users/user.svg') {
-            this.img_uploaded = true;
-          }
-          if (this.userdata['gst'] != 'None') {
-            this.gst_no = true;
-          }
+    // Initialize result here
+    this.bankInfo = { bankacNumber: '' }; // or initialize with appropriate default values
+    this.bankInfo ={ bankBranch:''};
+    this.bankInfo ={ ifsc:''};
 
-          this.user_data = [this.userdata];
-          console.log('data', this.user_data);
-        },
-        (error: any) => {
-          console.log('Error fetching user details:', error);
-        }
-      );
+    this.bankInfo = { upiId: '' };
+    this.bankInfo = { gst: '' };
+
+
+
+   //Get user details:
+     this.userDetailsSubscription = this.userservice.getOneUserDetails(this.userToken, this.accessToken)
+     .pipe(first())
+     .subscribe({
+       next: (res) => {
+         this.response = res.userDetails;
+         this.result = res.userDetails.user;
+         this.basicInfo = res.userDetails.basicInfo;
+         this.bankInfo = res.userDetails.bankInfo;
+         this.consultantDetails = res.userDetails.consultantInfo;
+         this.consultantCount = this.consultantDetails.lengt
+         this.user_data = this.response;
+         console.log( this.response)
+       },
+       error: (error) => {
+         console.log(error.error)
+       }
+     })
   }
 }

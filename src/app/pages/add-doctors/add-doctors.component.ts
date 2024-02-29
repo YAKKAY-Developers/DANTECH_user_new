@@ -108,9 +108,9 @@ export class AddDoctorsComponent {
 
     //form
     this.form = this.formBuilder.group({
-      First_name: ['', [Validators.required, Validators.minLength(3)]],
-      Last_name: ['', [Validators.required, Validators.minLength(1)]],
-      Specialisation: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(1)]],
+      specialisation: ['', [Validators.required]],
     });
   }
   get f() {
@@ -119,14 +119,18 @@ export class AddDoctorsComponent {
 
   //form submit
   onSubmit() {
+
     this.submitted = true;
+    console.log(this.submitted)
+
+
     if (this.form.invalid) {
       console.log(this.form.controls);
       return;
     }
     this.loading = true;
     this.userservice
-      .adddoctor(this.form.value, this.userId)
+      .addConsultant(this.userId, this.accessToken, this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {

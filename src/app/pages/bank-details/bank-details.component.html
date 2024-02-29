@@ -1,4 +1,4 @@
-<section *ngFor='let ts of user_data'>
+<section>
     <div class="container">
         <div class="card">
             <div class="card-body">
@@ -10,7 +10,7 @@
                         <h5 class="mb-0 fw-normal ms-3">Bank account number</h5><br>
                     </div>
                     <div class="col-7">
-                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{ts.bankacnumber}}</h5>
+                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{bankInfo.bankacNumber}}</h5>
                     </div>
                 </div>
                 <hr>
@@ -19,7 +19,7 @@
                         <h5 class="mb-0 fw-normal ms-3">IFSC number</h5><br>
                     </div>
                     <div class="col-7">
-                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{ts.ifsc}}</h5>
+                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{bankInfo.ifsc}}</h5>
                     </div>
                 </div>
                 <hr>
@@ -28,7 +28,7 @@
                         <h5 class="mb-0 fw-normal ms-3">Bank branch</h5><br>
                     </div>
                     <div class="col-7">
-                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{ts.bankbranch}}</h5>
+                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{bankInfo.bankBranch}}</h5>
                     </div>
                 </div>
                 <hr>
@@ -37,10 +37,19 @@
                         <h5 class="mb-0 fw-normal ms-3">UPI id</h5><br>
                     </div>
                     <div class="col-7">
-                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{ts.upiid}}</h5>
+                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{bankInfo.upiId}}</h5>
                     </div>
                 </div>
                 <hr>
+
+                <div class="row">
+                    <div class="col-5">
+                        <h5 class="mb-0 fw-normal ms-3">GST</h5><br>
+                    </div>
+                    <div class="col-7">
+                        <h5 class="card-subtitle text-muted" style="margin-left:6% ;">{{bankInfo.gst}}</h5>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
