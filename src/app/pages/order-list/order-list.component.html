@@ -26,15 +26,15 @@
             <table class="table align-middle">
                 <thead>
                     <tr>
-                        <th (click)="sortColumn('reference')" class="text-dark font-medium fs-4">Work Order id &nbsp; <i
+                        <th (click)="sortColumn('orderToken')" class="text-dark font-medium fs-4">Work Order id &nbsp; <i
                                 class="bi bi-arrow-down-up"></i></th>
                         <th (click)="sortColumn('status')" class="text-dark font-medium fs-4">Status &nbsp; <i
                                 class="bi bi-arrow-down-up"></i></th>
-                        <th (click)="sortColumn('patient')" class="text-dark font-medium fs-4">Patient &nbsp; <i
+                        <th (click)="sortColumn('patientName')" class="text-dark font-medium fs-4">Patient &nbsp; <i
                                 class="bi bi-arrow-down-up"></i></th>
-                        <th (click)="sortColumn('required')" class="text-dark font-medium fs-4">Required &nbsp; <i
+                        <th (click)="sortColumn('requiredDate')" class="text-dark font-medium fs-4">Required &nbsp; <i
                                 class="bi bi-arrow-down-up"></i></th>
-                        <th (click)="sortColumn('product')" class="text-dark font-medium fs-4">Product &nbsp; <i
+                        <th (click)="sortColumn('service')" class="text-dark font-medium fs-4">Product &nbsp; <i
                                 class="bi bi-arrow-down-up"></i></th>
                         <th (click)="sortColumn('Files')" class="text-dark font-medium fs-4">files</th>
                         <th (click)="sortColumn('Action')" class="text-dark font-medium fs-4">Action</th>
@@ -42,33 +42,37 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let ts of filteredData'>
-                        <td>{{ts.reference}}</td>
+                        <td>{{ts.userOrder.orderToken}}</td>
                         <td>
                             <!-- <span ng-if="ts.status === 'In Production'" class="badge text-bg-primary">{{ts.status}}</span>
                             <span ng-if="ts.status === 'Completed'" class="badge text-bg-success" ng-if="ts.status !== 'In Production' && ts.status !== 'Completed'">{{ts.status}}</span>
                            -->
                             <span [ngClass]="{
-                                'badge text-bg-warning': ts.status === 'In Production',
-                                'badge text-bg-success': ts.status === 'Completed',
-                                'badge text-bg-danger': ts.status === 'Not yet started'
+                                'badge text-bg-warning': ts.orderStatus.description === 'orderCreated',
+                                'badge text-bg-success': ts.orderStatus.description === 'orderStarted',
+                                'badge text-bg-danger': ts.orderStatus.description === 'Not yet started'
                               }">
-                            {{ts.status }}
+                            {{ts.orderStatus.description }}
                           </span>
                         </td>
                           
-                        <td>{{ts.patient}}</td>
-                        <td>{{ts.required}}</td>
-                        <td>{{ts.product}}</td>
+                        <td>{{ts.userOrder.patientName}}</td>
+                        <td>{{ts.userOrder.requiredDate | date:'yyyy-MM-dd'}}</td>
+                        <td>{{ts.userOrder.service}}</td>
                         <td>
-                            <img [src]="ts.image" alt="user" width="50">
+                            <img src="assets/images/files/1.jpg" alt="user" width="50">
                         </td>
                         <td>
                             <button class="btn btn-light-primary btn-sm"
                                 [routerLink]="['/det/pages/ordersummary',ts.reference]"><i
                                     class="bi bi-info"></i></button>
                             &nbsp;
-                            <button class="btn btn-outline-light-danger btn-sm" (click)="openModal()"><i
-                                    class="bi bi-trash3"></i></button>
+
+                            <button class="btn btn-outline-light-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalid"><i
+                                class="bi bi-trash3"></i>
+                            </button>
+                            <!-- <button class="btn btn-outline-light-danger btn-sm" (click)="openModal()"><i
+                                    class="bi bi-trash3"></i></button> -->
                         </td>
                     </tr>
                 </tbody>
@@ -79,4 +83,23 @@
 
     </div>
 
+</div>
+
+
+<div class="modal fade" id="modalid">
+    <div class="modal-dialog modal-dialog-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Order</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body">
+                    Do you still want to delete the Order?
+                <div class="modal-footer">
+                    <button type="submit" data-bs-dismiss="modal" (click)="showToaster('warning')" >Yes, Delete</button>
+                </div>
+      
+
+        </div>
+    </div>
 </div>

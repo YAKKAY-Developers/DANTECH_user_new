@@ -19,31 +19,31 @@
                             <table class="table align-middle">
                                 <thead>
                                     <tr>
-                                        <th (click)="sortColumn('doctorid')" class="text-dark font-medium fs-4">
+                                        <th (click)="sortColumn('regId')" class="text-dark font-medium fs-4">
                                             Consultant ID
                                             &nbsp; <i class="bi bi-arrow-down-up"></i></th>
-                                        <th (click)="sortColumn('Firstname')" class="text-dark font-medium fs-4">
+                                        <th (click)="sortColumn('firstName')" class="text-dark font-medium fs-4">
                                             First name
                                             &nbsp; <i class="bi bi-arrow-down-up"></i></th>
-                                        <th (click)="sortColumn('Lastname')" class="text-dark font-medium fs-4">
+                                        <th (click)="sortColumn('lastName')" class="text-dark font-medium fs-4">
                                             Last name &nbsp; <i class="bi bi-arrow-down-up"></i></th>
-                                        <th (click)="sortColumn('Specialisation')" class="text-dark font-medium fs-4">
+                                        <th (click)="sortColumn('specialisation')" class="text-dark font-medium fs-4">
                                             Specialization &nbsp; <i class="bi bi-arrow-down-up"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor='let ts of filteredData'>
                                         <td class="fs-4">
-                                            {{ts.doctorid}}
+                                            {{ts.regId}}
                                         </td>
                                         <td>
-                                            {{ts.Firstname}}
+                                            {{ts.firstName}}
                                         </td>
                                         <td>
-                                            {{ts.Lastname}}
+                                            {{ts.lastName}}
                                         </td>
                                         <td>
-                                            {{ts.Specialisation}}
+                                            {{ts.specialisation}}
                                         </td>
                                     </tr>
                                     <tr *ngIf="!doc_count">

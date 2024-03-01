@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DisableRightClickService } from './services/disable-right-click.service';
-// import { ToasterService } from './services/toaster.service';
+import { ToasterService } from './services/toaster.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +8,11 @@ import { DisableRightClickService } from './services/disable-right-click.service
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  // constructor(private toasterService: ToasterService) { }
-  // constructor(private rightClickDisable: DisableRightClickService) {}
-  // ngOnInit() {
-  //   this.rightClickDisable.disableRightClick();
-  // }
+  constructor(private toasterService: ToasterService) { }
+
+  ngOnInit() {
+    // this.rightClickDisable.disableRightClick();
+  }
   title = 'app';
 
   // showToaster(messageType: 'success' | 'error' | 'warning' | 'info' = 'success') {

@@ -109,6 +109,29 @@ export class UserService {
         return res;
       }));
   }
+
+
+  getOrderDetails(userToken: any, accessToken: any): Observable<any> {
+    let headers = new HttpHeaders({
+      'x-access-token': `${accessToken}`
+    });
+  
+    let body = {
+      "userToken": userToken,
+    };
+  
+    return this.http.post(`${environment.apiUrl}/api/order/getOrdeDetails`, body, { headers })
+      .pipe(map((res: any) => {
+        return res;
+      }));
+  }
+
+
+
+
+
+
+
   getalldoc(userToken: any) {
     const body = {
       userToken: userToken,

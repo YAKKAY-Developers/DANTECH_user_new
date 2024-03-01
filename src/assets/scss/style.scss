@@ -41,9 +41,10 @@
   }
   
   .custom-toast-error {
-    width: 300px;
-    background-color: red;
-    color: #ffffff;
+    background-color: #f78484;
+    border: solid #ce3434;
+    border-width: 0 0 0 2px;
+    color: #490000;
     border-radius: 10px;
     margin-bottom: 10px;
   }

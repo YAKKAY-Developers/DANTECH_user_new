@@ -75,7 +75,7 @@ export class AddDoctorsComponent {
 
   //user details
     this.userDetailsSubscription = this.userservice
-      .getUserDetails(this.userId)
+      .getOneUserDetails(this.userId, this.accessToken)
       .subscribe(
         (res: any) => {
           this.UserDetails = res;
@@ -88,22 +88,44 @@ export class AddDoctorsComponent {
       );
 
     //doc data
-    this.docDetailsSubscription = this.userservice
-      .getalldoc(this.userId)
-      .subscribe(
-        (res: any) => {
-          this.docdetails = res;
-          this.doc_data = this.docdetails['doctor'];
-          if (this.doc_data['length'] > 0) {
-            this.doc_count = true;
-          }
-          this.filteredData = this.doc_data;
+    // this.docDetailsSubscription = this.userservice
+    //   .getalldoc(this.userId)
+    //   .subscribe(
+    //     (res: any) => {
+    //       this.docdetails = res;
+    //       this.doc_data = this.docdetails['doctor'];
+    //       if (this.doc_data['length'] > 0) {
+    //         this.doc_count = true;
+    //       }
+    //       this.filteredData = this.doc_data;
+    //       console.log("DOctor count",this.doc_count );
+    //     },
+    //     (error: any) => {
+    //       console.log('Error fetching doc details:', error);
+    //     }
+    //   );
+
+
+
+      //Get all consultant details
+      this.docDetailsSubscription = this.userservice.getallConsultants(this.userId, this.accessToken)
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.doc_data = res.consultantDetails;
+          console.log( this.doc_data)
+          if (this.doc_data.length > 0) {
+                    this.doc_count = true;
+                  }
+                  this.filteredData = this.doc_data;
           console.log("DOctor count",this.doc_count );
+          
         },
-        (error: any) => {
-          console.log('Error fetching doc details:', error);
+        error: (error) => {
+          console.log('Error fetching doc details:',error.error)
         }
-      );
+      })
+
 
 
     //form
@@ -175,12 +197,12 @@ export class AddDoctorsComponent {
       this.filteredData = this.doc_data.filter((item: any) => {
 
         return (
-          item.doctorid.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          item.Firstname.toLowerCase().includes(
+          item.regId.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          item.firstName.toLowerCase().includes(
             this.searchText.toLowerCase()
           ) ||
-          item.Lastname.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          item.Specialisation.toLowerCase().includes(
+          item.lastName.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          item.specialisation.toLowerCase().includes(
             this.searchText.toLowerCase()
           )
 

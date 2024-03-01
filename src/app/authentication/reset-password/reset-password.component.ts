@@ -43,7 +43,7 @@ export class ResetPasswordComponent implements OnInit{
 
      // Retrieve token from query parameters
      this.route.queryParams.subscribe(params => {
-      this.token = params['token'];
+      this.token = params['id'];
       // Now you can use this.token in your component logic
     });
 
@@ -51,7 +51,7 @@ export class ResetPasswordComponent implements OnInit{
 console.log("Token value is", token);
 
 //   //to extract the token value from the route
-//   this.route.queryParams
+//   this.route.queryParams 
 //   .subscribe(params => {
 //   this.token=params['token'];
 //   console.log(this.token)//To print the token
