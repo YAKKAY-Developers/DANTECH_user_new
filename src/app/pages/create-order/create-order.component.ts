@@ -779,7 +779,6 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   userToken: any;
   userdata: any;
   UserDetails: any;
-  selected_tooth: any;
   userDetailsSubscription: Subscription;
   userObject: void;
   form_values: any;
@@ -798,15 +797,18 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     doc_data: any;
     docDetailsSubscription: Subscription;
 
+    selectedTeeth: { [key: string]: boolean } = {}; // Declare selectedTeeth here
 
      //api results
   result: any
+  clinicFullName:any
   basicInfo: any;
   bankInfo: any
   response: any;
   consultantDetails: any;
   consultantCount: any;
 
+  //  selectedTeeth: { [key: string]: boolean } = {}; // Declare selectedTeeth here
 
 
   // questions
@@ -898,64 +900,147 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     return `${year}-${month}-${day}`;
   }
 
+  // ngOnInit(): void {
+  //   $(document).ready(function () {
+      
+  //     var selectedTeeth: { [key: string]: boolean } = {}; // Object to store selected teeth states
+
+  //     var $toothNumber = $('.tooth-number');
+
+  //     $('.tooth').on('click touchstart', function (event) {
+  //       var $this = $(this);
+  //       var toothText: string = $this.data('title');
+
+  //       if (!selectedTeeth[toothText]) {
+  //         // If the tooth is not already selected, mark it as selected
+  //         selectedTeeth[toothText] = true;
+  //         $this.addClass('active');
+  //       } else {
+  //         // If the tooth is already selected, unselect it
+  //         selectedTeeth[toothText] = false;
+  //         $this.removeClass('active');
+  //       }
+
+  //       updateNextStepButton();
+  //     });
+
+  //     const updateNextStepButton =() => {
+  //       var selectedTeethCount =
+  //         Object.values(selectedTeeth).filter(Boolean).length;
+
+  //       if (selectedTeethCount > 0) {
+  //         $toothNumber
+  //           .removeClass('disabled')
+  //           .data('nextStep', selectedTeethCount);
+  //         $toothNumber.html('Selected: ' + selectedTeethCount + ' &times;');
+  //       } else {
+  //         $toothNumber.addClass('disabled').data('nextStep', '');
+  //         $toothNumber.html('test &times;');
+  //       }
+
+  //       console.log(selectedTeeth); // Log the selected teeth
+  //       this.selectedTeeth = selectedTeeth;
+  //     }
+  //   });
+
+  //   this.today_date = this.getTodayDate();
+
+  //   // this.rightClickDisable.disableRightClick();
+
+  //   this.initializeForm();
+  //   // this.fetchUserData();
+  //   this.populateCheckboxes();
+
+  //     // user
+  //     const { userToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
+  //     const { fullName } = JSON.parse(localStorage.getItem('user') ?? '{}');
+  //     const { accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
+  //     this.accessToken = accessToken;
+  //     this.userToken = userToken;
+  //     this.result = {}; 
+  //     this.basicInfo ={};
+  //     this.bankInfo ={};
+  //     this.consultantDetails ={};
+
+
+  //   //user details
+  //   //Get user details:
+  //   this.userDetailsSubscription = this.userservice.getOneUserDetails(this.userToken, this.accessToken)
+  //     .pipe(first())
+  //     .subscribe({
+  //       next: (res) => {
+  //         this.response = res.userDetails;
+  //         this.result = res.userDetails.user;
+  //         // this.clinicFullName = this.result.firstName +' '+ this.result.lastName;
+  //         // console.log("ClinicFullName",this.clinicFullName)
+  //         this.basicInfo = res.userDetails.basicInfo;
+  //         this.bankInfo = res.userDetails.bankInfo;
+  //         this.consultantDetails = res.userDetails.consultantInfo;
+  //         this.consultantCount = this.consultantDetails.length;
+  //         this.user_data = this.response;
+  //         console.log("Checking:", this.result);
+  //       },
+  //       error: (error) => {
+  //         console.log(error.error)
+  //       } 
+  //     })
+
+  // }
+
+
   ngOnInit(): void {
-    $(document).ready(function () {
-      var selectedTeeth: { [key: string]: boolean } = {}; // Object to store selected teeth states
-      var $toothNumber = $('.tooth-number');
-
-      $('.tooth').on('click touchstart', function (event) {
-        var $this = $(this);
-        var toothText: string = $this.data('title');
-
-        if (!selectedTeeth[toothText]) {
-          // If the tooth is not already selected, mark it as selected
-          selectedTeeth[toothText] = true;
-          $this.addClass('active');
-        } else {
-          // If the tooth is already selected, unselect it
-          selectedTeeth[toothText] = false;
-          $this.removeClass('active');
-        }
-
-        updateNextStepButton();
-      });
-
-      function updateNextStepButton() {
-        var selectedTeethCount =
-          Object.values(selectedTeeth).filter(Boolean).length;
-
-        if (selectedTeethCount > 0) {
-          $toothNumber
-            .removeClass('disabled')
-            .data('nextStep', selectedTeethCount);
-          $toothNumber.html('Selected: ' + selectedTeethCount + ' &times;');
-        } else {
-          $toothNumber.addClass('disabled').data('nextStep', '');
-          $toothNumber.html('test &times;');
-        }
-
-        console.log(selectedTeeth); // Log the selected teeth
-      }
-    });
-
-    this.today_date = this.getTodayDate();
-
-    // this.rightClickDisable.disableRightClick();
-
-    this.initializeForm();
-    // this.fetchUserData();
-    this.populateCheckboxes();
-
-      // user
-      const { userToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
-      const { fullName } = JSON.parse(localStorage.getItem('user') ?? '{}');
-      const { accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
-      this.accessToken = accessToken;
-      this.userToken = userToken;
+    const selectedTeeth: { [key: string]: boolean } = {}; // Object to store selected teeth states
+    const toothNumberElement: HTMLElement = document.querySelector('.tooth-number');
   
+    // document.querySelectorAll('.tooth').forEach((toothElement) => {
+    //   toothElement.addEventListener('click', (event) => {
+    //     const $this = event.currentTarget as HTMLElement;
+    //     const toothText: string = $this.getAttribute('data-title');
+    //     const isSelected: boolean = selectedTeeth[toothText] || false;
+  
+    //     if (!isSelected) {
+    //       selectedTeeth[toothText] = true;
+    //       $this.classList.add('active');
+    //     } else {
+    //       delete selectedTeeth[toothText];
+    //       $this.classList.remove('active');
+    //     }
+  
+    //     this.updateNextStepButton(selectedTeeth, toothNumberElement);
+    //   });
+    // });
 
-    //user details
-    //Get user details:
+    document.querySelectorAll('.tooth').forEach((toothElement) => {
+      toothElement.addEventListener('click', (event) => {
+        const $this = event.currentTarget as HTMLElement;
+        const toothText: string = $this.getAttribute('data-title');
+        const isSelected: boolean = this.selectedTeeth[toothText] || false;
+  
+        if (!isSelected) {
+          this.selectedTeeth[toothText] = true;
+          $this.classList.add('active');
+        } else {
+          delete this.selectedTeeth[toothText];
+          $this.classList.remove('active');
+        }
+  
+        this.updateNextStepButton(this.selectedTeeth, toothNumberElement);
+      });
+    });
+  
+    this.today_date = this.getTodayDate();
+    this.initializeForm();
+    this.populateCheckboxes();
+  
+    // Get user details
+    const { userToken, fullName, accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
+    this.accessToken = accessToken;
+    this.userToken = userToken;
+    this.result = {};
+    this.basicInfo = {};
+    this.bankInfo = {};
+    this.consultantDetails = {};
+  
     this.userDetailsSubscription = this.userservice.getOneUserDetails(this.userToken, this.accessToken)
       .pipe(first())
       .subscribe({
@@ -971,10 +1056,29 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         },
         error: (error) => {
           console.log(error.error)
-        } 
+        }
       })
-
   }
+  
+  updateNextStepButton(selectedTeeth: { [key: string]: boolean }, toothNumberElement: HTMLElement): void {
+    const selectedTeethCount = Object.values(selectedTeeth).filter(Boolean).length;
+  
+    if (toothNumberElement) {
+      if (selectedTeethCount > 0) {
+        toothNumberElement.classList.remove('disabled');
+        toothNumberElement.setAttribute('data-nextStep', `${selectedTeethCount}`);
+        toothNumberElement.innerHTML = `Selected: ${selectedTeethCount} &times;`;
+      } else {
+        toothNumberElement.classList.add('disabled');
+        toothNumberElement.removeAttribute('data-nextStep');
+        toothNumberElement.innerHTML = 'test &times;';
+      }
+    }
+  
+    console.log('Selected teeth:', selectedTeeth);
+  }
+  
+
 
   ngAfterViewInit(): void {
     // Use setTimeout as a temporary solution to ensure asynchronous data is processed
@@ -985,8 +1089,10 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   initializeForm(): void {
     this.form = this.formBuilder.group({
-      doctor_name: ['', Validators.required],
-      firstName: ['', Validators.required],
+      // doctor_name: ['', Validators.required],
+      firstName:['', Validators.required],
+      lastName:['',Validators.required],
+      fullName: ['', Validators.required],
       registerNumber:['',Validators.required],
       patientname: [
         '',
@@ -1009,6 +1115,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
           Validators.pattern('[0-9]+'),
         ],
       ],
+      priority:['', Validators.required],
       patientGender: ['', [Validators.required]],
       mobileNumber: [
         '',
@@ -1017,9 +1124,9 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
           Validators.minLength(10),
           Validators.maxLength(10),
         ],
+       
       ],
-      // clinicname: [''],
-      // registerNumber: [''],
+      
       type1: this.formBuilder.array(
         this.type1Checkboxes.map(() => false),
         Validators.required
@@ -1218,6 +1325,15 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   onSubmit() {
     this.submitted = true;
 
+// Extracting selected teeth from the selectedTeeth object
+const selectedTeeth = Object.entries(this.selectedTeeth)
+.filter(([key, value]) => value === true)
+.map(([key]) => key);
+
+console.log("My selectedTeeth value OnSubmit is ", selectedTeeth)
+
+
+
     const selectedOptionsType1 = this.getSelectedOptionsForType1(
       'type1',
       this.type1Checkboxes
@@ -1326,11 +1442,13 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     };
 
+
+
     console.log('My form data', formdata);
     console.log('formdata', this.form.value);
     console.log('Doctor name',this.form.value.doctor_name);
-    console.log(this.selected_tooth);
-    this.selected_tooth = 'None';
+   
+ 
 
     if (this.form.invalid) {
       return;
@@ -1341,7 +1459,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     // };
 
     this.orderservice
-      .orderreg(this.form.value, formdata, this.selected_tooth, this.userId)
+      .orderreg(this.form.value, formdata, selectedTeeth , this.userId)
       .pipe(first())
       .subscribe({
         next: (res) => {
@@ -1366,8 +1484,12 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  // submit() {
-  //   window.alert('File submitted');
-  //   this.router.navigate(['/pages/casedetail']);
-  // }
+  submit() {
+    window.alert('File submitted');
+    this.router.navigate(['/pages/casedetail']);
+  }
+
+
+ 
 }
+

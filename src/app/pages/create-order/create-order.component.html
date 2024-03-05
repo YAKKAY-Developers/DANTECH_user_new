@@ -1,26 +1,33 @@
-<div class="container"  >
+<div class="container">
     <!-- <ng-container *ngIf="result.userStatusId == '2'">  -->
-        <ng-container>
+    <ng-container>
         <form class="contact" (ngSubmit)="onSubmit()" [formGroup]="form">
-          <h3>Lab Form</h3> 
+            <h3>Lab Form</h3>
             <h4 class="card-title">Lab form</h4>
             <br>
             <div class="card-body">
                 <div class="row d-flex justify-content-around">
                     <div class="col-6">
+
+
+
                         <label for="service">Consultant</label>
-                        <select class="form-control form-select" formControlName="firstName">
-                            <option *ngFor='let item of consultantDetails' [value]="item.firstName">{{item.firstName }}</option>
-                          </select>
-                          
-                        <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
-                            <div *ngIf="f['doctor_name'].errors && f['doctor_name'].errors['required']">Name is required</div>
-                            <div *ngIf="f['doctor_name'].errors && f['doctor_name'].errors['minlength']">Enter a valid name (should contain at least 3 characters)</div>
+                        <select class="form-control form-select" formControlName="fullName">
+                            <option *ngFor='let item of consultantDetails' [value]="item.fullName">{{item.fullName }}
+                            </option>
+                        </select>
+
+                        <div *ngIf="submitted && f['fullName'].errors" class="invalid-feedback">
+                            <div *ngIf="f['fullName'].errors && f['fullName'].errors['required']">Name is required</div>
+                            <div *ngIf="f['fullName'].errors && f['fullName'].errors['minlength']">Enter a valid name
+                                (should contain at least 3 characters)</div>
                         </div>
+
+
                     </div>
                     <div class="col-6">
                         <label name="">Unique Registration ID</label>
-                        <input class="form-control"  formControlName="registerNumber" [(ngModel)]="result.registerNumber"
+                        <input class="form-control" formControlName="registerNumber" [(ngModel)]="result.registerNumber"
                             readonly type="text" required>
                     </div>
 
@@ -34,7 +41,8 @@
                         <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f['mobileNumber'].errors }"
                             formControlName="mobileNumber" placeholder="Phone Number" type="tel" required>
                         <div *ngIf=" submitted && f['mobileNumber'].errors" class="invalid-feedback">
-                            <div *ngIf="f['mobileNumber'].errors && f['mobileNumber'].errors['required']">Phone number is
+                            <div *ngIf="f['mobileNumber'].errors && f['mobileNumber'].errors['required']">Phone number
+                                is
                                 required
                             </div>
                             <div *ngIf="f['mobileNumber'].errors && f['mobileNumber'].errors['minlength']">Enter valid
@@ -45,30 +53,49 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="row d-flex justify-content-around">
-                    <div class="wd50">
-                        <label name="">Clinic name</label>
-                        <input class="form-control" formControlName="firstName" [(ngModel)]="result.firstName"
-                            readonly type="tel" required>
+                    <div class="row">
 
-                    </div>
-                    <div class="wd50">
-                        <label name="">DCI id</label>
-                        <input formControlName="doctorid" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f['regId'].errors }" placeholder="regId"
-                            type="url" required>
-                        <div *ngIf=" submitted && f['regId'].errors" class="invalid-feedback">
-                            <div *ngIf="f['regId'].errors && f['regId'].errors['required']">DCI id is
-                                required
+                        <div class="col-4">
+
+
+
+
+                            <label name="">Clinic first name</label>
+                            <input class="form-control" formControlName="firstName" [(ngModel)]="result.firstName"
+                                readonly type="text" required>
+                        </div>
+
+                        <div class="col-4">
+                            <label name="">Clinic Last name</label>
+                            <input class="form-control" formControlName="lastName" [(ngModel)]="result.lastName"
+                                readonly type="text" required>
+
+                        </div>
+
+                        <div class="col-4">
+                            <label name="">DCI id</label>
+                            <input formControlName="regId" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f['regId'].errors }" placeholder="regId"
+                                type="url" required>
+                            <div *ngIf=" submitted && f['regId'].errors" class="invalid-feedback">
+                                <div *ngIf="f['regId'].errors && f['regId'].errors['required']">DCI id is
+                                    required
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
+
+
+                  
                 </div>
             </div>
             <hr>
-          
+
             <h4 class="card-title">Patient details</h4>
             <br>
 
@@ -94,7 +121,6 @@
 
                 </div>
                 <div class="col-6">
-
                     <label name="">Patient Age</label>
                     <input formControlName="patientage" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f['patientage'].errors }" placeholder="Patient Name"
@@ -117,45 +143,45 @@
 
                 </div>
                 <div class="col-6">
-
                     <label name="">Patient Sex</label>
-                    <select formControlName="patientGender" class="form-control form-select d-inline-flex p-2"
-                        [ngClass]="{ 'is-invalid': submitted && f['patientGender'].errors }" style="padding-right:15px;">
+                    <select formControlName="patientGender" class="form-control form-select"
+                        [ngClass]="{ 'is-invalid': submitted && f['patientGender'].errors }"  placeholder="Patient Sex"
+                       >
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                       
+
                     </select>
 
                 </div>
             </div>
 
             <hr>
-     
+
 
 
             <div class="wd100 colleft question-checkbox" style="padding:2%">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class="row">
                             <label style="margin-bottom:8px;">Service</label>
-                         
+
                             <select formControlName="service" class="form-control form-select d-inline-flex p-2"
                                 [ngClass]="{ 'is-invalid': submitted && f['service'].errors }"
                                 style="padding-right:15px;">
                                 <option value="Offline">Offline - Tooth Support Cercon Crown & Bridges </option>
                                 <option value="Online">Online - Tooth Support Cercon Crown & Bridges </option>
-                             
+
                             </select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         &nbsp;
                         <label name="">Order Date</label>
                         <input class="form-control" formControlName="orderDate"
                             [ngClass]="{ 'is-invalid': submitted && f['orderDate'].errors }" placeholder="Order Date"
                             type="date" [(ngModel)]="today_date" readonly>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         &nbsp;
                         <label name="">Required Date</label>
                         <input class="form-control" formControlName="requiredDate"
@@ -163,19 +189,19 @@
                             type="date" [min]="getTodayDate()">
                     </div>
 
-                
-                   
+
+
                 </div>
-                <input type="checkbox" id="priority" name="priority" value="priority">
+                <input type="checkbox" id="priority" name="priority" value="priority" formControlName="priority">
                 <label for="priority"> Check the option if you want the order to be delivered within 3 days </label><br>
-            </div>  
+            </div>
 
 
 
             <div class=" wd100">
                 <hr>
             </div>
-           
+
             <div>
 
                 <div class="wd100">
@@ -186,7 +212,7 @@
                     <div class="col50 colleft">
 
                         <div class="col50 colleft">
-                          
+
                             <div class="mb-3 row ">
                                 <h4 class="card-subtitle">Crown & Bridge/ Implant prostheses</h4>
                                 <label *ngFor="let checkbox of type1Checkboxes; let i = index">
@@ -205,7 +231,7 @@
                                 </label>
                             </div>
 
-             
+
                             <div class="mb-3">
                                 <h4 class="card-subtitle ">Metal Free Zirconium</h4>
                                 <label *ngFor="let checkbox of type3Checkboxes; let i = index">
@@ -236,7 +262,7 @@
                                 </label>
                             </div>
 
-                       
+
                             <div class="mb-3 row">
                                 <h4 class="card-subtitle ">Orthodontics/ Splints</h4>
                                 <label *ngFor="let checkbox of type6Checkboxes; let i = index">
@@ -256,7 +282,7 @@
                                 </label>
                             </div>
                         </div>
-                    
+
                         <div class="mb-3 row">
                             <h4 class="card-subtitle "> Implant Components:</h4>
                             <label *ngFor="let checkbox of type12Checkboxes; let i = index">
@@ -282,7 +308,7 @@
                                     <input type="checkbox" [checked]="form.get('type19').get(i.toString()).value"
                                         (change)="updateCheckbox(i, 'type19')" [value]="checkbox" name="design"
                                         class="checkbox-input">
-                           
+
                                     <span class="checkbox-tile">
                                         <span class="checkbox-icon">
                                             <img src="assets/images/tooth/{{checkbox}}.jpg">
@@ -295,7 +321,7 @@
 
 
                         <div class="col50  colleft">
-                   
+
                             <div class="mb-3 row">
                                 <h4 class="card-subtitle ">Metal Ceramic/ Metal</h4>
                                 <label *ngFor="let checkbox of type8Checkboxes; let i = index">
@@ -324,7 +350,7 @@
                             </div>
 
 
-                
+
                             <div class="mb-3 row">
                                 <h4 class="card-subtitle ">Items Sent to the lab:</h4>
                                 <label *ngFor="let checkbox of type11Checkboxes; let i = index">
@@ -334,7 +360,7 @@
                                 </label>
                             </div>
 
-                            </div>
+                        </div>
 
 
 
@@ -507,7 +533,7 @@
 
 
 
-                
+
 
                                             <g class="tooth" data-title="21">
                                                 <path class="fil0"
@@ -608,7 +634,7 @@
                                         </g>
 
                                     </svg>
-                                  
+
                                 </div>
                             </div>
 
@@ -627,7 +653,7 @@
                     <h4 class="card-title">Notes</h4>
                     <div class="row">
                         <br>
-                      
+
                         <input class="form-control" type="file" value="">
                         <p>Acceptable file formats - images, pdf, stl, ply</p>
                         <br><br>
@@ -658,8 +684,8 @@
             </div>
 
 
-            
-        
+
+
         </form>
     </ng-container>
 
@@ -675,9 +701,9 @@
         </div>
     </ng-container>
 
-    
+
     <ng-container *ngIf="stat_user == 'WA4000'">
-  
+
         <div class="box-modal modal-show">
             <div class="overlay"></div>
             <div class="body-modal">
@@ -690,7 +716,7 @@
 
 
 
-    </div>
+</div>
 
 
 
