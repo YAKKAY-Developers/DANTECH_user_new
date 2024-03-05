@@ -17,6 +17,7 @@ import { authGuard } from '../helpers/auth.guard';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrdersummaryComponent } from './ordersummary/ordersummary.component';
 import { FaqComponent } from './faq/faq.component';
+import { TestingComponent } from './testing/testing.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,11 @@ const routes: Routes = [
         path: 'faq',
         component: FaqComponent,
         canActivate: [authGuard],
+      },
+      {
+        path: 'testing',
+        component: TestingComponent,
+        canActivate: [authGuard],
       }
       
     ],
@@ -100,6 +106,7 @@ const routes: Routes = [
     OrderListComponent,
     OrdersummaryComponent,
     FaqComponent,
+    TestingComponent,
   ],
   imports: [
     CommonModule,
