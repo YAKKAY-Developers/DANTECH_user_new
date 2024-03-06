@@ -1,4 +1,18 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+import { OrderService } from 'src/app/services/order.service';
+import { first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-ordersummary',
@@ -6,47 +20,56 @@ import { Component } from '@angular/core';
   styleUrls: ['./ordersummary.component.scss'],
 })
 export class OrdersummaryComponent {
-  invoice_number: string = '21001';
-  date_issue: string = '03-Feb-2021';
-  date_expire: string = '03-Mar-2021';
-  desc: string =
-    'This invoice covers services provided by Niall Ainsworth for the design, development and deployment of the website site@site.com';
-  company: any = {
-    name: 'Niall Ainsworth',
-    address: '126 Address\nCo. Meath',
-    phone: '087 3297222',
-    mail: 'niallainsworth@gmail.com',
-    tax_number: '83007342',
-  };
-  client: any = {
-    name: 'Kevin Smith',
-    company: 'Clever Company',
-  };
-  rate: string = '12.50';
-  currency: string = '€';
+  accessToken: any;
+  userToken: any;
+  orderToken:any;
 
-  work: any[] = [
-    { desc: 'Static site design and dev', time: 44 },
-    { desc: 'Keyboard applet design and dev', time: 32 },
-    { desc: 'e-commerce shop', time: 20 },
-    { desc: 'Mobile compatibility', time: 16 },
-    { desc: 'Site hosting, domain, SEO', time: 12 },
-  ];
-  bank: any = {
-    IBAN: 'IE41AIBK9234234',
-    BIC: 'AIBKI324',
-  };
-  total_time: number = 0;
-  total_cost: number = 0;
+  userOrderDetailsSubscription: Subscription;
+  result: any
+  orderDate = {};
 
-  constructor() {
-    this.calculateTotals();
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authservice: AuthService,
+    private userservice: UserService,
+    private orderservice: OrderService,
+
+  ) { }
+
+
+  ngOnInit() {
+
+ // user
+ const { userToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
+ const { fullName } = JSON.parse(localStorage.getItem('user') ?? '{}');
+ const { accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
+ this.accessToken = accessToken;
+ this.userToken = userToken;
+    // Retrieve token from route parameters
+    this.route.params.subscribe((params) => {
+      this.orderToken = params['id'];
+      console.log("OrderToken", this.orderToken);
+    });
+
+ //Get user details:
+ this.userOrderDetailsSubscription = this.userservice.getOneUserOrderDetails(this.userToken, this.accessToken, this.orderToken)
+ .pipe(first())
+ .subscribe({
+   next: (res) => {
+     this.result = res.userOrders;
+     console.log("Result:", this.result)
+  
+   },
+   error: (error) => {
+     console.log(error.error)
+   }
+ })
+
+
   }
 
-  calculateTotals() {
-    this.total_time = this.work.reduce((total, item) => total + item.time, 0);
-    this.total_cost = this.total_time * parseFloat(this.rate);
-  }
 
   printPDF() {
     // Get the invoice container by its id

@@ -39,38 +39,9 @@
                                         src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
                                         class="img-responsive" alt="order-placed" />
                                     </div>
-                                <div class="tracking-content">Order Taken<span>01 Jan 2024, 10:00am</span></div>
+                                <div class="tracking-content">Order Placed<span>{{ result?.orderDate | date }}</span></div>
                             </div>
-                            <!-- <div class="tracking-item">
-                                <div class="tracking-icon status-intransit">
-                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
-                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512" data-fa-i2svg="">
-                                        <path fill="currentColor"
-                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="tracking-date"><img
-                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
-                                        class="img-responsive" alt="order-placed" /></div>
-                                <div class="tracking-content">Order Confirmed<span>09 Aug 2023, 10:30am</span></div>
-                            </div> -->
-                            <!-- <div class="tracking-item">
-                                <div class="tracking-icon status-intransit">
-                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
-                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512" data-fa-i2svg="">
-                                        <path fill="currentColor"
-                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="tracking-date"><img
-                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
-                                        class="img-responsive" alt="order-placed" /></div>
-                                <div class="tracking-content">Mold creation<span>15 Aug 2023, 12:00pm</span></div>
-                            </div> -->
+                            
                             <div class="tracking-item">
                                 <div class="tracking-icon status-intransit">
                                     <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
@@ -84,10 +55,16 @@
                                 <div class="tracking-date"><img
                                         src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
                                         class="img-responsive" alt="order-placed" /></div>
-                                <div class="tracking-content">Inn Production <span>02 Jan 2024, 02:00pm</span></div>
+                                <div class="tracking-content" *ngIf="result?.orderStatusId == 1">Production <span>Not Started</span></div>
+                                <div class="tracking-content" *ngIf="result?.orderStatusId == 2">Production <span>Not Started</span></div>
+                                <div class="tracking-content" *ngIf="result?.orderStatusId == 3">Production <span>Production In Progress</span></div>
+                                
+                            
+                            
                             </div>
                             <div class="tracking-item">
-                                <div class="tracking-icon status-current blinker">
+                                <!-- <div class="tracking-icon status-current blinker"> -->
+                                    <div class="tracking-icon status-intransit">
                                     <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
                                         data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 512 512" data-fa-i2svg="">
@@ -99,39 +76,9 @@
                                 <div class="tracking-date"><img
                                         src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
                                         class="img-responsive" alt="order-placed" /></div>
-                                <div class="tracking-content">Completed<span>10 Jan 2024, 02:00pm</span></div>
+                                        <div class="tracking-content">Order Completed<span>Not Completed</span></div>
+                                <div class="tracking-content"*ngIf="result?.orderStatusId == 3">Order Completed<span>Completed</span></div>
                             </div>
-
-                            <!-- <div class="tracking-item-pending">
-                                <div class="tracking-icon status-intransit">
-                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
-                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512" data-fa-i2svg="">
-                                        <path fill="currentColor"
-                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="tracking-date"><img
-                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
-                                        class="img-responsive" alt="order-placed" /></div>
-                                <div class="tracking-content">Out for Delivery<span>12 Aug 2023, 05:00pm</span></div>
-                            </div>
-                            <div class="tracking-item-pending">
-                                <div class="tracking-icon status-intransit">
-                                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas"
-                                        data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512" data-fa-i2svg="">
-                                        <path fill="currentColor"
-                                            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="tracking-date"><img
-                                        src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
-                                        class="img-responsive" alt="order-placed" /></div>
-                                <div class="tracking-content">Delivered<span>12 Aug 2025, 09:00pm</span></div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -145,7 +92,7 @@
             <div class="container">
                 <!-- Title -->
                 <div class="d-flex justify-content-between align-items-center py-3">
-                    <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #16123222</h2>
+                    <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> Order #{{result?.workOrderNumber}}</h2>
                 </div>
 
                 <!-- Main content -->
@@ -156,85 +103,42 @@
                             <div class="card-body">
                                 <div class="mb-3 d-flex justify-content-between">
                                     <div>
-                                        <span class="me-3">22-11-2021</span>
-                                        <span class="me-3">#16123222</span>
-                                        <span class="me-3">Visa -1234</span>
-                                        <span class="badge rounded-pill bg-warning">In Progress</span>
+                                        <span class="me-3">{{result?.orderDate | date}}</span>
+                                        <span class="me-3">#{{result?.workOrderNumber}}</span>
+                                        <span class="badge rounded-pill bg-info" *ngIf="result?.orderStatusId == 1">Order Created</span>
+                                        <span class="badge rounded-pill bg-warning" *ngIf="result?.orderStatusId == 2">Order In Progress</span>
+                                        <span class="badge rounded-pill bg-warning" *ngIf="result?.orderStatusId == 3">Order In Progress</span>
+                                        <span class="badge rounded-pill bg-success" *ngIf="result?.orderStatusId == 4">Order Completed</span>
                                     </div>
                                     <div class="d-flex">
-                                        <!-- <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button> -->
-                                        <div class="dropdown">
-                                            <button class="btn btn-link p-0 text-muted" type="button"
-                                                data-bs-toggle="dropdown">
-                                                <i class="bi bi-three-dots-vertical"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i>
-                                                        Edit</a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i>
-                                                        Print</a></li>
-                                            </ul>
-                                        </div>
+                        
+        
                                     </div>
                                 </div>
                                 <table class="table table-borderless">
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex mb-2">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="assets/images/files/2.jpg" alt="" width="35"
-                                                            class="img-fluid">
+                                        <ng-container *ngFor="let keyValuePair of result | keyvalue">
+                                            <tr *ngIf="keyValuePair.value !== null">
+                                                <td>
+                                                    <div class="d-flex mb-2">
+                                                        <div class="flex-shrink-0">
+                                                            <img src="assets/images/files/2.jpg" alt="" width="35" class="img-fluid">
+                                                        </div>
+                                                        <div class="flex-lg-grow-1 ms-3">
+                                                            <h6 class="small mb-0">
+                                                                <a href="#" class="text-reset">
+                                                                    {{ keyValuePair.value }}:{{ keyValuePair.key }}
+                                                                </a>
+                                                            </h6>
+                                                        </div>
                                                     </div>
-                                                    <div class="flex-lg-grow-1 ms-3">
-                                                        <h6 class="small mb-0"><a href="#" class="text-reset">Teeth
-                                                                Impression Kit Putty Silicone Material Tray Teeth
-                                                                Molding Kit for Dental Impression Medium</a></h6>
-                                                        <span class="small">Color: Black</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>1</td>
-                                            <!-- <td class="text-end">Rs 79.99</td> -->
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex mb-2">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="assets/images/files/2.jpg" alt="" width="35"
-                                                            class="img-fluid">
-                                                    </div>
-                                                    <div class="flex-lg-grow-1 ms-3">
-                                                        <h6 class="small mb-0"><a href="#" class="text-reset">Custom
-                                                                Grillz Mold Kit - Teeth Dental Impression Kit w/Putty
-                                                                Full Kit Medium</a></h6>
-                                                        <span class="small">Color: White</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>1</td>
-                                            <!-- <td class="text-end">Rs 79.99</td> -->
-                                        </tr>
+                                                </td>
+                                                <td>{{ keyValuePair.key }}</td>
+                                            </tr>
+                                        </ng-container>
                                     </tbody>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <td colspan="2">Subtotal</td>
-                                            <td class="text-end">Rs 159,98</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Shipping</td>
-                                            <td class="text-end">Rs 20.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Discount (Code: NEWYEAR)</td>
-                                            <td class="text-danger text-end">-Rs 10.00</td>
-                                        </tr>
-                                        <tr class="fw-bold">
-                                            <td colspan="2">TOTAL</td>
-                                            <td class="text-end">Rs 169,98</td>
-                                        </tr>
-                                    </tfoot> -->
                                 </table>
+                                
                             </div>
                         </div>
                         <!-- Payment -->

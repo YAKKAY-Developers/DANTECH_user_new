@@ -126,7 +126,21 @@ export class UserService {
       }));
   }
 
-
+  getOneUserOrderDetails(userToken: any, accessToken: any, orderToken:any): Observable<any> {
+    let headers = new HttpHeaders({
+      'x-access-token': `${accessToken}`
+    });
+  
+    let body = {
+      "userToken": userToken,
+      "orderToken":orderToken
+    };
+  
+    return this.http.post(`${environment.apiUrl}/api/order/getOrderDeatils`, body, { headers })
+      .pipe(map((res: any) => {
+        return res;
+      }));
+  }
 
 
 
