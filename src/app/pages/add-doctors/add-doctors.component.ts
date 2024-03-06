@@ -168,6 +168,11 @@ export class AddDoctorsComponent {
 
 
   sortColumn(column: string) {
+
+    
+    console.log('Sorting column:', column);
+
+
     // Check if the column is already sorted
     if (this.sortcolumn === column) {
       // If the same column is clicked again, toggle the sorting order
@@ -182,6 +187,9 @@ export class AddDoctorsComponent {
     this.filteredData.sort((a, b) => {
       const valueA = a[column];
       const valueB = b[column];
+
+      console.log('value A:', valueA);
+      console.log('value B:', valueA);
 
       if (this.sortDirection === 'asc') {
         return valueA.localeCompare(valueB);

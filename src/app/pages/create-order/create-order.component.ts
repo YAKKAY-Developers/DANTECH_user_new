@@ -1437,29 +1437,61 @@ console.log("My selectedTeeth value OnSubmit is ", selectedTeeth)
         option15: selectedOptionsType15,
         type16: 'Texture',
         option16: selectedOptionsType16,
+        option18: 'Nill',
+        type18: 'Comments',
         type19: 'Pontic Design',
         option19: selectedOptionsType19,
       },
     };
 
+ // Constructing the formPayload object with only desired form fields
+ const {
+  firstName,
+  lastName,
+  fullName,
+  registerNumber,
+  patientname,
+  regId,
+  service,
+  orderDate,
+  requiredDate,
+  patientage,
+  priority,
+  patientGender,
+  mobileNumber
+} = this.form.value;
 
+const formPayload = {
+  form: {
+    firstName,
+    lastName,
+    fullName,
+    registerNumber,
+    patientname,
+    regId,
+    service,
+    orderDate,
+    requiredDate,
+    patientage,
+    priority,
+    patientGender,
+    mobileNumber
+  }
+};
 
+console.log('My form data', formPayload);
     console.log('My form data', formdata);
     console.log('formdata', this.form.value);
-    console.log('Doctor name',this.form.value.doctor_name);
-   
+  
  
-
-    if (this.form.invalid) {
-      return;
-    }
-    // this.form_values = {
-    //   clinicid: this.UserDetails.profile.clinicid,
-    //   doctorid: this.form.value['doctorid'],
-    // };
-
+//Check this
+    // if (this.form.invalid) {
+    //   console.log("Form is invalid")
+    //   return;
+    // }
+   
     this.orderservice
-      .orderreg(this.form.value, formdata, selectedTeeth , this.userId)
+      .createOrder(this.userToken,this.accessToken, formPayload.form, formdata, selectedTeeth )
       .pipe(first())
       .subscribe({
         next: (res) => {

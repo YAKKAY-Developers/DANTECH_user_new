@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let ts of filteredData'>
-                        <td>{{ts.userOrder.orderToken}}</td>
+                        <td>{{ts.userOrder.workOrderNumber}}</td>
                         <td>
                             <!-- <span ng-if="ts.status === 'In Production'" class="badge text-bg-primary">{{ts.status}}</span>
                             <span ng-if="ts.status === 'Completed'" class="badge text-bg-success" ng-if="ts.status !== 'In Production' && ts.status !== 'Completed'">{{ts.status}}</span>

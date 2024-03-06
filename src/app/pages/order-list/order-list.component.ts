@@ -180,6 +180,7 @@ userId: string;
   //Order
   orderDetailSubscription: Subscription;
   orderData:any;
+  orderStatusData:any;
 
 
   isModalVisible = false;
@@ -254,6 +255,7 @@ this.orderDetailSubscription = this.userservice
   (res: any) => {
     this.orderData = res.orderDetails;
     this.filteredData = this.orderData;
+    console.log("Response from API ",res)
     console.log(this.filteredData)
   },
   (error: any) => {
@@ -265,42 +267,104 @@ this.orderDetailSubscription = this.userservice
 
   }
 
-  sortColumn(column: string) {
-    // Check if the column is already sorted
-    if (this.sortcolumn === column) {
-      // If the same column is clicked again, toggle the sorting order
-      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-    } else {
-      // If a different column is clicked, set the sorting column and direction
-      this.sortcolumn = column;
-      this.sortDirection = 'asc'; // Default to ascending order
+//   sortColumn(column: string) {
+
+//     console.log('Sorting column:', column);
+
+//     // Check if the column is valid
+//     if (!column) {
+//       console.error('Invalid column:', column);
+//       return;
+//   }
+
+//     // Check if the column is already sorted
+//     if (this.sortcolumn === column) {
+//       // If the same column is clicked again, toggle the sorting order
+//       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+//     } else {
+//       // If a different column is clicked, set the sorting column and direction
+//       this.sortcolumn = column;
+//       this.sortDirection = 'asc'; // Default to ascending order
+//     }
+
+//     // Sort the filtered data based on the chosen column and direction
+//     this.filteredData.sort((a, b) => {
+//       const valueA = a[column];
+//       const valueB = b[column];
+
+//       console.log('value A:', valueA);
+//       console.log('value B:', valueA);
+
+//        // Handle cases where either value is undefined
+//        if (valueA === undefined || valueB === undefined) {
+//         console.error('Undefined value for column:', column);
+//         // Return 0 to maintain the order of items with undefined values
+//         return 0;
+//     }
+//  // Perform sorting based on the values of the specified column
+//  if (this.sortDirection === 'asc') {
+//   return valueA.localeCompare(valueB);
+// } else {
+//   return valueB.localeCompare(valueA);
+// }
+// });
+//   }
+
+
+sortColumn(column: string) {
+  console.log('Sorting column:', column);
+
+  // Check if the column is valid
+  if (!column) {
+    console.error('Invalid column:', column);
+    return;
+  }
+
+  // Check if the column is already sorted
+  if (this.sortcolumn === column) {
+    // If the same column is clicked again, toggle the sorting order
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+  } else {
+    // If a different column is clicked, set the sorting column and direction
+    this.sortcolumn = column;
+    this.sortDirection = 'asc'; // Default to ascending order
+  }
+
+  // Sort the filtered data based on the chosen column and direction
+  this.filteredData.sort((a, b) => {
+    let valueA = a['orderStatus']['description'];
+    let valueB = b['orderStatus']['description'];
+
+    // Provide default values for undefined or null values
+    if (valueA === undefined || valueA === null) {
+      valueA = '';
+    }
+    if (valueB === undefined || valueB === null) {
+      valueB = '';
     }
 
-    // Sort the filtered data based on the chosen column and direction
-    this.filteredData.sort((a, b) => {
-      const valueA = a[column];
-      const valueB = b[column];
+    // Case-insensitive string comparison
+    return this.sortDirection === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+  });
+}
 
-      if (this.sortDirection === 'asc') {
-        return valueA.localeCompare(valueB);
-      } else {
-        return valueB.localeCompare(valueA);
-      }
-    });
-  }
+
+
 
   filterData() {
     if (this.searchText) {
    
       this.filteredData = this.orderData.filter((item: any) => {
 
+        console.log(  "Checking", item.userOrder.workOrderNumber)
+
         return (
-          item.regId.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          item.firstName.toLowerCase().includes(
+          item.userOrder.workOrderNumber.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          item.userOrder.patientName.toLowerCase().includes(
             this.searchText.toLowerCase()
           ) ||
-          item.lastName.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          item.specialisation.toLowerCase().includes(
+          item.userOrder.requiredDate.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          item.userOrder.service.toLowerCase().includes(
             this.searchText.toLowerCase()
           )
 

@@ -27,6 +27,7 @@ export class OrderService {
   }
 
   orderreg(form: any, formdata: any, selected_tooth: any, userToken: any) {
+    console.log("I am in")
     const body = {
       form: form,
       formdata: formdata,
@@ -35,6 +36,24 @@ export class OrderService {
     };
     console.log(body);
     return this.http.post(`${environment.apiUrl}/api/order/createorder`, body);
+  }
+
+
+  createOrder(userToken: any, accessToken: any, form: any, formdata: any, selected_tooth: any) {
+    console.log("I am in createorder service service")
+   
+    let headers = new HttpHeaders({
+      'x-access-token': `${accessToken}`
+    });
+    const body = {
+      userToken: userToken,
+      form: form,
+      formdata: formdata,
+      tooth: selected_tooth
+    }
+    
+    console.log(body);
+    return this.http.post(`${environment.apiUrl}/api/order/createOrder`, body , { headers });
   }
 
 
