@@ -49,7 +49,7 @@
                            -->
                             <span [ngClass]="{
                                 'badge rounded-pill bg-warning': ts.orderStatus.description === 'orderCreated',
-                                'badge text-bg-success': ts.orderStatus.description === 'orderStarted',
+                                'badge text-bg-success': ts.orderStatus.description === 'orderStarted' || 'orderCompleted',
                                 'badge text-bg-danger': ts.orderStatus.description === 'Not yet started'
                               }">
                             {{ts.orderStatus.description }}

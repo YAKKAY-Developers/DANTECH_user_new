@@ -27,7 +27,17 @@ export class OrdersummaryComponent {
   userOrderDetailsSubscription: Subscription;
   result: any
   orderDate = {};
-  refinedResult:any;
+
+
+  userDetailsSubscription: Subscription;
+  basicInfo: any;
+  bankInfo: any
+  response: any;
+  consultantDetails: any;
+  consultantCount: any;
+  userresult:any
+
+  // refinedResult:any
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,9 +71,9 @@ export class OrdersummaryComponent {
    next: (res) => {
      this.result = res.userOrders;
 
-     this.refinedResult = Object.entries(this.result)
-        .filter(([key, value]) => value !== null && value !== '')
-        .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+    //  this.refinedResult = Object.entries(this.result)
+    //     .filter(([key, value]) => value !== null && value !== '')
+    //     .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
    
 
      console.log("Result:", this.result)
@@ -73,6 +83,25 @@ export class OrdersummaryComponent {
      console.log(error.error)
    }
  })
+
+
+     //Get user details:
+     this.userDetailsSubscription = this.userservice.getOneUserDetails(this.userToken, this.accessToken)
+     .pipe(first())
+     .subscribe({
+       next: (res) => {
+         this.response = res.userDetails;
+         this.userresult = res.userDetails.user;
+         this.basicInfo = res.userDetails.basicInfo;
+         this.bankInfo = res.userDetails.bankInfo;
+         this.consultantDetails = res.userDetails.consultantInfo;
+         
+       },
+       error: (error) => {
+         console.log(error.error)
+       }
+     })
+ 
 
 
   }
