@@ -55,7 +55,7 @@ timeOut: 3000, // Time to close the toaster (in milliseconds)
     SidebarComponent,
     NgCircleProgressModule.forRoot(
     //   {
-    //   backgroundColor: 'teal',
+    //   backgroundColor: 'Bakeryl',
     //   backgroundPadding: 8,
     //   radius: 60,
     //   space: -15,
@@ -63,7 +63,7 @@ timeOut: 3000, // Time to close the toaster (in milliseconds)
     //   unitsColor: '#ffffff',
     //   outerStrokeWidth: 7.5,
     //   outerStrokeColor: 'white',
-    //   innerStrokeColor: 'teal',
+    //   innerStrokeColor: 'Bakeryl',
     //   innerStrokeWidth: 3,
     //   titleColor: '#ffffff',
     //   subtitleColor: '#ffffff',

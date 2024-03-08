@@ -115,7 +115,7 @@
         
                                     </div>
                                 </div>
-                                <table class="table table-borderless">
+                                <!-- <table class="table table-borderless">
                                     <tbody>
                                         <ng-container *ngFor="let keyValuePair of result | keyvalue">
                                             <tr *ngIf="keyValuePair.value !== null">
@@ -135,6 +135,89 @@
                                                 </td>
                                                 <td>{{ keyValuePair.key }}</td>
                                             </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table> -->
+
+
+                                             <table class="table table-borderless">
+                                    <tbody>
+                                        <ng-container >
+                                            <tr >
+                                                <td>
+                                                    <div class="d-flex mb-2">
+                                                        <div class="flex-shrink-0">
+                                                            <img src="assets/images/files/2.jpg" alt="" width="35" class="img-fluid">
+                                                        </div>
+                                                        <div class="flex-lg-grow-1 ms-3">
+                                                            <h6 class="small mb-0">
+                                                                <a href="#" class="text-reset">
+                                                                    <ng-container *ngIf="result.type1 && result.option1">
+                                                                      <p>{{ result.type1 }}: {{ result.option1 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type2 && result.option2">
+                                                                      <p>{{ result.type2 }}: {{ result.option2 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type3 && result.option3">
+                                                                      <p>{{ result.type3 }}: {{ result.option3 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type4 && result.option4">
+                                                                      <p>{{ result.type4 }}: {{ result.option4 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type5 && result.option5">
+                                                                      <p>{{ result.type5 }}: {{ result.option5 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type6 && result.option6">
+                                                                      <p>{{ result.type6 }}: {{ result.option6 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type7 && result.option7">
+                                                                      <p>{{ result.type7 }}: {{ result.option7 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type8 && result.option8">
+                                                                      <p>{{ result.type8 }}: {{ result.option8 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type9 && result.option9">
+                                                                      <p>{{ result.type9 }}: {{ result.option9 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type10 && result.option10">
+                                                                      <p>{{ result.type10 }}: {{ result.option10 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type11 && result.option11">
+                                                                      <p>{{ result.type11 }}: {{ result.option11 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type12 && result.option12">
+                                                                      <p>{{ result.type12 }}: {{ result.option12 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type13 && result.option13">
+                                                                      <p>{{ result.type13 }}: {{ result.option13 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type14 && result.option14">
+                                                                      <p>{{ result.type14 }}: {{ result.option14 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type15 && result.option15">
+                                                                      <p>{{ result.type15 }}: {{ result.option15 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type16 && result.option16">
+                                                                      <p>{{ result.type16 }}: {{ result.option16 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type17 && result.option17">
+                                                                      <p>{{ result.type17 }}: {{ result.option17 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type18 && result.option18">
+                                                                      <p>{{ result.type18 }}: {{ result.option18 }}</p>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="result.type19 && result.option19">
+                                                                      <p>{{ result.type19 }}: {{ result.option19 }}</p>
+                                                                    </ng-container>
+                                                                  </a>
+                                                                  
+                                                                  
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                            </tr>   
                                         </ng-container>
                                     </tbody>
                                 </table>
