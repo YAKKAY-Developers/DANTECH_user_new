@@ -87,24 +87,7 @@ export class AddDoctorsComponent {
         }
       );
 
-    //doc data
-    // this.docDetailsSubscription = this.userservice
-    //   .getalldoc(this.userId)
-    //   .subscribe(
-    //     (res: any) => {
-    //       this.docdetails = res;
-    //       this.doc_data = this.docdetails['doctor'];
-    //       if (this.doc_data['length'] > 0) {
-    //         this.doc_count = true;
-    //       }
-    //       this.filteredData = this.doc_data;
-    //       console.log("DOctor count",this.doc_count );
-    //     },
-    //     (error: any) => {
-    //       console.log('Error fetching doc details:', error);
-    //     }
-    //   );
-
+ 
 
 
       //Get all consultant details
