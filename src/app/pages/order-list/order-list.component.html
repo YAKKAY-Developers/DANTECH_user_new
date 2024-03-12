@@ -48,9 +48,11 @@
                             <span ng-if="ts.status === 'Completed'" class="badge text-bg-success" ng-if="ts.status !== 'In Production' && ts.status !== 'Completed'">{{ts.status}}</span>
                            -->
                             <span [ngClass]="{
-                                'badge rounded-pill bg-warning': ts.orderStatus.description === 'orderCreated',
-                                'badge text-bg-success': ts.orderStatus.description === 'orderStarted' || 'orderCompleted',
-                                'badge text-bg-danger': ts.orderStatus.description === 'Not yet started'
+                                'badge rounded-pill bg-primary': ts.orderStatus.description === 'orderCreated',
+                                'badge text-bg-info': ts.orderStatus.description === 'orderStarted' ,
+                                'badge text-bg-success': ts.orderStatus.description ===  'orderCompleted',
+                                'badge text-bg-danger': ts.orderStatus.description === 'orderRejected' ,
+                                'badge text-bg-warning': ts.orderStatus.description === 'orderInProgress'
                               }">
                             {{ts.orderStatus.description }}
                           </span>
