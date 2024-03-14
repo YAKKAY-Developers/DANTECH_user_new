@@ -1,7 +1,10 @@
+
+
 <div class="container">
  
     <ng-container  > 
     <!-- <ng-container> -->
+
         <form class="contact" (ngSubmit)="onSubmit()" [formGroup]="form">
             <h3>Lab Form</h3>
             <h4 class="card-title">Lab form</h4>
@@ -688,8 +691,10 @@
 
 
         </form>
+   
     </ng-container>
 
+    <canvas #screenshotCanvas style="display: none;"></canvas>
 
     <ng-container *ngIf="result.userStatusId == '3'">
 
