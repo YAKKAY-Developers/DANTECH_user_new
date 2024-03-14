@@ -1,334 +1,395 @@
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="order-tab" data-bs-toggle="tab" data-bs-target="#order" type="button" role="tab" aria-controls="order" aria-selected="true">Order Summary</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="task-tab" data-bs-toggle="tab" data-bs-target="#task" type="button" role="tab" aria-controls="task" aria-selected="false">Task</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab" aria-controls="history" aria-selected="false">History</button>
-    </li>
-  </ul>
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="order-tab">
-        <div class="container-fluid">
-  
-            <div class="container">
-              <!-- Title -->
-              <div class="d-flex justify-content-between align-items-center py-3">
-                <h2 class="h5 mb-0"><a href="#" class="text-muted"></a> WorkOrder #{{ filteredData?.workOrder }}</h2>
-              </div>
+<form class="contact" [formGroup]="form">
+  <h3>Lab Form</h3>
+ 
+  <br>
+  <div class="card-body">
+      <div class="row d-flex justify-content-around">
+          <div class="col-6">
+
+
+              <label for="service">Consultant</label>
+              <input class="form-control" formControlName="consultantName" [(ngModel)]="myUserresult.consultantName"
+              readonly type="text" required>
+
+          </div>
+          <div class="col-6">
+              <label name="">Unique Registration ID</label>
+              <input class="form-control" formControlName="regNumber" [(ngModel)]="myUserresult.regNumber"
+                  readonly type="text" required>
+          </div>
+
+      </div>
+      
+      <div class="row d-flex justify-content-around">
+          <div class="wd100">
+              <label name="">Phone number</label>
+              <input class="form-control" formControlName="phoneNumber" [(ngModel)]="myUserresult.phoneNumber" placeholder="Phone Number" type="tel" required>
             
-              <!-- Main content -->
-              <div class="row">
-                <div class="col-lg-8">
-                  <!-- Details -->
-                  <div class="card mb-4">
-                    <div class="card-body">
-                      <div class="mb-3 d-flex justify-content-between">
-                        <div>
-                          
-                          <span class="me-3">Order Date: <b>{{filteredData?.date}}</b></span>
-                          <span class="me-3">Created by: <b>{{filteredData?.doctor}}</b></span>
-                          <span [ngClass]="{
-                            'badge rounded-pill bg-warning': filteredData?.woStatus === 'In Production',
-                            'badge rounded-pill bg-danger': filteredData?.woStatus === 'Yet to start'
-                          }">
-                            {{filteredData?.woStatus}}
-                          </span>
-                        </div>
-                        <div class="d-flex">
-                          <!-- <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Invoice</span></button> -->
-                          <div class="dropdown">
-                            <button class="btn btn-link p-0 text-muted" type="button" data-bs-toggle="dropdown">
-                              <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                              <li><a class="dropdown-item" href="#"><i class="bi bi-pencil"></i> Edit</a></li>
-                              <li><a class="dropdown-item" href="#"><i class="bi bi-printer"></i> Print</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                  <form>
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                      </div>
-                      <input type="text" class="form-control" placeholder= "D0189" value="{{ filteredData?.workOrder }}" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-                    <input class="form-control" type="text" placeholder="Client Name" value="{{ filteredData?.doctor }}">
-                    &nbsp;
-                    <div class="row">
-                    <div class="col-6">
-                      <label name="">Order Date</label>
-                    <input  class="form-control" type="date" required value="{{ filteredData?.date }}">
-                  </div>
-                  <div class="col-6">
-                    <label name="">Due Date</label>
-                    <input  class="form-control" placeholder="Order Date" type="date" required disabled>
-                  </div>
-                  </div>
-                  &nbsp;
-                  &nbsp;
-                 <hr>
-  
-                 <ng-container *ngIf="filteredData?.woStatus === 'Yet to start'">
-                 <span class="me-3">Order Assignment: <b>Not Assigned</b></span>
-                 <div>
-                  <label name="">Status</label>
-                  <select class="form-control" name="service" id="service" placeholder="Order Date">
-                    <option value="Crown">Started</option>
-                    <option value="Denture">Not yet started</option>
-                    <option value="Partials">Completed</option>
-                    
-                  </select>
-                  <label name="">Assign To</label>
-                  <select class="form-control" name="service" id="service" placeholder="Order Date">
-                    <option value="Crown">Mold Bakerym</option>
-                    <option value="Denture">Production Bakerym</option>
-                    <option value="Partials">QC Bakerym</option>
-                    
-                  </select>
-  
-                 
-  
-  
-  
-                  <!--To change later-->
-                  <label name="">Delivery</label>
-                  <select class="form-control" name="service" id="service" placeholder="Order Date">
-                    <option value="Crown">Local</option>
-                    <option value="Denture">International</option>
-                   
-                    
-                  </select>
-                  &nbsp;
-  
-                </div>
-              </ng-container>
-  
-  
-              <ng-container *ngIf="filteredData?.woStatus == 'In Production'">
-                <div>Assigned</div>
-              </ng-container>
-  
-  
-                  <div class="wd100">
-                    <button class="
-                    btn btn-light-success" name="submit" type="submit" id="" data-submit="...Sending"   (click)="switchToTaskTab()">Next</button>
-                  </div>
-                  </form>
-                    </div>
-                  </div>
-                  <!-- Payment -->
-                
-                </div>
-                <div class="col-lg-4">
-                  <!-- Customer Notes -->
-                  <div class="card mb-4">
-                    <div class="card-body">
-                      <h3 class="h6">Product Description</h3>
-                      <p>Impression materials are used to copy the teeth and surrounding oral structures by creating a dental impression poured with dental plaster to fabricate a dental cast. This procedure provides a tridimensional and accurate mouth replica, allowing dental work even in the absence of the patient.</p>
-                    </div>
-                  </div>
-                  <div class="card mb-4">
-                    <!-- Shipping information -->
-                    <div class="card-body">
-                      <h3 class="h6">Shipping Information</h3>
-                      <strong>FedEx</strong>
-                      <span><a href="#" class="text-decoration-underline" target="_blank">FF1234567890</a> <i class="bi bi-box-arrow-up-right"></i> </span>
-                      <hr>
-                      <h3 class="h6">Address</h3>
-                      <address>
-                        <strong>John Doe</strong><br>
-                        1355 Market St, Suite 900<br>
-                        San Francisco, CA 94103<br>
-                        <abbr title="Phone">P:</abbr> (123) 456-7890
-                      </address>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-              </div>
-                  
-  
-  
-  
-  
-    </div>
-  
-  
-  
-  
-  
-    <div class="tab-pane fade" id="task" role="tabpanel" aria-labelledby="task-tab" >
-  
-      &nbsp;
-      <div class="card">
-  
-      <div class="row">
-  
-  
-  
-        <div class="col-4">
-      
-          <label class="mr-sm-2" for="service">Service</label>
-        <select [(ngModel)]="selectedService" name="service" id="service">
-              <option value="Crown">Crown</option>
-              <option value="Denture">Denture</option>
-              <option value="Partials">Partials</option>
-              <option value="Implants">Implants</option>
-              <option value="Removable">Removable</option>
-            </select>
-          
-    
-          
-          
           </div>
-        
-     
-          <div class="col-4">
-            <label for="orderDate">Order Date</label>
-            <input [(ngModel)]="orderDate" type="date" id="orderDate" required>
-        </div>
-          <div class="col-4">
-            <button (click)="addOrder()" class="btn btn-success btn-sm">Apply</button>
-          </div>
-        
-        </div>
-        </div>
 
-      
-  
-          <div class="card">
-          <table class="table align-middle">
-            <thead>
-              <tr>
-                <!-- <th class="text-dark font-medium fs-4">Workflow</th> -->
-                <th class="text-dark font-medium fs-4">Task</th>
-                <th class="text-dark font-medium fs-4">Start Date</th>
-                <th class="text-dark font-medium fs-4">Finish Date</th>
-                <th class="text-dark font-medium fs-4">User</th>
-                <th class="text-dark font-medium fs-4">Actions</th>
-               
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let order of orders">
+      </div>
 
+
+      <div class="row d-flex justify-content-around">
+          <div class="row">
+
+             
+
+                  <label name="">Clinic first name</label>
+                  <input class="form-control" formControlName="clinicName" [(ngModel)]="myUserresult.clinicName"
+                      readonly type="text" required>
               
-               
-                <!-- <td >{{ order.service }}</td> -->
-                <td class="col-auto my-1"><input class="form-control" placeholder="Enter subtask" value="{{ order.task }}" /></td>
-                <td class="col-auto my-1"><input  class="form-control" type="date" value="{{order.orderDate}}"></td>
-                <td class="col-auto my-1"><input class="form-control" type="date" [value]="order.taskDueDate | date:'yyyy-MM-dd'"></td>
-                <td class="col-auto my-1">
-                  <select class="form-control" name="service" id="service" placeholder="Order Date">
-                    <option value="Crown">Mold Bakerym</option>
-                    <option value="Denture">Production Bakerym</option>
-                    <option value="Partials">QC Bakerym</option>
-                  </select>
-                </td>
-                <td  class="action-buttons">
-                  <button class="btn btn-outline-primary btn-sm" (click)="startTask()"><i class="bi bi-play"></i></button>
 
-                  <button class="btn btn-outline-warning btn-sm" (click)="closeTask()"><i class="bi bi-pause"></i></button>
-                  <button class="btn btn-outline-danger btn-sm" (click)="deleteTask()"><i class="bi bi-trash"></i></button>
-                </td>
-                </tr>
-            </tbody>
-          </table>
-          <button  class="btn btn-success btn-sm" (click)="addTask(selectedService)">Add Task</button>
+              <!-- <div class="col-4">
+                  <label name="">DCI id</label>
+                  <input formControlName="regId" class="form-control"
+                  [(ngModel)]="result.regId"
+                  readonly type="text" required>
+                  
+              </div> -->
 
-        </div>
-          
-      
-    
-    
-    
-        
-    </div>
-  
-  
-    <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
-      <div class="container py-5">
-        <div class="row">
-      
-          <div class="col-md-12 col-lg-12">
-            <div id="tracking-pre"></div>
-            <div id="tracking">
-              <div class="tracking-list">
-                <div class="tracking-item">
-                  <div class="tracking-icon status-intransit">
-                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                      <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                    </svg>
-                  </div>
-                  <div class="tracking-date"></div>
-                  <div class="tracking-content">Order Placed<span>09 Aug 2023, 10:00am</span></div>
-                </div>
-                <div class="tracking-item">
-                  <div class="tracking-icon status-intransit">
-                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                      <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                    </svg>
-                  </div>
-                  <div class="tracking-date"></div>
-                  <div class="tracking-content">Order Confirmed<span>09 Aug 2023, 10:30am</span></div>
-                </div>
-                <div class="tracking-item">
-                  <div class="tracking-icon status-intransit">
-                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                      <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                    </svg>
-                  </div>
-                  <div class="tracking-date"></div>
-                  <div class="tracking-content">Mold creation<span>15 Aug 2023, 12:00pm</span></div>
-                </div>
-                <div class="tracking-item">
-                  <div class="tracking-icon status-intransit">
-                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                      <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                    </svg>
-                  </div>
-                  <div class="tracking-date"></div>
-                  <div class="tracking-content">Doctors'Approval<span>16 Aug 2023, 02:00pm</span></div>
-                </div>
-                <div class="tracking-item">
-                  <div class="tracking-icon status-current blinker">
-                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                      <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                    </svg>
-                  </div>
-                  <div class="tracking-date"></div>
-                  <div class="tracking-content">Production<span>20 Aug 2025, 03:00pm</span></div>
-                </div>
-      
-                <div class="tracking-item-pending">
-                  <div class="tracking-icon status-intransit">
-                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                      <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                    </svg>
-                  </div>
-                  <div class="tracking-date"></div>
-                  <div class="tracking-content">Out for Delivery<span>12 Aug 2023, 05:00pm</span></div>
-                </div>
-                <div class="tracking-item-pending">
-                  <div class="tracking-icon status-intransit">
-                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                      <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                    </svg>
-                  </div>
-                  <div class="tracking-date"></div>
-                  <div class="tracking-content">Delivered<span>12 Aug 2025, 09:00pm</span></div>
-                </div>
-              </div>
-            </div>
+
           </div>
-        </div>
-      </div>  
-    </div>
-  
-    
+
+
+        
+      </div>
+  </div>
+  <hr>
+
+  <!-- <h4 class="card-title">Patient details</h4>
+  <br>
+
+  <div class="row d-flex justify-content-around">
+      <div class="col-12">
+
+          <label name="">Patient Name</label>
+          <input formControlName="patientName" class="form-control"
+               placeholder="Patient Name"
+               [(ngModel)]="myUserresult.patientName"
+               readonly type="text" >
+
+      </div>
+      <div class="col-6">
+          <label name="">Patient Age</label>
+          <input formControlName="patientage" class="form-control"
+          placeholder="Patient Name"
+          [(ngModel)]="myUserresult.patientage"
+          readonly type="text">
+        
+      </div>
+      <div class="col-6">
+          <label name="">Patient Sex</label>
+          <input class="form-control" formControlName="consultantName" [(ngModel)]="myUserresult.patientGender"
+          readonly type="text" required>
+
+      </div>
+  </div>
+
+  <hr> -->
+
+
+
+  <div class="wd100 colleft question-checkbox" style="padding:2%">
+      <div class="row">
+          <div class="col-6">
+              <div class="row">
+                  <label style="margin-bottom:8px;">Service</label>
+
+                  <input formControlName="service" class="form-control d-inline-flex p-2"
+                  [(ngModel)]="myUserresult.service"
+                      style="padding-right:15px;">
+                 
+              </div>
+          </div>
+          <div class="col-3">
+              &nbsp;
+              <label name="">Order Date</label>
+              <input class="form-control" formControlName="orderDate"
+                  [(ngModel)]="myUserresult.orderDate" readonly>
+          </div>
+          <div class="col-3">
+              &nbsp;
+              <label name="">Required Date</label>
+              <input class="form-control" formControlName="requiredDate"
+                  [(ngModel)]="myUserresult.requiredDate" readonly>
+          </div>
+
+
+
+      </div>
+      <input type="checkbox" id="priority" name="priority" value="priority" formControlName="priority">
+      <label for="priority"> Check the option if you want the order to be delivered within 3 days </label><br>
+  </div>
+
+
+
+  <div class=" wd100">
+      <hr>
+  </div>
+
+  <div>
+
+      <div class="wd100">
+          <h4><strong>Lab Requistion Form</strong></h4>
+      </div>
+
+      <div class="wd100 question-checkbox">
+          <div class="col50 colleft">
+
+              <div class="col50 colleft">
+
+                <div class="mb-3">
+                  <h4 class="card-subtitle ">Crown & Bridge/ Implant prostheses</h4>
+                  <label *ngFor="let checkbox of type1Checkboxes; let i = index">
+                    <input type="checkbox" 
+                           [checked]="myUserresult.option1?.split(',').includes(checkbox)" 
+                           [disabled]="!myUserresult.option1?.split(',').includes(checkbox)">
+                    {{ checkbox }}
+                  </label>
+                </div>
+
+                <div class="mb-3">
+                  <h4 class="card-subtitle ">Implant crown & Bridge</h4>
+                  <label *ngFor="let checkbox of type2Checkboxes; let i = index">
+                    <input type="checkbox" 
+                           [checked]="myUserresult.option2?.split(',').includes(checkbox)" 
+                           [disabled]="!myUserresult.option2?.split(',').includes(checkbox)">
+                    {{ checkbox }}
+                  </label>
+                </div>
+
+
+                  <div class="mb-3">
+                      <h4 class="card-subtitle ">Metal Free Zirconium</h4>
+                      <label *ngFor="let checkbox of type3Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option3?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option3?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+              </div>
+
+
+              <div class="col50 colright">
+                  <div class="mb-3 row">
+               
+                      <div class="mb-3 row">
+                        <h4 class="card-subtitle ">Removable prostheses</h4>
+                        <label *ngFor="let checkbox of type4Checkboxes; let i = index">
+                          <input type="checkbox" 
+                                 [checked]="myUserresult.option4?.split(',').includes(checkbox)" 
+                                 [disabled]="!myUserresult.option4?.split(',').includes(checkbox)">
+                          {{ checkbox }}
+                        </label>
+                      </div>
+                  </div>
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle ">Material</h4>
+                      <label *ngFor="let checkbox of type5Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option5?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option5?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle ">Orthodontics/ Splints</h4>
+                      <label *ngFor="let checkbox of type6Checkboxes; let i = index">
+                        <input type="checkbox" [checked]="myUserresult.option6 === checkbox" [disabled]="myUserresult.option6 !== checkbox">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle ">Lithium Di Silicate</h4>
+                      <label *ngFor="let checkbox of type7Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option7?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option7?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+              </div>
+
+              <div class="mb-3 row">
+                  <h4 class="card-subtitle "> Implant Components:</h4>
+                  <label *ngFor="let checkbox of type8Checkboxes; let i = index">
+                    <input type="checkbox" 
+                           [checked]="myUserresult.option8?.split(',').includes(checkbox)" 
+                           [disabled]="!myUserresult.option8?.split(',').includes(checkbox)">
+                    {{ checkbox }}
+                  </label>
+              </div>
+
+
+          </div>
+
+          <div class="col50 colright">
+
+              <div class="col100 colleft">
+                  <h4 class="card-subtitle ">Pontic Design </h4>
+                  <p style="font-size: xx-small;font-style: italic;">please pick one type</p>
+                  <div class="checkbox-wrapper-16">
+                    <label class="checkbox-wrapper" *ngFor="let checkbox of type19Checkboxes; let i = index">
+                      <input type="checkbox"
+                             [checked]="myUserresult.option19?.split(',').includes(checkbox.trim())"
+                             
+                             [value]="checkbox"
+                             name="design"
+                             class="checkbox-input">
+                      <span class="checkbox-tile">
+                        <span class="checkbox-icon">
+                          <img src="assets/images/tooth/{{checkbox}}.jpg">
+                        </span>
+                        <span class="checkbox-label">{{checkbox}}</span>
+                      </span>
+                    </label>
+                  </div>
+                  
+              </div>
+
+
+              <div class="col50  colleft">
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle ">Metal Ceramic/ Metal</h4>
+                      <label *ngFor="let checkbox of type8Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option8?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option8?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle ">Removable prostheses</h4>
+                      <label *ngFor="let checkbox of type9Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option9?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option9?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle "> Stump Shade</h4>
+                      <label *ngFor="let checkbox of type10Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option10?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option10?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle ">Items Sent to the lab:</h4>
+                      <label *ngFor="let checkbox of type11Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option11?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option11?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+              </div>
+
+
+
+              <div class="col50 colright">
+
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle "> Translucency</h4>
+                      <label *ngFor="let checkbox of type13Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option13?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option13?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle ">Glaze</h4>
+                      <label *ngFor="let checkbox of type14Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option14?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option14?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle ">Value</h4>
+                      <label *ngFor="let checkbox of type15Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option15?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option15?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+                  <div class="mb-3 row">
+                      <h4 class="card-subtitle ">Texture</h4>
+                      <label *ngFor="let checkbox of type16Checkboxes; let i = index">
+                        <input type="checkbox" 
+                               [checked]="myUserresult.option16?.split(',').includes(checkbox)" 
+                               [disabled]="!myUserresult.option16?.split(',').includes(checkbox)">
+                        {{ checkbox }}
+                      </label>
+                  </div>
+
+
+ 
+
+
+              </div>
+
+
+
+          </div>
+      </div>
+
+
+
+      <div class="wd100 px-4">
+          <h4 class="card-title">Notes</h4>
+          <div class="row">
+              <!-- <br>
+
+              <input class="form-control" type="file" value="">
+              <p>Acceptable file formats - images, pdf, stl, ply</p>
+              <br><br> -->
+              <h4 class="card-title">Add additonal comments</h4>
+              <br>
+              <textarea formControlName="type18" class="form-control"
+                  
+                  placeholder="Add your comments ..." [(ngModel)]="myUserresult.option18" required=""></textarea>
+          
+          </div>
+      </div>
+
+
+
+
+  </div>
+
+
+
+
+  <div class="wd100 pt-4">
+      <button name="submit" type="submit" id="" data-submit="...Sending">Submit</button>
+  </div>
+
+
+
+
+</form>

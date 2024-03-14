@@ -44,18 +44,14 @@
                     <tr *ngFor='let ts of filteredData'>
                         <td>{{ts.userOrder.workOrderNumber}}</td>
                         <td>
-                            <!-- <span ng-if="ts.status === 'In Production'" class="badge text-bg-primary">{{ts.status}}</span>
-                            <span ng-if="ts.status === 'Completed'" class="badge text-bg-success" ng-if="ts.status !== 'In Production' && ts.status !== 'Completed'">{{ts.status}}</span>
-                           -->
-                            <span [ngClass]="{
-                                'badge rounded-pill bg-primary': ts.orderStatus.description === 'orderCreated',
-                                'badge text-bg-info': ts.orderStatus.description === 'orderStarted' ,
-                                'badge text-bg-success': ts.orderStatus.description ===  'orderCompleted',
-                                'badge text-bg-danger': ts.orderStatus.description === 'orderRejected' ,
-                                'badge text-bg-warning': ts.orderStatus.description === 'orderInProgress'
-                              }">
-                            {{ts.orderStatus.description }}
-                          </span>
+                          <ng-container [ngSwitch]="ts.userOrder.orderStatusId">
+                            <span class="badge rounded-pill bg-secondary" *ngSwitchCase="1">Order Created</span>
+                            <span class="badge rounded-pill bg-info" *ngSwitchCase="2">Order In Progress</span>
+                            <span class="badge rounded-pill bg-warning" *ngSwitchCase="3">Order In Progress</span>
+                            <span class="badge rounded-pill bg-success" *ngSwitchCase="4">Order Completed</span>
+                            <span class="badge rounded-pill bg-danger" *ngSwitchCase="5">Order Rejected</span>
+                        </ng-container>
+
                         </td>
                           
                         <td>{{ts.userOrder.patientName}}</td>
