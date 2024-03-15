@@ -97,17 +97,17 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
   img_uploaded = false;
   //date
   today_date: any;
-    // doctor list
-    docdetails: any;
-    doc_count = false;
-    doc_data: any;
-    docDetailsSubscription: Subscription;
+  // doctor list
+  docdetails: any;
+  doc_count = false;
+  doc_data: any;
+  docDetailsSubscription: Subscription;
 
-    selectedTeeth: { [key: string]: boolean } = {}; // Declare selectedTeeth here
+  selectedTeeth: { [key: string]: boolean } = {}; // Declare selectedTeeth here
 
-     //api results
+  //api results
   result: any
-  clinicFullName:any
+  clinicFullName: any
   basicInfo: any;
   bankInfo: any
   response: any;
@@ -188,6 +188,8 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
   myuserOrderDetailsSubscription: Subscription;
   orderToken: any;
   myUserresult: any;
+  toothValues: any;
+  myTeethValues: void;
 
   constructor(
     public router: Router,
@@ -197,8 +199,8 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private userservice: UserService,
     private orderservice: OrderService,
-    private toaster :ToasterService
-  ) {}
+    private toaster: ToasterService
+  ) { }
 
   getTodayDate(): string {
     const today = new Date();
@@ -209,36 +211,16 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
     return `${year}-${month}-${day}`;
   }
 
-  
+
 
   ngOnInit(): void {
-    const selectedTeeth: { [key: string]: boolean } = {}; // Object to store selected teeth states
-    const toothNumberElement: HTMLElement = document.querySelector('.tooth-number');
-  
- 
+   
+   
 
-    document.querySelectorAll('.tooth').forEach((toothElement) => {
-      toothElement.addEventListener('click', (event) => {
-        const $this = event.currentTarget as HTMLElement;
-        const toothText: string = $this.getAttribute('data-title');
-        const isSelected: boolean = this.selectedTeeth[toothText] || false;
-  
-        if (!isSelected) {
-          this.selectedTeeth[toothText] = true;
-          $this.classList.add('active');
-        } else {
-          delete this.selectedTeeth[toothText];
-          $this.classList.remove('active');
-        }
-  
-        this.updateNextStepButton(this.selectedTeeth, toothNumberElement);
-      });
-    });
-  
     this.today_date = this.getTodayDate();
     this.initializeForm();
     this.populateCheckboxes();
-  
+
     // Get user details
     const { userToken, fullName, accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
     this.accessToken = accessToken;
@@ -246,21 +228,21 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-       // Retrieve token from route parameters
-       this.route.params.subscribe((params) => {
-        this.orderToken = params['id'];
-        console.log("OrderToken", this.orderToken);
-      });
-
-      
+    // Retrieve token from route parameters
+    this.route.params.subscribe((params) => {
+      this.orderToken = params['id'];
+      console.log("OrderToken", this.orderToken);
+    });
 
 
-      
+
+
+
     this.result = {};
     this.basicInfo = {};
     this.bankInfo = {};
     this.consultantDetails = {};
-  
+
     this.userDetailsSubscription = this.userservice.getOneUserDetails(this.userToken, this.accessToken)
       .pipe(first())
       .subscribe({
@@ -281,16 +263,31 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-      this.myuserOrderDetailsSubscription = this.userservice.getOneUserOrderDetails(this.userToken, this.accessToken, this.orderToken)
+    this.myuserOrderDetailsSubscription = this.userservice.getOneUserOrderDetails(this.userToken, this.accessToken, this.orderToken)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.myUserresult = res.userOrders;
-     
-     
           console.log("Result:", this.myUserresult)
-       
-         },
+          this.toothValues = this.myUserresult.option17;
+          console.log("Result:", this.myUserresult);
+    
+          // Parse the option17 values from the API response into an array of tooth numbers
+          const selectedTeeth: string[] = this.myUserresult.option17.split(',');
+    
+          // Iterate over each tooth element in the template
+          document.querySelectorAll('.tooth').forEach((toothElement) => {
+            const toothText: string = toothElement.getAttribute('data-title');
+    
+            // Check if the tooth number exists in the array of selected tooth numbers
+            if (selectedTeeth.includes(toothText)) {
+              toothElement.classList.add('active'); // Mark the tooth as selected
+            }
+          });
+    
+          return this.toothValues;
+
+        },
         error: (error) => {
           console.log(error.error)
         }
@@ -298,27 +295,8 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-  }
-  
-  updateNextStepButton(selectedTeeth: { [key: string]: boolean }, toothNumberElement: HTMLElement): void {
-    const selectedTeethCount = Object.values(selectedTeeth).filter(Boolean).length;
-  
-    if (toothNumberElement) {
-      if (selectedTeethCount > 0) {
-        toothNumberElement.classList.remove('disabled');
-        toothNumberElement.setAttribute('data-nextStep', `${selectedTeethCount}`);
-        toothNumberElement.innerHTML = `Selected: ${selectedTeethCount} &times;`;
-      } else {
-        toothNumberElement.classList.add('disabled');
-        toothNumberElement.removeAttribute('data-nextStep');
-        toothNumberElement.innerHTML = 'test &times;';
-      }
-    }
-  
-    console.log('Selected teeth:', selectedTeeth);
-  }
-  
 
+  }
 
   ngAfterViewInit(): void {
     // Use setTimeout as a temporary solution to ensure asynchronous data is processed
@@ -329,18 +307,18 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
 
   initializeForm(): void {
     this.form = this.formBuilder.group({
-     
-      consultantName:['', Validators.required],
-      regNumber:['',Validators.required],
+
+      consultantName: ['', Validators.required],
+      regNumber: ['', Validators.required],
       phoneNumber: ['', Validators.required],
-      clinicName:['',Validators.required],
-      patientname: ['',Validators.required],
-      patientage: ['',Validators.required],
+      clinicName: ['', Validators.required],
+      patientname: ['', Validators.required],
+      patientage: ['', Validators.required],
       regId: ['', [Validators.required]],
       service: ['', [Validators.required]],
       orderDate: ['', [Validators.required]],
       requiredDate: ['', [Validators.required]],
-      priority:['', Validators.required],
+      priority: ['', Validators.required],
       patientGender: ['', [Validators.required]],
       mobileNumber: [
         '',
@@ -349,9 +327,9 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
           Validators.minLength(10),
           Validators.maxLength(10),
         ],
-       
+
       ],
-      
+
       type1: this.formBuilder.array(
         this.type1Checkboxes.map(() => false),
         Validators.required
@@ -450,7 +428,7 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
     const type16Array = this.form.get('type16') as FormArray;
     const type19Array = this.form.get('type19') as FormArray;
 
-  
+
   }
 
 
@@ -460,16 +438,18 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSubmit() {
-  
+
   }
 
   submit() {
-      
+
     window.alert('File submitted');
 
     this.router.navigate(['/pages/casedetail']);
   }
 
- 
+
 }
+
+
 
