@@ -1,11 +1,5 @@
 
-
-
-
-
 ///Second version 2
-
-
 
 import {
   Component,
@@ -205,7 +199,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private userservice: UserService,
     private orderservice: OrderService,
-    private toaster :ToasterService
+    private toasterService :ToasterService
   ) {}
 
   getTodayDate(): string {
@@ -711,18 +705,22 @@ console.log('My form data', formPayload);
       .subscribe({
         next: (res) => {
           this.result = res;
-          // this.toaster.showToast(this.result.status, title, messageType);
-          this.toaster.showToast(this.result.message, 'success' , 'success');
-          // window.confirm(this.result.message);
-          // get return url from query parameters or default to home page
-          // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-          // this.router.navigateByUrl(returnUrl);
-          // this.router.navigate(['/det/profile/view']);
+          const messageType = 'success';
+          console.log( "Message", messageType);
+          const message = this.result.message;
+          const title = 'Order Creation';
+          this.toasterService.showToast(message, title, messageType);
           this.router.navigate(['/det/pages/success']);
           // window.location.reload();
         },
         error: (error) => {
           this.loading = false;
+          const messageType = 'warning' ;
+          const message = error;
+          const title = 'Login';
+    
+        this.toasterService.showToast(message, title, messageType);
+         
         },
         // {
         //   // this.alertService.error(error);
