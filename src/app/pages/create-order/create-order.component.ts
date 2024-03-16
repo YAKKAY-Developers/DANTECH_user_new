@@ -324,7 +324,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
           Validators.pattern('[0-9]+'),
         ],
       ],
-      priority:['', Validators.required],
+      priority:[''],
       patientGender: ['', [Validators.required]],
       mobileNumber: [
         '',
@@ -338,72 +338,72 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
       
       type1: this.formBuilder.array(
         this.type1Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type2: this.formBuilder.array(
         this.type2Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type3: this.formBuilder.array(
         this.type3Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type4: this.formBuilder.array(
         this.type4Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type5: this.formBuilder.array(
         this.type5Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type6: this.formBuilder.array(
         this.type6Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type7: this.formBuilder.array(
         this.type7Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type8: this.formBuilder.array(
         this.type8Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type9: this.formBuilder.array(
         this.type9Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type10: this.formBuilder.array(
         this.type10Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type11: this.formBuilder.array(
         this.type11Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type12: this.formBuilder.array(
         this.type12Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type13: this.formBuilder.array(
         this.type13Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type14: this.formBuilder.array(
         this.type14Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type15: this.formBuilder.array(
         this.type15Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type16: this.formBuilder.array(
         this.type16Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
       type18: ['', [Validators.required, Validators.maxLength(700)]],
       type19: this.formBuilder.array(
         this.type19Checkboxes.map(() => false),
-        Validators.required
+        // Validators.required
       ),
     });
   }
@@ -694,10 +694,14 @@ console.log('My form data', formPayload);
   
  
 //Check this
-    // if (this.form.invalid) {
-    //   console.log("Form is invalid")
-    //   return;
-    // }
+    if (this.form.invalid) {
+      this.checkFormValidity();
+      const messageType = 'warning' ;
+      const message = "Form is Invalid, fill all mandatory fields";
+      const title = 'Invalid Form';
+      this.toasterService.showToast(message, title, messageType);
+      return;
+    }
    
     this.orderservice
       .createOrder(this.userToken,this.accessToken, formPayload.form, formdata, selectedTeeth )
@@ -730,47 +734,62 @@ console.log('My form data', formPayload);
   }
 
   submit() {
-       this.captureScreenshot();
+      //  this.captureScreenshot();
     window.alert('File submitted');
 
     this.router.navigate(['/pages/casedetail']);
   }
 
-  captureScreenshot() {
-    const formElement = this.formElement.nativeElement;
-    const canvas = this.screenshotCanvas.nativeElement;
-    const context = canvas.getContext('2d');
-  
-    // Get the computed style of the form element to include any styling
-    const computedStyle = getComputedStyle(formElement);
-  
-    // Set canvas dimensions based on form element dimensions and style
-    canvas.width = formElement.offsetWidth;
-    canvas.height = formElement.offsetHeight;
-  
-    // Draw the filled form onto the canvas
-    context.drawImage(formElement, 0, 0, canvas.width, canvas.height);
-  
-    // Convert the canvas content to a data URL representing the image
-    const imageDataUrl = canvas.toDataURL('image/png');
-  
-    // Send the image data to the backend
-    this.sendImageToBackend(imageDataUrl);
+
+  checkFormValidity() {
+    Object.keys(this.form.controls).forEach(field => {
+      const control = this.form.get(field);
+      if (control && !control.valid) {
+        console.log('Invalid field:', field);
+        // Handle invalid field as needed
+      }
+    });
   }
+
   
 
-  sendImageToBackend(imageDataUrl: string) {
-    console.log("I m here to send image")
-    // Send the imageDataUrl to your backend using HTTP request
-    // Example:
-    // this.httpClient.post('your-backend-url', { image: imageDataUrl })
-    //   .subscribe(response => {
-    //     console.log('Image uploaded successfully');
-    //   }, error => {
-    //     console.error('Error uploading image:', error);
-    //   });
 
-  }
+
+  // captureScreenshot() {
+  //   const formElement = this.formElement.nativeElement;
+  //   const canvas = this.screenshotCanvas.nativeElement;
+  //   const context = canvas.getContext('2d');
+  
+  //   // Get the computed style of the form element to include any styling
+  //   const computedStyle = getComputedStyle(formElement);
+  
+  //   // Set canvas dimensions based on form element dimensions and style
+  //   canvas.width = formElement.offsetWidth;
+  //   canvas.height = formElement.offsetHeight;
+  
+  //   // Draw the filled form onto the canvas
+  //   context.drawImage(formElement, 0, 0, canvas.width, canvas.height);
+  
+  //   // Convert the canvas content to a data URL representing the image
+  //   const imageDataUrl = canvas.toDataURL('image/png');
+  
+  //   // Send the image data to the backend
+  //   this.sendImageToBackend(imageDataUrl);
+  // }
+  
+
+  // sendImageToBackend(imageDataUrl: string) {
+  //   console.log("I m here to send image")
+  //   // Send the imageDataUrl to your backend using HTTP request
+  //   // Example:
+  //   // this.httpClient.post('your-backend-url', { image: imageDataUrl })
+  //   //   .subscribe(response => {
+  //   //     console.log('Image uploaded successfully');
+  //   //   }, error => {
+  //   //     console.error('Error uploading image:', error);
+  //   //   });
+
+  // }
  
 }
 
