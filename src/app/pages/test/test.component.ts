@@ -91,9 +91,8 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
   //form
   selectedOption: string = '';
   add_comments = 'Nill!';
-  // check prescence
-  gst_no = false;
-  stat_user = 'AC2000';
+
+
   img_uploaded = false;
   //date
   today_date: any;
@@ -222,7 +221,7 @@ export class TestComponent implements OnInit, AfterViewInit, OnDestroy {
     this.populateCheckboxes();
 
     // Get user details
-    const { userToken, fullName, accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
+    const { userToken, accessToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
     this.accessToken = accessToken;
     this.userToken = userToken;
 

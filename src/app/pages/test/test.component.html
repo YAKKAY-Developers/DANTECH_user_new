@@ -239,7 +239,7 @@
                     <label class="checkbox-wrapper" *ngFor="let checkbox of type19Checkboxes; let i = index">
                       <input type="checkbox"
                              [checked]="myUserresult.option19?.split(',').includes(checkbox.trim())"
-                             
+                             [disabled]="!myUserresult.option19?.split(',').includes(checkbox.trim())"
                              [value]="checkbox"
                              name="design"
                              class="checkbox-input">
