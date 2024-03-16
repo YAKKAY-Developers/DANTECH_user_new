@@ -37,6 +37,8 @@ export class ToasterService {
   constructor(private toastr: ToastrService) { }
 
   showToast(message: string, title?: string, messageType: 'success' | 'error' | 'warning' | 'info' = 'success') {
+     console.log("I am here",message,title, messageType )
+    
     const toastrOptions = {
       timeOut: 3000,
       positionClass: 'toast-top-right',

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router , ActivatedRoute} from '@angular/router';
 import { first } from 'rxjs/operators';
+import { ToasterService } from 'src/app/services/toaster.service';
+
 
 @Component({
   selector: 'app-register',
@@ -23,11 +25,14 @@ export class RegisterComponent {
   passwordsMatching = false;
   loginError: boolean = false;
   RegisterError: boolean =false;
+  messageType: any;
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router, 
-    private authservice:AuthService,) {}
+    private authservice:AuthService,
+    private toasterService: ToasterService,
+    ) {}
 
     
     
@@ -85,6 +90,11 @@ export class RegisterComponent {
   .subscribe({
     next: (res) => {
       this.result = res;
+      const messageType = 'success' ;
+      const message = this.result.message;
+      const title = 'Registration';
+
+    this.toasterService.showToast(message, title, messageType);
       // window.confirm(this.result.message);
       // get return url from query parameters or default to home page
       // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

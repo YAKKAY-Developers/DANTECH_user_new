@@ -111,6 +111,23 @@ export class UserService {
   }
 
 
+  getAllWorkflowUser(userToken: any, accessToken: any): Observable<any> {
+    let headers = new HttpHeaders({
+      'x-access-token': `${accessToken}`
+    });
+  
+    let body = {
+      "userToken": userToken,
+    };
+  
+    return this.http.post(`${environment.apiUrl}/api/user/getWorkflow`, body, { headers })
+      .pipe(map((res: any) => {
+        return res;
+      }));
+  }
+
+
+
   getOrderDetails(userToken: any, accessToken: any): Observable<any> {
     let headers = new HttpHeaders({
       'x-access-token': `${accessToken}`

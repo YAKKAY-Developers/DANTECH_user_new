@@ -23,7 +23,10 @@
 
 .custom-toast {
     width: 300px;
-    background-color: orange;
+    padding: 5px;
+    background-color: rgb(253, 58, 188);
+    border: solid rgb(216, 20, 151);
+    border-width: 0 0 0 2px;
     color: #ffffff;
     border-radius: 2px;
     margin-bottom: 10px;
@@ -34,13 +37,18 @@
 
   .custom-toast-success {
     width: 300px;
+    padding: 5px;
     background-color: green;
+    border: solid rgb(0, 65, 0);
+    border-width: 0 0 0 2px;
     color: #ffffff;
     border-radius: 10px;
     margin-bottom: 10px;
   }
   
   .custom-toast-error {
+    width: 300px;
+    padding: 5px;
     background-color: #f78484;
     border: solid #ce3434;
     border-width: 0 0 0 2px;
@@ -51,21 +59,27 @@
   
   .custom-toast-warning {
     width: 300px;
-    background-color: orange;
-    color: #ffffff;
+    padding: 5px;
+    background-color: #F89406;
+  border: solid #d87f02;
+  border-width: 0 0 0 2px;  
+  color: #ffffff;
     border-radius: 10px;
     margin-bottom: 10px;
   }
   
   .custom-toast-info {
     width: 300px;
-    background-color: blue;
+    padding: 5px;
+    background-color: rgb(33, 106, 241);
+    border: solid rgb(21, 86, 207);
+    border-width: 0 0 0 2px;  
     color: #ffffff;
     border-radius: 10px;
     margin-bottom: 10px;
   }
 
   .toast-top-right {
-    top: 0;
-    right: 0;
+    top: 50px;
+  right: 12px;
   }

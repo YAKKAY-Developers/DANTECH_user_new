@@ -8,6 +8,8 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { ToasterService } from 'src/app/services/toaster.service';
+
 
 @Component({
   selector: 'app-login',
@@ -33,7 +35,8 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authservice: AuthService
+    private authservice: AuthService,
+    private toasterService: ToasterService,
   ) {}
 
 
@@ -128,21 +131,19 @@ export class LoginComponent {
       .subscribe({
         next: (res) => {
           this.result = res;
-          // window.confirm(this.result.message);
-          // get return url from query parameters or default to home page
-          // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-          // console.log(this.result)
-          // this.router.navigateByUrl(returnUrl);
-          this.router.navigate(['/det/profile/view']);
+       this.router.navigate(['/det/profile/view']);
         },
         error: (error) => {
           this.loading = false;
           this.loginError = true;
+          const messageType = 'warning' ;
+          const message = error;
+          const title = 'Login';
+    
+        this.toasterService.showToast(message, title, messageType);
+         
         },
-        // {
-        //   // this.alertService.error(error);
-        //   // this.loading = false;
-        // }
+       
       });
   }
 
@@ -160,23 +161,26 @@ export class LoginComponent {
       .register(this.register.value)
       .pipe(first())
       .subscribe({
-        // next: () => {
-        //   // this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-        //   this.router.navigate(['/det/auth/login'], { relativeTo: this.route });
-        //   window.location.reload();
-        // },
+ 
 
         next: (res) => {
           this.result = res;
-          window.confirm(this.result.message);
-          this.router.navigate(['/det/auth/login']);
-          // get return url from query parameters or default to home page
-          // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-          // this.router.navigateByUrl(returnUrl);
+          const messageType = 'success';
+          console.log( "Message", messageType);
+          const message = this.result.message;
+          const title = 'Registration';
+          this.toasterService.showToast(message, title, messageType);
+          // this.router.navigate(['/det/auth/login']);
         },
         error: (error) => {
           // this.error_message = error.error.message;
           console.log(error);
+          const messageType = 'warning' ;
+          const message = error;
+          const title = 'Login';
+    
+        this.toasterService.showToast(message, title, messageType);
+         
 
           this.RegisterError = true;
         },

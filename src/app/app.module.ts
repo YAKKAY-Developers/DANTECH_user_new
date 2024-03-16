@@ -25,7 +25,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { CustomToastComponent } from './dialogs/custom-toast/custom-toast.component';
 
 
-
 @NgModule({
   declarations: [AppComponent, SpinnerComponent],
   imports: [
@@ -49,6 +48,12 @@ timeOut: 3000, // Time to close the toaster (in milliseconds)
       toastClass: 'custom-toast',
 
     }),
+// ToastrModule.forRoot({
+//   timeOut: 15000, // 15 seconds
+//   closeButton: true,
+//   progressBar: true,
+// toastClass: 'custom-toast',
+// }),
     FullComponent,
     BlankComponent,
     NavigationComponent,
