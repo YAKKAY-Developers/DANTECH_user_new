@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { DisableRightClickService } from 'src/app/services/disable-right-click.service';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 
 @Component({
@@ -64,7 +65,8 @@ export class BankFormComponent {
     private http: HttpClient,
     private userservice: UserService,
     private orderservice: OrderService,
-    private rightClickDisable: DisableRightClickService
+    private rightClickDisable: DisableRightClickService,
+    private toasterService :ToasterService
   ) {}
 
   // profile image
@@ -121,7 +123,7 @@ export class BankFormComponent {
           Validators.pattern('^[A-Za-z]{4}0[0-9]{6}$'),
         ],
       ],
-      bankBranch: ['', [Validators.required]],
+      bankBranch: ['', [Validators.required, Validators.min(3)]],
       upiId: [
         '',
         [
@@ -172,13 +174,22 @@ export class BankFormComponent {
     this.submitted = true;
 
     if (this.form.invalid) {
+      const messageType = 'warning' ;
+      const message = "Form is Invalid, fill all mandatory fields";
+      const title = 'Invalid Form';
+      this.toasterService.showToast(message, title, messageType);
       return;
     }
     this.loading = true;
     this.userservice.updateBankInfo(this.userToken, this.accessToken, this.form.value, )
       .pipe(first())
       .subscribe({
-        next: () => {
+        next: (res) => {
+          this.result = res;
+          const messageType = 'success';
+          const message = this.result.message;
+          const title = 'User Information Saved';
+          this.toasterService.showToast(message, title, messageType);
           this.router.navigate(['/det/profile/view']);
         },
         error: (error) => {

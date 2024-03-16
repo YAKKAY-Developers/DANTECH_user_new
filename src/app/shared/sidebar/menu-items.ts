@@ -19,6 +19,13 @@ export const ROUTES: RouteInfo[] = [
     extralink: false,
     submenu: [],
   },
+  {
+    path: '',
+    title: 'My Consultants',
+    icon: 'bi bi-people',
+    class: 'd-none',  
+    extralink: false,
+    submenu: [
 
   {
     path: '/det/pages/add-doctors',
@@ -28,6 +35,10 @@ export const ROUTES: RouteInfo[] = [
     extralink: false,
     submenu: [],
   },
+],
+expanded: false,
+},
+
 
   {
     path: '',

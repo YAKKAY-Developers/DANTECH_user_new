@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-10">
                             <input class="form-control" type="text" name="search" [(ngModel)]="searchText"
-                                (ngModelChange)="filterData()" autocomplete="off" placeholder="Find your orders">
+                                (ngModelChange)="filterData()" autocomplete="off" placeholder="Find your Consultants">
                         </div>
                         <div class="col-2 align-self-center">
                             <button class="login-button" data-bs-toggle="modal" data-bs-target="#modalid">Add
@@ -47,7 +47,7 @@
                                         </td>
                                     </tr>
                                     <tr *ngIf="!doc_count">
-                                        <td colspan="3" style="text-align: center;"> No Doctors..! </td>
+                                        <td colspan="3" style="text-align: center;"> No Consultants available for this Clinic..! </td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -7,10 +7,10 @@
         <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button"
             role="tab" aria-controls="history" aria-selected="false">History</button>
     </li>
-    <li class="nav-item" role="presentation">
+    <!-- <li class="nav-item" role="presentation">
         <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
             aria-controls="home" aria-selected="false">Invoice</button>
-    </li>
+    </li> -->
 
     <li class="nav-item" role="presentation">
         <button class="nav-link " id="form-tab" data-bs-toggle="tab" data-bs-target="#form" type="button" role="tab"
@@ -63,6 +63,7 @@
                                 <div class="tracking-content" *ngIf="result?.orderStatusId == 1">Production <span>Not Started</span></div>
                                 <div class="tracking-content" *ngIf="result?.orderStatusId == 2">Production <span>Not Started</span></div>
                                 <div class="tracking-content" *ngIf="result?.orderStatusId == 3">Production <span>Production In Progress</span></div>
+                                <div class="tracking-content" *ngIf="result?.orderStatusId == 4">Production <span>Completed</span></div>
                                 
                             
                             
@@ -81,8 +82,8 @@
                                 <div class="tracking-date"><img
                                         src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg"
                                         class="img-responsive" alt="order-placed" /></div>
-                                        <div class="tracking-content">Order Completed<span>Not Completed</span></div>
-                                <div class="tracking-content"*ngIf="result?.orderStatusId == 3">Order Completed<span>Completed</span></div>
+                                        <div class="tracking-content" *ngIf="result?.orderStatusId != 4">Order Completed<span>Not Completed</span></div>
+                                <div class="tracking-content"*ngIf="result?.orderStatusId == 4">Order Completed<span>Completed</span></div>
                             </div>
                         </div>
                     </div>

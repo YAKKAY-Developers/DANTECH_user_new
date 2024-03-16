@@ -24,9 +24,9 @@
         <!-- title -->
         <div class="table-responsive">
             <table class="table align-middle">
-                <thead>
+                <thead class="head" style="text-align: center;">
                     <tr>
-                        <th (click)="sortColumn('orderToken')" class="text-dark font-medium fs-4">Work Order id &nbsp; <i
+                        <th (click)="sortColumn('orderToken')" class="text-dark font-medium fs-4">WorkOrder &nbsp; <i
                                 class="bi bi-arrow-down-up"></i></th>
                         <th (click)="sortColumn('status')" class="text-dark font-medium fs-4">Status &nbsp; <i
                                 class="bi bi-arrow-down-up"></i></th>
@@ -36,13 +36,13 @@
                                 class="bi bi-arrow-down-up"></i></th>
                         <th (click)="sortColumn('service')" class="text-dark font-medium fs-4">Product &nbsp; <i
                                 class="bi bi-arrow-down-up"></i></th>
-                        <th (click)="sortColumn('Files')" class="text-dark font-medium fs-4">files</th>
+                        <!-- <th (click)="sortColumn('Files')" class="text-dark font-medium fs-4">files</th> -->
                         <th (click)="sortColumn('Action')" class="text-dark font-medium fs-4">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor='let ts of filteredData'>
-                        <td>{{ts.userOrder.workOrderNumber}}</td>
+                        <td>...{{ts.userOrder.workOrderNumber.slice(-3)}}</td>
                         <td>
                           <ng-container [ngSwitch]="ts.userOrder.orderStatusId">
                             <span class="badge rounded-pill bg-secondary" *ngSwitchCase="1">Order Created</span>
@@ -51,15 +51,14 @@
                             <span class="badge rounded-pill bg-success" *ngSwitchCase="4">Order Completed</span>
                             <span class="badge rounded-pill bg-danger" *ngSwitchCase="5">Order Rejected</span>
                         </ng-container>
-
                         </td>
-                          
+
                         <td>{{ts.userOrder.patientName}}</td>
                         <td>{{ts.userOrder.requiredDate | date:'yyyy-MM-dd'}}</td>
                         <td>{{ts.userOrder.service}}</td>
-                        <td>
+                        <!-- <td>
                             <img src="assets/images/files/1.jpg" alt="user" width="50">
-                        </td>
+                        </td> -->
                         <td>
                             <button class="btn btn-light-primary btn-sm"
                                 [routerLink]="['/det/pages/ordersummary',ts.userOrder.orderToken]"><i
@@ -69,10 +68,8 @@
                             <button class="btn btn-outline-light-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalid"><i
                                 class="bi bi-trash3"></i>
                             </button>
-                            <!-- <button class="btn btn-outline-light-danger btn-sm" (click)="openModal()"><i
-                                    class="bi bi-trash3"></i></button> -->
-                                    <!-- <button type="button" class="btn btn-sm btn-success" (click)="showSuccess()">Success</button> -->
-                        </td>
+    
+                                </td>
                     </tr>
                 </tbody>
             </table>

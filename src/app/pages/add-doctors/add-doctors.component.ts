@@ -13,6 +13,10 @@ import { OrderService } from 'src/app/services/order.service';
 
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { ToasterService } from 'src/app/services/toaster.service';
+
+
+
 @Component({
   selector: 'app-add-doctors',
   templateUrl: './add-doctors.component.html',
@@ -51,6 +55,7 @@ export class AddDoctorsComponent {
   img_uploaded = false;
 
   isModalVisible = false;
+  result: any;
 
   constructor(
     public router: Router,
@@ -59,7 +64,8 @@ export class AddDoctorsComponent {
     private route: ActivatedRoute,
     private authservice: AuthService,
     private userservice: UserService,
-    private orderservice: OrderService
+    private orderservice: OrderService,
+    private toasterService :ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -115,7 +121,7 @@ export class AddDoctorsComponent {
     this.form = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(1)]],
-      specialisation: ['', [Validators.required]],
+      specialisation: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
   get f() {
@@ -130,7 +136,11 @@ export class AddDoctorsComponent {
 
 
     if (this.form.invalid) {
-      console.log(this.form.controls);
+      const messageType = 'warning' ;
+      const message = "Form is Invalid, fill all mandatory fields";
+      const title = 'Invalid Form';
+      this.toasterService.showToast(message, title, messageType);
+      
       return;
     }
     this.loading = true;
@@ -138,12 +148,22 @@ export class AddDoctorsComponent {
       .addConsultant(this.userId, this.accessToken, this.form.value)
       .pipe(first())
       .subscribe({
-        next: () => {
+        next: (res) => {
+          this.result = res;
+          const messageType = 'success';
+          const message = this.result.message;
+          const title = 'Consultant Information added';
+          this.toasterService.showToast(message, title, messageType);
           window.location.reload();
         },
         error: (error) => {
           this.loading = false;
-          console.log(error)
+          const messageType = 'warning' ;
+          const message = error;
+          const title = 'Login';
+    
+        this.toasterService.showToast(message, title, messageType);
+         
         },
       });
   }

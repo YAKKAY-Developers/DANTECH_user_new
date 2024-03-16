@@ -10,6 +10,7 @@ enum TokenStatus {
   Invalid
 }
 
+import { ToasterService } from 'src/app/services/toaster.service';
 
 
 
@@ -27,12 +28,14 @@ export class ResetPasswordComponent implements OnInit{
   resetpassword: FormGroup;
   loading = false;
   submitted = false; // Add this line
+  result: any;
  
   constructor(
     private formBuilder: FormBuilder,  
     private route: ActivatedRoute,
     private router: Router, 
-    private authservice:AuthService) { }
+    private authservice:AuthService,
+    private toasterService :ToasterService) { }
 
   ngOnInit(): void {
     this.resetpassword = this.formBuilder.group({
@@ -42,35 +45,24 @@ export class ResetPasswordComponent implements OnInit{
 
 
      // Retrieve token from query parameters
-     this.route.queryParams.subscribe(params => {
-      this.token = params['id'];
-      // Now you can use this.token in your component logic
+     this.route.queryParams.subscribe((params) => {
+      this.token = params['token'];
+      console.log("Reset Token", this.token);
+
     });
 
-    let token=this.token;
-console.log("Token value is", token);
 
-//   //to extract the token value from the route
-//   this.route.queryParams 
-//   .subscribe(params => {
-//   this.token=params['token'];
-//   console.log(this.token)//To print the token
-// }
-//     );
-
-
-
-this.authservice.validateResetToken(token)
-  .pipe(first())
-  .subscribe({
-      next: () => {
+// this.authservice.validateResetToken(token)
+//   .pipe(first())
+//   .subscribe({
+//       next: () => {
         
-          this.tokenStatus = TokenStatus.Valid;
-      },
-      error: () => {
-          this.tokenStatus = TokenStatus.Invalid;
-      }
-  });
+//           this.tokenStatus = TokenStatus.Valid;
+//       },
+//       error: () => {
+//           this.tokenStatus = TokenStatus.Invalid;
+//       }
+//   });
 
 
   }
@@ -95,16 +87,24 @@ console.log(this.token);
 this.authservice.resetPassword(this.token, this.f['password'].value, this.f['confirmPassword'].value)
     .pipe(first())
     .subscribe({
-        next: () => {
-          alert("Password reset successful, you can now login");
-            // this.alertService.success('Password reset successful, you can now login'
-            // { keepAfterRouteChange: true });
+        next: (res) => {
+          this.result = res;
+          const messageType = 'success';
+          const message = this.result.message;
+          const title = 'Password reset ';
+          this.toasterService.showToast(message, title, messageType);
+         
             this.router.navigate(['../pages-login'], 
             { relativeTo: this.route });
         },
         error: error => {
             // this.alertService.error(error);
             this.loading = false;
+             this.loading = false;
+        const messageType = 'warning' ;
+        const message = error;
+        const title = 'Reset Password';
+        this.toasterService.showToast(message, title, messageType);
         }
     });
 

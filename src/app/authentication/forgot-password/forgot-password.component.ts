@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { first, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ToasterService } from 'src/app/services/toaster.service';
+
 
 @Component({
   selector: 'app-forgot-password',
@@ -21,7 +23,8 @@ export class ForgotPasswordComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
     private authservice: AuthService,
-    private router: Router,)
+    private router: Router,
+    private toasterService :ToasterService)
   
   { }
 
@@ -53,6 +56,10 @@ export class ForgotPasswordComponent implements OnInit {
 
      // stop here if form is invalid
      if (this.form.invalid) {
+      const messageType = 'warning' ;
+      const message = "Form is Invalid, fill all mandatory fields";
+      const title = 'Invalid Form';
+      this.toasterService.showToast(message, title, messageType);
       return;
   }
 
@@ -62,12 +69,21 @@ export class ForgotPasswordComponent implements OnInit {
     .subscribe({
       next: (res) => {
         this.result = res;
-        this.router.navigate(['/det/auth/reset-password']);
+        const messageType = 'success';
+        const message = this.result.message;
+        const title = 'Forget Password';
+        this.toasterService.showToast(message, title, messageType);
+        this.router.navigate(['/auth/reset-password']);
       },
       error: (error) => {
         this.loading = false;
         this.loginError = true;
-        console.log(error);
+        this.loading = false;
+        const messageType = 'warning' ;
+        const message = error;
+        const title = 'Forget Password';
+        this.toasterService.showToast(message, title, messageType);
+        
       },
       
     });

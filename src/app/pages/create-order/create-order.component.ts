@@ -710,7 +710,6 @@ console.log('My form data', formPayload);
         next: (res) => {
           this.result = res;
           const messageType = 'success';
-          console.log( "Message", messageType);
           const message = this.result.message;
           const title = 'Order Creation';
           this.toasterService.showToast(message, title, messageType);
@@ -752,44 +751,6 @@ console.log('My form data', formPayload);
   }
 
   
-
-
-
-  // captureScreenshot() {
-  //   const formElement = this.formElement.nativeElement;
-  //   const canvas = this.screenshotCanvas.nativeElement;
-  //   const context = canvas.getContext('2d');
-  
-  //   // Get the computed style of the form element to include any styling
-  //   const computedStyle = getComputedStyle(formElement);
-  
-  //   // Set canvas dimensions based on form element dimensions and style
-  //   canvas.width = formElement.offsetWidth;
-  //   canvas.height = formElement.offsetHeight;
-  
-  //   // Draw the filled form onto the canvas
-  //   context.drawImage(formElement, 0, 0, canvas.width, canvas.height);
-  
-  //   // Convert the canvas content to a data URL representing the image
-  //   const imageDataUrl = canvas.toDataURL('image/png');
-  
-  //   // Send the image data to the backend
-  //   this.sendImageToBackend(imageDataUrl);
-  // }
-  
-
-  // sendImageToBackend(imageDataUrl: string) {
-  //   console.log("I m here to send image")
-  //   // Send the imageDataUrl to your backend using HTTP request
-  //   // Example:
-  //   // this.httpClient.post('your-backend-url', { image: imageDataUrl })
-  //   //   .subscribe(response => {
-  //   //     console.log('Image uploaded successfully');
-  //   //   }, error => {
-  //   //     console.error('Error uploading image:', error);
-  //   //   });
-
-  // }
  
 }
 

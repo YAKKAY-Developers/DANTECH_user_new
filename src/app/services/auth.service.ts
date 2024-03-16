@@ -86,10 +86,7 @@ export class AuthService {
   
 
   forgotPassword(email: string): Observable<any> {
-      // let headers = new HttpHeaders({
-      //   'x-access-token': `${accessToken}`
-      // });
-    
+
       let body = {
       
         "email": email
@@ -101,6 +98,10 @@ export class AuthService {
           return res;
         }));
     }
+
+
+
+    
 
 
     resetPassword(resetToken: string, password: string, confirmPassword: string) {

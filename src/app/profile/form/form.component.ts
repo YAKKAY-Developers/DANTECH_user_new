@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { DisableRightClickService } from 'src/app/services/disable-right-click.service';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 
 @Component({
@@ -64,7 +65,8 @@ export class FormComponent {
     private http: HttpClient,
     private userservice: UserService,
     private orderservice: OrderService,
-    private rightClickDisable: DisableRightClickService
+    private rightClickDisable: DisableRightClickService,
+    private toasterService :ToasterService
   ) {}
 
   // profile image
@@ -123,11 +125,11 @@ export class FormComponent {
         )]],
         alternatePhoneNumber: [
         '',
-        [Validators.required],
+        [Validators.required, Validators.pattern('[0-9]{10}')],
       ],
       address: ['', [Validators.required, Validators.maxLength(50)]],
-      city: ['', [Validators.required]],
-      state: ['', [Validators.required]],
+      city: ['', [Validators.required, Validators.min(3)]],
+      state: ['', [Validators.required, Validators.min(3)]],
       pincode: [
         '',
         [
@@ -137,40 +139,8 @@ export class FormComponent {
           Validators.pattern('^[1-9][0-9]+$'),
         ],
       ],
-      country: ['', [Validators.required]],
-      // bank_acNo: [
-      //   '',
-      //   [
-      //     Validators.required,
-      //     Validators.minLength(9),
-      //     Validators.maxLength(16),
-      //     Validators.pattern('[0-9]{9,18}'),
-      //   ],
-      // ],
-      // ifsc: [
-      //   '',
-      //   [
-      //     Validators.required,
-      //     Validators.pattern('^[A-Za-z]{4}0[0-9]{6}$'),
-      //   ],
-      // ],
-      // bank_brnch: ['', [Validators.required]],
-      // upi_id: [
-      //   '',
-      //   [
-      //     Validators.required,
-      //     Validators.pattern('[a-zA-Z0-9_]{3,}@[a-zA-Z]{3,}'),
-      //   ],
-      // ],
-      // gst: [
-      //   '',
-      //   [
-      //     Validators.required,
-      //     Validators.pattern(
-      //       '[0-9]{2}[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}'
-      //     ),
-      //   ],
-      // ],
+      country: ['', [Validators.required, Validators.min(3)]],
+      
     });
 
      //Get user details:
@@ -206,17 +176,32 @@ export class FormComponent {
     this.submitted = true;
 
     if (this.form.invalid) {
+      const messageType = 'warning' ;
+      const message = "Form is Invalid, fill all mandatory fields";
+      const title = 'Invalid Form';
+      this.toasterService.showToast(message, title, messageType);
+      
       return;
     }
     this.loading = true;
     this.userservice.updateUserInfo(this.userToken, this.accessToken, this.form.value, )
       .pipe(first())
       .subscribe({
-        next: () => {
+        next: (res) => {
+          this.result = res;
+          const messageType = 'success';
+          const message = this.result.message;
+          const title = 'User Information Saved';
+          this.toasterService.showToast(message, title, messageType);
           this.router.navigate(['/det/profile/bank']);
         },
         error: (error) => {
-          // this.alertService.error(error);
+          const messageType = 'warning' ;
+          const message = error;
+          const title = 'Login';
+    
+        this.toasterService.showToast(message, title, messageType);
+         
           this.loading = false;
         },
       });

@@ -66,11 +66,11 @@ userId: string;
     ];
     const csvData = this.filteredData.map((item) => {
       return [
-        item.workOrder,
-        item.woStatus,
-        item.doctor,
-        item.date,
-        item.product,
+        item.userOrder.workOrderNumber,
+        item.userOrder.orderStatusId,
+        item.userOrder.patientName,
+        item.userOrder.requiredDate ,
+        item.userOrder.service,
       ];
     });
 
