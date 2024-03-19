@@ -127,7 +127,7 @@ export class FormComponent {
         '',
         [Validators.required, Validators.pattern('[0-9]{10}')],
       ],
-      address: ['', [Validators.required, Validators.maxLength(50)]],
+      address: ['', [Validators.required, Validators.maxLength(100)]],
       city: ['', [Validators.required, Validators.min(3)]],
       state: ['', [Validators.required, Validators.min(3)]],
       pincode: [
