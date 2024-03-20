@@ -160,7 +160,25 @@ export class UserService {
   }
 
 
+  updateConsultant(userToken: any, accessToken: any, regId:any, firstName:any, lastName:any, specialisation:any) {
+    let headers = new HttpHeaders({
+      'x-access-token': `${accessToken}`
+    });
+  
+    let body = {
+      "regId":regId,
+      "userToken": userToken,
+      "firstName":firstName,
+      "lastName":lastName,
+      "specialisation":specialisation
 
+    };
+  
+    return this.http.put(`${environment.apiUrl}/api/user/updateConsultant`, body, { headers })
+      .pipe(map((res: any) => {
+        return res;
+      }));
+  }
 
 
   getalldoc(userToken: any) {

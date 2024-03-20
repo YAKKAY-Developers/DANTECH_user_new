@@ -29,27 +29,59 @@
                                             Last name &nbsp; <i class="bi bi-arrow-down-up"></i></th>
                                         <th (click)="sortColumn('specialisation')" class="text-dark font-medium fs-4">
                                             Specialization &nbsp; <i class="bi bi-arrow-down-up"></i></th>
+                                            <th class="text-dark font-medium fs-4">
+                                                Actions &nbsp; <i class="bi bi-arrow-down-up"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor='let ts of filteredData'>
-                                        <td class="fs-4">
-                                            {{ts.regId}}
+                                    <tr *ngFor="let ts of filteredData; let i = index">
+                                        <td>{{ ts.regId }}</td>
+                                        <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;">
+                                            <ng-container *ngIf="!ts.isEdit">
+                                                {{ ts.firstName }}
+                                            </ng-container>
+                                            <ng-container *ngIf="ts.isEdit">
+                                                <input type="text" [(ngModel)]="ts.firstName">
+                                            </ng-container>
+                                        </td>
+                                        <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;">
+                                            <ng-container *ngIf="!ts.isEdit">
+                                                {{ ts.lastName }}
+                                            </ng-container>
+                                            <ng-container *ngIf="ts.isEdit">
+                                                <input type="text" [(ngModel)]="ts.lastName">
+                                            </ng-container>
+                                        </td>
+                                        <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;">
+                                            <ng-container *ngIf="!ts.isEdit">
+                                                {{ ts.specialisation }}
+                                            </ng-container>
+                                            <ng-container *ngIf="ts.isEdit">
+                                                <input type="text" [(ngModel)]="ts.specialisation">
+                                            </ng-container>
                                         </td>
                                         <td>
-                                            {{ts.firstName}}
+                                            <ng-container *ngIf="!ts.isEdit">
+                                                <button class="btn btn-outline-info btn-sm" (click)="onEdit(ts)">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                            </ng-container>
+                                            <ng-container *ngIf="ts.isEdit">
+                                                <div class="d-flex">
+                                                    <button class="btn btn-outline-success btn-sm me-2"
+                                                        (click)="onSave(ts)">
+                                                        <i class="bi bi-save"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm"
+                                                        (click)="onCancel(ts)">
+                                                        <i class="bi bi-x"></i> 
+                                                    </button>
+                                                </div>
+                                            </ng-container>
                                         </td>
-                                        <td>
-                                            {{ts.lastName}}
-                                        </td>
-                                        <td>
-                                            {{ts.specialisation}}
-                                        </td>
-                                    </tr>
-                                    <tr *ngIf="!doc_count">
-                                        <td colspan="3" style="text-align: center;"> No Consultants available for this Clinic..! </td>
                                     </tr>
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>

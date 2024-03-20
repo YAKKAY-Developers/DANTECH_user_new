@@ -128,6 +128,50 @@ export class AddDoctorsComponent {
     return this.form.controls;
   }
 
+  onEdit(consultant: any) {
+    // Set editing state to true for the selected consultant
+    consultant.isEdit = true;
+  }
+
+
+  onSave(consultant: any) {
+    // Make PUT request to update the consultant's details
+    
+    let regId = consultant.regId;
+    let firstName = consultant.firstName;
+    let lastName = consultant.lastName;
+    let specialisation = consultant.specialisation;
+    console.log(regId);
+    this.userservice.updateConsultant(this.userToken, this.accessToken, regId, firstName, lastName, specialisation).subscribe(
+      (res: any) => {
+        // Update the local data after successful update
+        const index = this.doc_data.findIndex((c :any) => c.regId === consultant.regId);
+        if (index !== -1) {
+          this.doc_data[index] = res.updatedConsultant;
+          this.filteredData = [...this.doc_data];
+          consultant.isEdit = false; // Exit editing mode
+          this.toasterService.showToast('Consultant details updated successfully', 'Success', 'success');
+        }
+      },
+      (error: any) => {
+        console.error('Error updating consultant details:', error);
+        this.toasterService.showToast('Error updating consultant details', 'Error', 'error');
+      }
+    );
+  }
+
+  onCancel(consultant: any) {
+    // Find the index of the consultant in the original data array
+    const index = this.doc_data.findIndex((c :any) => c.regId === consultant.regId);
+    if (index !== -1) {
+      // Restore original data from the filtered data array
+      this.filteredData[index] = { ...this.doc_data[index] };
+      // Exit editing mode for the consultant
+      this.filteredData[index].isEdit = false;
+    }
+  }
+  
+
   //form submit
   onSubmit() {
 
