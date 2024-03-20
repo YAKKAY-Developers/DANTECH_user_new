@@ -190,6 +190,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   type15Checkboxes = ['Low', 'Regular', 'High'];
   type16Checkboxes = ['No', 'Low', 'High', 'Follow adjacent tooth texture'];
   type19Checkboxes = ['Sanitary', 'FullRidge', 'Modified', 'Bullet', 'Ovate'];
+  workflowResult: any;
 
   constructor(
     public router: Router,
@@ -267,6 +268,22 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
           console.log(error.error)
         }
       })
+
+
+
+      this.userservice.getAllWorkflowUser(this.userToken, this.accessToken).pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.workflowResult = res.getallworkflow;
+          console.log("Checking:", this.workflowResult);
+  },
+  error: (error) => {
+    console.log(error.error)
+  }
+})
+
+
+
   }
   
   updateNextStepButton(selectedTeeth: { [key: string]: boolean }, toothNumberElement: HTMLElement): void {

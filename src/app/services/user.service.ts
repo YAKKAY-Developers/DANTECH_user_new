@@ -197,7 +197,7 @@ export class UserService {
     let headers = new HttpHeaders({
       'x-access-token': `${accessToken}`
     });
-  
+
     let body = {
       "userToken": userToken,
       "userInfoResult":userInfoResult
