@@ -52,7 +52,9 @@ function calculatePercentageCompletion(userObject: any): number {
   }
 
   // Check consultantInfo array
-  if (userObject.consultantInfo && userObject.consultantInfo.length > 0) {
+  if (userObject.consultantInfo && 
+    userObject.consultantInfo.length > 0) 
+    {
     filledFields++;
   }
 
@@ -133,7 +135,7 @@ export class ViewComponent {
           this.basicInfo = res.userDetails.basicInfo;
           this.bankInfo = res.userDetails.bankInfo;
           this.consultantDetails = res.userDetails.consultantInfo;
-          this.consultantCount = this.consultantDetails.lengt
+          this.consultantCount = this.consultantDetails.length;
           this.user_data = this.response;
           this.profileCompletionPercentage = calculatePercentageCompletion(this.user_data);
           console.log("Checking:", this.user_data);
@@ -142,11 +144,8 @@ export class ViewComponent {
           console.log(error.error)
         }
       })
+      
   }
-
-
-
-
 
 
 

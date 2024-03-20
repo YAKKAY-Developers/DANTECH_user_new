@@ -329,9 +329,9 @@
                                                 <h5 class="mb-0 fw-normal ms-3">Consultants</h5><br>
                                             </div>
                                             <div class="col-3">
-                                                <i *ngIf="!consultantDetails" class="bi bi-x-circle" style="font-size: 23px; color: red;"
+                                                <i *ngIf="consultantCount == 0" class="bi bi-x-circle" style="font-size: 23px; color: red;"
                                                     ></i>
-                                                <i *ngIf="consultantDetails" class="bi bi-check-circle" style="font-size: 23px; color: green;"
+                                                <i *ngIf="consultantCount > 0" class="bi bi-check-circle" style="font-size: 23px; color: green;"
                                                     ></i>
                                             </div>
                                         </div>
