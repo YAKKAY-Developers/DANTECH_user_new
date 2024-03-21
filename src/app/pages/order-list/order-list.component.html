@@ -46,7 +46,7 @@
                         <td>
                           <ng-container [ngSwitch]="ts.userOrder.orderStatusId">
                             <span class="badge rounded-pill bg-secondary" *ngSwitchCase="1">Order Created</span>
-                            <span class="badge rounded-pill bg-info" *ngSwitchCase="2">Order In Progress</span>
+                            <span class="badge rounded-pill bg-warning" *ngSwitchCase="2">Order In Progress</span>
                             <span class="badge rounded-pill bg-warning" *ngSwitchCase="3">Order In Progress</span>
                             <span class="badge rounded-pill bg-success" *ngSwitchCase="4">Order Completed</span>
                             <span class="badge rounded-pill bg-danger" *ngSwitchCase="5">Order Rejected</span>

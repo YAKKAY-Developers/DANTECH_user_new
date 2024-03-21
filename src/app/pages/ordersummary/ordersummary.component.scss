@@ -118,10 +118,22 @@
 }
 
 .tracking-item .tracking-content span {
-    display: block;
-    color: #767676;
+    display: unset;
+    color: #ffffff;
     font-size: 13px;
 }
+
+.tracking-item .tracking-content-order span{
+    display: block;
+    color: #888;
+    font-size: 13px;
+}
+
+.tracking-item .tracking-content-order {
+    font-weight: 600;
+    font-size: 17px;
+}
+
 
 .tracking-item .tracking-icon {
     position: absolute;
@@ -169,6 +181,8 @@
     color: #767676;
     font-size: 13px;
 }
+
+
 
 .tracking-item-pending .tracking-icon {
     line-height: 2.6rem;
