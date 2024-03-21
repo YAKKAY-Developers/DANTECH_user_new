@@ -142,7 +142,7 @@ export class AddDoctorsComponent {
     let lastName = consultant.lastName;
     let specialisation = consultant.specialisation;
     console.log(regId);
-    this.userservice.updateConsultant(this.userToken, this.accessToken, regId, firstName, lastName, specialisation).subscribe(
+    this.userservice.updateConsultant(this.userId, this.accessToken, regId, firstName, lastName, specialisation).subscribe(
       (res: any) => {
         // Update the local data after successful update
         const index = this.doc_data.findIndex((c :any) => c.regId === consultant.regId);
@@ -150,7 +150,12 @@ export class AddDoctorsComponent {
           this.doc_data[index] = res.updatedConsultant;
           this.filteredData = [...this.doc_data];
           consultant.isEdit = false; // Exit editing mode
-          this.toasterService.showToast('Consultant details updated successfully', 'Success', 'success');
+          const messageType = 'success';
+          const message = this.result.message;
+          const title = 'Order Creation';
+          this.toasterService.showToast(message, title, messageType);
+          
+         
         }
       },
       (error: any) => {

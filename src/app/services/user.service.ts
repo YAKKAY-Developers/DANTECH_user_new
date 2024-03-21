@@ -161,6 +161,9 @@ export class UserService {
 
 
   updateConsultant(userToken: any, accessToken: any, regId:any, firstName:any, lastName:any, specialisation:any) {
+   
+   console.log("Inside service")
+   
     let headers = new HttpHeaders({
       'x-access-token': `${accessToken}`
     });
@@ -174,7 +177,7 @@ export class UserService {
 
     };
   
-    return this.http.put(`${environment.apiUrl}/api/user/updateConsultant`, body, { headers })
+    return this.http.put(`${environment.apiUrl}/api/user/updateconsultant`, body, { headers })
       .pipe(map((res: any) => {
         return res;
       }));

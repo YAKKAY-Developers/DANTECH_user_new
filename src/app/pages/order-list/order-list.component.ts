@@ -111,6 +111,19 @@ this.orderDetailSubscription = this.userservice
 .subscribe(
   (res: any) => {
     this.orderData = res.orderDetails;
+        // Sort the orderData array based on orderDate with March first, then February
+        this.orderData.sort((a :any, b :any) => {
+          const dateA = new Date(a.userOrder.orderDate);
+          const dateB = new Date(b.userOrder.orderDate);
+
+          // Check if the months are different
+          if (dateA.getMonth() !== dateB.getMonth()) {
+            return dateB.getMonth() - dateA.getMonth(); // Sort by month in descending order
+          } else {
+            // If the months are the same, sort by year in descending order
+            return dateB.getFullYear() - dateA.getFullYear();
+          }
+        });
     this.filteredData = this.orderData;
     console.log("Response from API ",res)
     console.log(this.filteredData)
@@ -124,48 +137,6 @@ this.orderDetailSubscription = this.userservice
 
   }
 
-//   sortColumn(column: string) {
-
-//     console.log('Sorting column:', column);
-
-//     // Check if the column is valid
-//     if (!column) {
-//       console.error('Invalid column:', column);
-//       return;
-//   }
-
-//     // Check if the column is already sorted
-//     if (this.sortcolumn === column) {
-//       // If the same column is clicked again, toggle the sorting order
-//       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-//     } else {
-//       // If a different column is clicked, set the sorting column and direction
-//       this.sortcolumn = column;
-//       this.sortDirection = 'asc'; // Default to ascending order
-//     }
-
-//     // Sort the filtered data based on the chosen column and direction
-//     this.filteredData.sort((a, b) => {
-//       const valueA = a[column];
-//       const valueB = b[column];
-
-//       console.log('value A:', valueA);
-//       console.log('value B:', valueA);
-
-//        // Handle cases where either value is undefined
-//        if (valueA === undefined || valueB === undefined) {
-//         console.error('Undefined value for column:', column);
-//         // Return 0 to maintain the order of items with undefined values
-//         return 0;
-//     }
-//  // Perform sorting based on the values of the specified column
-//  if (this.sortDirection === 'asc') {
-//   return valueA.localeCompare(valueB);
-// } else {
-//   return valueB.localeCompare(valueA);
-// }
-// });
-//   }
 
 
 sortColumn(column: string) {
@@ -189,8 +160,8 @@ sortColumn(column: string) {
 
   // Sort the filtered data based on the chosen column and direction
   this.filteredData.sort((a, b) => {
-    let valueA = a['orderStatus']['description'];
-    let valueB = b['orderStatus']['description'];
+    let valueA = a['userOrder']['orderDate'];
+    let valueB = b['userOrder']['orderDate'];
 
     // Provide default values for undefined or null values
     if (valueA === undefined || valueA === null) {
