@@ -18,6 +18,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { OrdersummaryComponent } from './ordersummary/ordersummary.component';
 import { FaqComponent } from './faq/faq.component';
 import { TestingComponent } from './testing/testing.component';
+import { CompletedOrderComponent } from './completed-order/completed-order.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,11 @@ const routes: Routes = [
         canActivate: [authGuard],
       },
       {
+        path: 'completedorder',
+        component: CompletedOrderComponent,
+        canActivate: [authGuard],
+      },
+      {
         path: 'ordersummary/:id',
         component: OrdersummaryComponent,
         canActivate: [authGuard],
@@ -107,6 +113,7 @@ const routes: Routes = [
     OrdersummaryComponent,
     FaqComponent,
     TestingComponent,
+    CompletedOrderComponent,
   ],
   imports: [
     CommonModule,

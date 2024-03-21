@@ -133,6 +133,15 @@ export class AddDoctorsComponent {
     consultant.isEdit = true;
   }
 
+  onDelete(consultant: any) {
+    // Set editing state to true for the selected consultant
+  window.alert("Are you sure you want to delete this Consultant?")
+  const messageType = 'warning';
+        const message = "Delete request has been sent to Admin for Approval";
+        const title = 'Consultant delete';
+        this.toasterService.showToast(message, title, messageType);
+  }
+
 
   onSave(consultant: any) {
     // Make PUT request to update the consultant's details
@@ -144,19 +153,21 @@ export class AddDoctorsComponent {
     console.log(regId);
     this.userservice.updateConsultant(this.userId, this.accessToken, regId, firstName, lastName, specialisation).subscribe(
       (res: any) => {
+        const messageType = 'success';
+        const message = res.message;
+        const title = 'Consultant update';
+        this.toasterService.showToast(message, title, messageType);
+        window.location.reload();
         // Update the local data after successful update
-        const index = this.doc_data.findIndex((c :any) => c.regId === consultant.regId);
-        if (index !== -1) {
-          this.doc_data[index] = res.updatedConsultant;
-          this.filteredData = [...this.doc_data];
-          consultant.isEdit = false; // Exit editing mode
-          const messageType = 'success';
-          const message = this.result.message;
-          const title = 'Order Creation';
-          this.toasterService.showToast(message, title, messageType);
-          
+        // const index = this.doc_data.findIndex((c :any) => c.regId === consultant.regId);
+        // if (index !== -1) {
+        //   this.doc_data[index] = res.updatedConsultant;
+        //   this.filteredData = [...this.doc_data];
+        //   consultant.isEdit = false; // Exit editing mode
          
-        }
+        
+         
+        // }
       },
       (error: any) => {
         console.error('Error updating consultant details:', error);
