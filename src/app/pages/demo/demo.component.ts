@@ -537,7 +537,9 @@ export class DemoComponent implements OnInit, AfterViewInit, OnDestroy {
           // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           // this.router.navigateByUrl(returnUrl);
           // this.router.navigate(['/det/profile/view']);
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000); 
         },
         error: (error) => {
           this.loading = false;

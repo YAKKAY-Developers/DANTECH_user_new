@@ -153,11 +153,15 @@ export class AddDoctorsComponent {
     console.log(regId);
     this.userservice.updateConsultant(this.userId, this.accessToken, regId, firstName, lastName, specialisation).subscribe(
       (res: any) => {
+       
         const messageType = 'success';
         const message = res.message;
         const title = 'Consultant update';
         this.toasterService.showToast(message, title, messageType);
-        window.location.reload();
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000); // 3000 milliseconds = 3 seconds
         // Update the local data after successful update
         // const index = this.doc_data.findIndex((c :any) => c.regId === consultant.regId);
         // if (index !== -1) {
