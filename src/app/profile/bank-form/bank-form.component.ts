@@ -154,7 +154,7 @@ export class BankFormComponent {
          this.consultantDetails = res.userDetails.consultantInfo;
          this.consultantCount = this.consultantDetails.lengt
          this.user_data = this.response;
-         console.log( this.response)
+       
        },
        error: (error) => {
          console.log(error.error)
@@ -188,8 +188,11 @@ export class BankFormComponent {
           this.result = res;
           const messageType = 'success';
           const message = this.result.message;
-          const title = 'User Information Saved';
+          const title = 'Saved Success';
           this.toasterService.showToast(message, title, messageType);
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000)
           this.router.navigate(['/det/profile/view']);
         },
         error: (error) => {

@@ -191,7 +191,7 @@ export class FormComponent {
           this.result = res;
           const messageType = 'success';
           const message = this.result.message;
-          const title = 'User Information Saved';
+          const title = 'Save Success';
           this.toasterService.showToast(message, title, messageType);
           this.router.navigate(['/det/profile/bank']);
         },

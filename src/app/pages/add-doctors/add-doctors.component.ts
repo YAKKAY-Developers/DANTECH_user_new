@@ -218,7 +218,9 @@ export class AddDoctorsComponent {
           const message = this.result.message;
           const title = 'Consultant Information added';
           this.toasterService.showToast(message, title, messageType);
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000)
         },
         error: (error) => {
           this.loading = false;
