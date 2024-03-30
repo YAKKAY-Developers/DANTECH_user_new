@@ -13,9 +13,9 @@
 
                     <input type="text" formControlName="firstName" class="form-control" data-bs-toggle="tooltip"
                         data-bs-placement="right" data-bs-title="This top tooltip is themed via CSS variables."
-                        [ngClass]="{ 'is-invalid': reg_submitted && r['firstName'].errors }" placeholder="firstName name" />
+                        [ngClass]="{ 'is-invalid': reg_submitted && r['firstName'].errors }" placeholder="Clinic First Name" />
                     <div *ngIf="reg_submitted&& r['firstName'].errors" class="invalid-feedback">
-                        <div *ngIf="r['firstName'].errors && r['firstName'].errors['required']">First Name is required</div>
+                        <div *ngIf="r['firstName'].errors && r['firstName'].errors['required']">Clinic First Name is required</div>
                     </div>
 
                     <div *ngIf="reg_submitted && r['firstName'].errors" class="invalid-feedback">
@@ -26,9 +26,9 @@
 
                     <input type="text" formControlName="lastName" class="form-control" data-bs-toggle="tooltip"
                     data-bs-placement="right" data-bs-title="This top tooltip is themed via CSS variables."
-                    [ngClass]="{ 'is-invalid': reg_submitted && r['lastName'].errors }" placeholder="lastName name" />
+                    [ngClass]="{ 'is-invalid': reg_submitted && r['lastName'].errors }" placeholder="Clinic Last Name" />
                 <div *ngIf="reg_submitted&& r['lastName'].errors" class="invalid-feedback">
-                    <div *ngIf="r['lastName'].errors && r['lastName'].errors['required']">First Name is required</div>
+                    <div *ngIf="r['lastName'].errors && r['lastName'].errors['required']">Clinic Last Name is required</div>
                 </div>
 
                 <div *ngIf="reg_submitted && r['lastName'].errors" class="invalid-feedback">
@@ -63,9 +63,9 @@
 
                     <input type="text" formControlName="registerNumber" class="form-control"
                         [ngClass]="{ 'is-invalid': reg_submitted && r['registerNumber'].errors }"
-                        placeholder="registerNumber" />
+                        placeholder="Clinic Register Number" />
                     <div *ngIf="reg_submitted && r['registerNumber'].errors" class="invalid-feedback">
-                        <div *ngIf="r['registerNumber'].errors && r['registerNumber'].errors['required']">regNumber number is
+                        <div *ngIf="r['registerNumber'].errors && r['registerNumber'].errors['required']">Clinic Register Number is
                             required
                         </div>
                     </div>
