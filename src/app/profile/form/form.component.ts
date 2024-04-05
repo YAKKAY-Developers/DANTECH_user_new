@@ -25,7 +25,7 @@ export class FormComponent {
   form: FormGroup;
   loading = false;
   submitted = false;
-  selected_image = null;
+  // selected_image = null;
   stat_user: string;
   userType: string;
   accessToken: string;
@@ -52,7 +52,7 @@ export class FormComponent {
    consultantDetails: any;
    consultantCount: any;
    fullName:any
-
+   selected_image: File | null = null;
 
 
 
