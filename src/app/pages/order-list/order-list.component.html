@@ -42,7 +42,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let ts of filteredData'>
-                         <ng-container *ngIf="ts.userOrder.orderStatusId === 1 || ts.userOrder.orderStatusId === 2 || ts.userOrder.orderStatusId === 3 && (filteredData && filteredData.length > 0); else noOrders">
+                         <!-- <ng-container *ngIf="ts.userOrder.orderStatusId === 1 || ts.userOrder.orderStatusId === 2 || ts.userOrder.orderStatusId === 3 && (filteredData && filteredData.length > 0); else noOrders"> -->
+                            <ng-container *ngIf="ts.userOrder.orderStatusId === 1 || ts.userOrder.orderStatusId === 2 || ts.userOrder.orderStatusId === 3 ">
                        
                         <td>...{{ts.userOrder.workOrderNumber.slice(-3)}}</td>
                         <td>

@@ -324,8 +324,6 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         '',
         [
           Validators.required,
-          Validators.pattern(/^[A-z]*$/),
-          Validators.minLength(3),
         ],
       ],
       regId: ['', [Validators.required]],

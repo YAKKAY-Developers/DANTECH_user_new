@@ -16,10 +16,13 @@
 
 
                         <label for="service">Consultant</label>
-                        <select class="form-control form-select" formControlName="fullName">
+                        <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f['fullName'].errors }"
+                        formControlName="fullName" placeholder="Consultant Name" type="tel" required>
+
+                        <!-- <select class="form-control form-select" formControlName="fullName">
                             <option *ngFor='let item of consultantDetails' [value]="item.fullName">{{item.fullName }}
                             </option>
-                        </select>
+                        </select> -->
 
                         <div *ngIf="submitted && f['fullName'].errors" class="invalid-feedback">
                             <div *ngIf="f['fullName'].errors && f['fullName'].errors['required']">Name is required</div>
@@ -127,7 +130,7 @@
                 <div class="col-6">
                     <label name="">Patient Age</label>
                     <input formControlName="patientage" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f['patientage'].errors }" placeholder="Patient Name"
+                        [ngClass]="{ 'is-invalid': submitted && f['patientage'].errors }" placeholder="Patient Age"
                         type="url" required>
                     <div *ngIf=" submitted && f['patientage'].errors" class="invalid-feedback">
                         <div *ngIf="f['patientage'].errors && f['patientage'].errors['required']">

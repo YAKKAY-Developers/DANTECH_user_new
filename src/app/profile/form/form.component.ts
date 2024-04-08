@@ -73,16 +73,12 @@ export class FormComponent {
   loadFile(event: any) {
     const target = event.target as HTMLInputElement;
     const image = document.getElementById('output') as HTMLImageElement;
-    console.log(event);
-    this.selected_image = event.target.files[0];
+    this.selected_image = event.target.files ? event.target.files[0] : null;
     if (target.files && target.files.length > 0) {
       const file = target.files[0];
       image.src = URL.createObjectURL(target.files[0]);
-
-     
     }
   }
-  
 
   ngOnInit() {
     const { userToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
@@ -184,6 +180,10 @@ export class FormComponent {
       return;
     }
     this.loading = true;
+
+
+  
+
     this.userservice.updateUserInfo(this.userToken, this.accessToken, this.form.value, )
       .pipe(first())
       .subscribe({
@@ -206,6 +206,13 @@ export class FormComponent {
         },
       });
 
+  
     this.router.navigate(['/det/profile/view']);
   }
+
+  getFileExtension(filename: string): string {
+    return filename.split('.').pop() || '';
+  }
+
+  
 }
