@@ -53,14 +53,14 @@ export class FormComponent {
    consultantCount: any;
    fullName:any
    selected_image: File | null = null;
-
-
+   selectedImage: File | null = null;
+   selectedImageContent: File | null = null;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router, 
     private authservice: AuthService,
     private http: HttpClient,
     private userservice: UserService,
@@ -69,16 +69,33 @@ export class FormComponent {
     private toasterService :ToasterService
   ) {}
 
-  // profile image
+
   loadFile(event: any) {
     const target = event.target as HTMLInputElement;
     const image = document.getElementById('output') as HTMLImageElement;
+  
     this.selected_image = event.target.files ? event.target.files[0] : null;
     if (target.files && target.files.length > 0) {
       const file = target.files[0];
       image.src = URL.createObjectURL(target.files[0]);
+  
+      // Read the file content
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const fileContent = e.target?.result;
+        if (typeof fileContent === 'string' || fileContent instanceof ArrayBuffer) {
+          const blob = new Blob([fileContent], { type: file.type });
+          this.selectedImageContent = new File([blob], file.name, { type: file.type });
+          console.log("Checking",this.selectedImageContent); // Add this line
+        }
+      };
+      reader.readAsArrayBuffer(file);
     }
   }
+  
+
+
+
 
   ngOnInit() {
     const { userToken } = JSON.parse(localStorage.getItem('user') ?? '{}');
@@ -104,7 +121,7 @@ export class FormComponent {
 
 
     this.form = this.formBuilder.group({
-      // image: ['',[Validators.required]],
+      photo: ['',[Validators.required]],
       name: [
         '',
         [
@@ -181,10 +198,35 @@ export class FormComponent {
     }
     this.loading = true;
 
+    const formData = new FormData();
+    
+   // Append photo with its name
+   if (this.selectedImageContent) {
+    formData.append('photo', this.selectedImageContent, this.selectedImageContent.name);
+  }
 
-  
+  // Append other form data
+  Object.keys(this.form.value).forEach(key => {
+    const value = this.form.value[key];
+    console.log("Key:", key, "Value:", value);
+    formData.append(key, value);
+  });
 
-    this.userservice.updateUserInfo(this.userToken, this.accessToken, this.form.value, )
+  // Append other form data
+formData.append('name', this.form.value.name);
+formData.append('email', this.form.value.email);
+formData.append('mobileNumber', this.form.value.mobileNumber);
+formData.append('alternatePhoneNumber', this.form.value.alternatePhoneNumber);
+formData.append('address', this.form.value.address);
+formData.append('city', this.form.value.city);
+formData.append('state', this.form.value.state);
+formData.append('pincode', this.form.value.pincode);
+formData.append('country', this.form.value.country);
+
+console.log("Form Data:", formData);
+
+
+    this.userservice.updateUserInfo(this.userToken, this.accessToken,formData )
       .pipe(first())
       .subscribe({
         next: (res) => {
@@ -209,6 +251,13 @@ export class FormComponent {
   
     this.router.navigate(['/det/profile/view']);
   }
+
+
+
+
+
+
+
 
   getFileExtension(filename: string): string {
     return filename.split('.').pop() || '';

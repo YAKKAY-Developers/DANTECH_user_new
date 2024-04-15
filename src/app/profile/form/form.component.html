@@ -22,7 +22,15 @@
                                         <i class="bi bi-camera" style="font-size: 1.25em;"></i>
                                         <span>Change Image</span>
                                     </label>
-                                    <input id="file" type="file" (change)="loadFile($event)" />
+                                    <input id="file" type="file" (change)="loadFile($event)"  formControlName="photo" />
+                                    <!-- <input type="file" (change)="handleFileChange($event)" accept="image/*"> -->
+
+
+                                    <div *ngIf="selectedImage">
+                                        Selected Image: {{ selectedImage.name }}
+                                      </div>
+
+                                      
                                     <img src='assets/images/users/user.svg' id="output" width="184px" />
                                 </div>
                             </div>

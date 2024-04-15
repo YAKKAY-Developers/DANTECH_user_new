@@ -196,14 +196,30 @@ export class UserService {
     );
   }
 
-  updateUserInfo(userToken: any, accessToken: any, userInfoResult:any): Observable<any> {
+  // updateUserInfo(userToken: any, accessToken: any, userInfoResult:any): Observable<any> {
+  //   let headers = new HttpHeaders({
+  //     'x-access-token': `${accessToken}`
+  //   });
+
+  //   let body = {
+  //     "userToken": userToken,
+  //     "userInfoResult":userInfoResult
+  //   };
+  
+  //   return this.http.put(`${environment.apiUrl}/api/user/updateUserInfo`, body, { headers })
+  //     .pipe(map((res: any) => {
+  //       return res;
+  //     }));
+  // }
+
+  updateUserInfo(userToken: any, accessToken: any, formData: FormData): Observable<any> {
     let headers = new HttpHeaders({
       'x-access-token': `${accessToken}`
     });
 
     let body = {
       "userToken": userToken,
-      "userInfoResult":userInfoResult
+      "userInfoResult":formData
     };
   
     return this.http.put(`${environment.apiUrl}/api/user/updateUserInfo`, body, { headers })
@@ -211,6 +227,8 @@ export class UserService {
         return res;
       }));
   }
+
+
 
 
   updateBankInfo(userToken: any, accessToken: any, userBankResult:any): Observable<any> {
