@@ -19,6 +19,8 @@ import { OrdersummaryComponent } from './ordersummary/ordersummary.component';
 import { FaqComponent } from './faq/faq.component';
 import { TestingComponent } from './testing/testing.component';
 import { CompletedOrderComponent } from './completed-order/completed-order.component';
+import { QRCodeModule } from 'angularx-qrcode';
+
 
 const routes: Routes = [
   {
@@ -119,6 +121,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    QRCodeModule,
     RouterModule.forChild(routes),
   ],
 })

@@ -302,6 +302,19 @@ body {
     color: inherit !important;
 }
 
+
+.qrcodeImage {
+    display: flex;
+    flex: 1;
+  }
+  
+  /* Add custom styles here */
+  .center {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+
 // a {
 //   color: #5465ff;
 //   text-decoration: none;

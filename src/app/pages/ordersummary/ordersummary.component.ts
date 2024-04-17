@@ -12,8 +12,6 @@ import { OrderService } from 'src/app/services/order.service';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
-
-
 @Component({
   selector: 'app-ordersummary',
   templateUrl: './ordersummary.component.html',
@@ -23,7 +21,7 @@ export class OrdersummaryComponent {
   accessToken: any;
   userToken: any;
   orderToken:any;
-
+  public myAngularxQrCode: string = null;
   userOrderDetailsSubscription: Subscription;
   result: any
   orderDate = {};
@@ -70,6 +68,7 @@ export class OrdersummaryComponent {
  .subscribe({
    next: (res) => {
      this.result = res.userOrders;
+     this.myAngularxQrCode = res.userOrders.workOrderNumber;
 
     //  this.refinedResult = Object.entries(this.result)
     //     .filter(([key, value]) => value !== null && value !== '')

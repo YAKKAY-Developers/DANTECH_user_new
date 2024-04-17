@@ -209,24 +209,24 @@ export class FormComponent {
   Object.keys(this.form.value).forEach(key => {
     const value = this.form.value[key];
     console.log("Key:", key, "Value:", value);
-    formData.append(key, value);
+   this.form.value.append(key, value);
   });
 
   // Append other form data
-formData.append('name', this.form.value.name);
-formData.append('email', this.form.value.email);
-formData.append('mobileNumber', this.form.value.mobileNumber);
-formData.append('alternatePhoneNumber', this.form.value.alternatePhoneNumber);
-formData.append('address', this.form.value.address);
-formData.append('city', this.form.value.city);
-formData.append('state', this.form.value.state);
-formData.append('pincode', this.form.value.pincode);
-formData.append('country', this.form.value.country);
+  this.form.value.append('name', this.form.value.name);
+  this.form.value.append('email', this.form.value.email);
+  this.form.value.append('mobileNumber', this.form.value.mobileNumber);
+  this.form.value.append('alternatePhoneNumber', this.form.value.alternatePhoneNumber);
+  this.form.value.append('address', this.form.value.address);
+  this.form.value.append('city', this.form.value.city);
+  this.form.value.append('state', this.form.value.state);
+  this.form.value.append('pincode', this.form.value.pincode);
+  this.form.value.append('country', this.form.value.country);
 
-console.log("Form Data:", formData);
+console.log("Form Data:", this.form.value);
 
 
-    this.userservice.updateUserInfo(this.userToken, this.accessToken,formData )
+    this.userservice.updateUserInfo(this.userToken, this.accessToken,this.form.value )
       .pipe(first())
       .subscribe({
         next: (res) => {

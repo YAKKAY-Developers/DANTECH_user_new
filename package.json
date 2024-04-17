@@ -23,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "14.1.1",
     "@popperjs/core": "^2.11.7",
     "angular-file-uploader": "^7.1.1",
+    "angularx-qrcode": "^17.0.0",
     "ansi-html-community": "^0.0.8",
     "apexcharts": "^3.40.0",
     "bootstrap": "^5.2.3",

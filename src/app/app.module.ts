@@ -5,7 +5,11 @@ import {
   LocationStrategy,
   PathLocationStrategy,
 } from '@angular/common';
+
+
+
 import { NgModule } from '@angular/core';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
@@ -23,7 +27,7 @@ import { BlankComponent } from './layouts/blank/blank.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ToastrModule } from 'ngx-toastr';
 import { CustomToastComponent } from './dialogs/custom-toast/custom-toast.component';
-
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [AppComponent, SpinnerComponent],
@@ -35,6 +39,7 @@ import { CustomToastComponent } from './dialogs/custom-toast/custom-toast.compon
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    QRCodeModule,
     RouterModule.forRoot(Approutes, { useHash: false }),
     ToastrModule.forRoot({
    
@@ -58,6 +63,7 @@ timeOut: 3000, // Time to close the toaster (in milliseconds)
     BlankComponent,
     NavigationComponent,
     SidebarComponent,
+
     NgCircleProgressModule.forRoot(
     //   {
     //   backgroundColor: 'Bakeryl',
