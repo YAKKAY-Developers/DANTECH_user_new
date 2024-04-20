@@ -70,30 +70,51 @@ export class FormComponent {
   ) {}
 
 
+  // loadFile(event: any) {
+  //   const target = event.target as HTMLInputElement;
+  //   const image = document.getElementById('output') as HTMLImageElement;
+  
+  //   this.selected_image = event.target.files ? event.target.files[0] : null;
+  //   // console.log( "Iamge selected",this.selected_image)
+  //   if (target.files && target.files.length > 0) {
+  //     const file = target.files[0];
+  //     console.log( "Iamge selected",file)
+  //     image.src = URL.createObjectURL(target.files[0]);
+  
+  //     // Read the file content
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       const fileContent = e.target?.result;
+  //       if (typeof fileContent === 'string' || fileContent instanceof ArrayBuffer) {
+  //         const blob = new Blob([fileContent], { type: file.type });
+  //         this.selectedImageContent = new File([blob], file.name, { type: file.type });
+  //         console.log("Checking",this.selectedImageContent); // Add this line
+  //       }
+  //     };
+  //     reader.readAsArrayBuffer(file);
+  //   }
+  // }
   loadFile(event: any) {
     const target = event.target as HTMLInputElement;
     const image = document.getElementById('output') as HTMLImageElement;
   
-    this.selected_image = event.target.files ? event.target.files[0] : null;
-    if (target.files && target.files.length > 0) {
-      const file = target.files[0];
-      image.src = URL.createObjectURL(target.files[0]);
+    // Get the selected file
+    const file = target.files ? target.files[0] : null;
   
-      // Read the file content
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const fileContent = e.target?.result;
-        if (typeof fileContent === 'string' || fileContent instanceof ArrayBuffer) {
-          const blob = new Blob([fileContent], { type: file.type });
-          this.selectedImageContent = new File([blob], file.name, { type: file.type });
-          console.log("Checking",this.selectedImageContent); // Add this line
-        }
-      };
-      reader.readAsArrayBuffer(file);
+    // Log the selected file
+    console.log("Image selected:", file);
+  
+    // Update the selectedImageContent
+    this.selectedImageContent = file;
+  
+    // Display the image preview
+    if (file) {
+      image.src = URL.createObjectURL(file);
     }
-  }
   
-
+    // Log the selectedImageContent
+    console.log("Selected image content:", this.selectedImageContent);
+  }
 
 
 
@@ -184,75 +205,137 @@ export class FormComponent {
     return this.form.controls;
   }
 
-  onSubmit() {
+//   onSubmit() {
   
-    this.submitted = true;
+//     this.submitted = true;
 
-    if (this.form.invalid) {
-      const messageType = 'warning' ;
-      const message = "Form is Invalid, fill all mandatory fields";
-      const title = 'Invalid Form';
-      this.toasterService.showToast(message, title, messageType);
+//     if (this.form.invalid) {
+//       const messageType = 'warning' ;
+//       const message = "Form is Invalid, fill all mandatory fields";
+//       const title = 'Invalid Form';
+//       this.toasterService.showToast(message, title, messageType);
       
-      return;
-    }
-    this.loading = true;
+//       return;
+//     }
+//     this.loading = true;
 
-    const formData = new FormData();
+//     const formData = new FormData();
     
-   // Append photo with its name
-   if (this.selectedImageContent) {
-    formData.append('photo', this.selectedImageContent, this.selectedImageContent.name);
+//    // Append photo with its name
+//    if (this.selectedImageContent) {
+//     formData.append('photo', this.selectedImageContent, this.selectedImageContent.name);
+//   }
+
+//   // Append other form data
+//   Object.keys(this.form.value).forEach(key => {
+//     const value = this.form.value[key];
+//     console.log("Key:", key, "Value:", value);
+//     formData.append(key, value);
+//   });
+
+//   // Append other form data
+// formData.append('name', this.form.value.name);
+// formData.append('email', this.form.value.email);
+// formData.append('mobileNumber', this.form.value.mobileNumber);
+// formData.append('alternatePhoneNumber', this.form.value.alternatePhoneNumber);
+// formData.append('address', this.form.value.address);
+// formData.append('city', this.form.value.city);
+// formData.append('state', this.form.value.state);
+// formData.append('pincode', this.form.value.pincode);
+// formData.append('country', this.form.value.country);
+// formData.append('photo', this.selectedImageContent);
+// console.log("Form Data:", formData);
+
+
+//     this.userservice.updateUserInfo(this.userToken, this.accessToken,formData )
+//       .pipe(first())
+//       .subscribe({
+//         next: (res) => {
+//           this.result = res;
+//           const messageType = 'success';
+//           const message = this.result.message;
+//           const title = 'Save Success';
+//           this.toasterService.showToast(message, title, messageType);
+//           this.router.navigate(['/det/profile/bank']);
+//         },
+//         error: (error) => {
+//           const messageType = 'warning' ;
+//           const message = error;
+//           const title = 'Login';
+    
+//         this.toasterService.showToast(message, title, messageType);
+         
+//           this.loading = false;
+//         },
+//       });
+
+  
+//     this.router.navigate(['/det/profile/view']);
+//   }
+
+
+onSubmit() {
+  this.submitted = true;
+
+  if (this.form.invalid) {
+    const messageType = 'warning';
+    const message = "Form is Invalid, fill all mandatory fields";
+    const title = 'Invalid Form';
+    this.toasterService.showToast(message, title, messageType);
+    return;
+  }
+  this.loading = true;
+
+  const formData = new FormData();
+
+  if (this.selectedImageContent) {
+    formData.append('photo', this.selectedImageContent, this.selectedImageContent.name); // Append the image file
   }
 
   // Append other form data
   Object.keys(this.form.value).forEach(key => {
-    const value = this.form.value[key];
-    console.log("Key:", key, "Value:", value);
-   this.form.value.append(key, value);
+    formData.append(key, this.form.get(key)?.value);
   });
 
-  // Append other form data
-  this.form.value.append('name', this.form.value.name);
-  this.form.value.append('email', this.form.value.email);
-  this.form.value.append('mobileNumber', this.form.value.mobileNumber);
-  this.form.value.append('alternatePhoneNumber', this.form.value.alternatePhoneNumber);
-  this.form.value.append('address', this.form.value.address);
-  this.form.value.append('city', this.form.value.city);
-  this.form.value.append('state', this.form.value.state);
-  this.form.value.append('pincode', this.form.value.pincode);
-  this.form.value.append('country', this.form.value.country);
 
-console.log("Form Data:", this.form.value);
+formData.append('name', this.form.value.name);
+formData.append('email', this.form.value.email);
+formData.append('mobileNumber', this.form.value.mobileNumber);
+formData.append('alternatePhoneNumber', this.form.value.alternatePhoneNumber);
+formData.append('address', this.form.value.address);
+formData.append('city', this.form.value.city);
+formData.append('state', this.form.value.state);
+formData.append('pincode', this.form.value.pincode);
+formData.append('country', this.form.value.country);
+formData.append('photo', this.selectedImageContent);
 
 
-    this.userservice.updateUserInfo(this.userToken, this.accessToken,this.form.value )
-      .pipe(first())
-      .subscribe({
-        next: (res) => {
-          this.result = res;
-          const messageType = 'success';
-          const message = this.result.message;
-          const title = 'Save Success';
-          this.toasterService.showToast(message, title, messageType);
-          this.router.navigate(['/det/profile/bank']);
-        },
-        error: (error) => {
-          const messageType = 'warning' ;
-          const message = error;
-          const title = 'Login';
-    
+
+  console.log("FormData after appending other form data:", formData);
+
+  this.userservice.updateUserInfo(this.userToken, this.accessToken, formData)
+    .pipe(first())
+    .subscribe({
+      next: (res) => {
+        this.result = res;
+        const messageType = 'success';
+        const message = this.result.message;
+        const title = 'Save Success';
         this.toasterService.showToast(message, title, messageType);
-         
-          this.loading = false;
-        },
-      });
+        this.router.navigate(['/det/profile/bank']);
+      },
+      error: (error) => {
+        const messageType = 'warning';
+        const message = error;
+        const title = 'Login';
 
-  
-    this.router.navigate(['/det/profile/view']);
-  }
+        this.toasterService.showToast(message, title, messageType);
+        this.loading = false;
+      },
+    });
 
-
+  this.router.navigate(['/det/profile/view']);
+}
 
 
 
