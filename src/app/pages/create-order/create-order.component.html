@@ -205,8 +205,6 @@
                 <label for="priority"> Check the option if you want the order to be delivered within 3 days </label><br>
             </div>
 
-
-
             <div class=" wd100">
                 <hr>
             </div>
@@ -663,9 +661,19 @@
                     <div class="row">
                         <br>
 
-                        <input class="form-control" type="file" value="">
-                        <p>Acceptable file formats - images, pdf, stl, ply</p>
+                        <!-- <input class="form-control" type="file" value="">
+                        <p>Acceptable file formats - images, pdf, stl, ply</p> -->
+
+                        <input class="form-control" type="file" accept="image/*,.pdf,.stl,.ply" multiple (change)="selectFiles($event)" />
+
+                        <div>
+                            <img *ngFor="let preview of previews" [src]="preview" class="preview" />
+                          </div>
+
                         <br><br>
+
+
+
                         <h4 class="card-title">Add additonal comments</h4>
                         <br>
                         <textarea formControlName="type18" class="form-control"

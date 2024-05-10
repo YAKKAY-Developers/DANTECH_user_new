@@ -29,6 +29,10 @@ import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { DisableRightClickService } from 'src/app/services/disable-right-click.service';
 import { ToasterService } from 'src/app/services/toaster.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { FileUploadService } from 'src/app/services/file-upload.service';
+
 
 export function fileExtensionValidator(allowedExtensions: string[]) {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -122,6 +126,15 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   //  selectedTeeth: { [key: string]: boolean } = {}; // Declare selectedTeeth here
 
 
+  //File image upload
+  selectedFiles?: FileList;
+  progressInfos: any[] = [];
+  message: string[] = [];
+
+  previews: string[] = [];
+  imageInfos?: Observable<any>;
+
+
   // questions
   type1Checkboxes = [
     'Wax-Up',
@@ -200,7 +213,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private userservice: UserService,
     private orderservice: OrderService,
-    private toasterService :ToasterService
+    private toasterService :ToasterService,
+    private uploadService: FileUploadService
   ) {}
 
   getTodayDate(): string {
@@ -763,6 +777,73 @@ console.log('My form data', formPayload);
         // Handle invalid field as needed
       }
     });
+  }
+
+
+  selectFiles(event: any): void {
+    this.message = [];
+    this.progressInfos = [];
+    this.selectedFiles = event.target.files;
+  
+    this.previews = [];
+    if (this.selectedFiles && this.selectedFiles.length > 0) {
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        const file = this.selectedFiles[i];
+        const fileType = file.type;
+        const allowedTypes = [
+          'image/jpeg',
+          'image/jpg', 
+          'image/png', 
+          'application/pdf',
+           'model/stl', 
+           'model/ply'];
+        
+        if (!allowedTypes.includes(fileType)) {
+          //this.message.push(`${file.name} is not a valid file type.`);
+         //Add a toaster message for invalid dat type
+          continue;
+        }
+  
+        // Process the file if it's valid
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          console.log(e.target.result);
+          this.previews.push(e.target.result);
+        };
+        reader.readAsDataURL(file);
+  
+        // Immediately upload the file after selecting it
+        this.upload(i, this.selectedFiles[i]);
+      }
+    }
+  }
+
+  upload(idx: number, file: File): void {
+    this.progressInfos[idx] = { value: 0, fileName: file.name };
+
+    if (file) {
+      this.uploadService.upload(file).subscribe({
+        next: (event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
+          } else if (event instanceof HttpResponse) {
+            const msg = file.name + ": Successful!";
+            this.message.push(msg);
+            this.imageInfos = this.uploadService.getFiles();
+          }
+        },
+        error: (err: any) => {
+          this.progressInfos[idx].value = 0;
+          let msg = file.name + ": Failed!";
+
+          if (err.error && err.error.message) {
+            msg += " " + err.error.message;
+          }
+
+          this.message.push(msg);
+          this.imageInfos = this.uploadService.getFiles();
+        }});
+    }
   }
 
   
