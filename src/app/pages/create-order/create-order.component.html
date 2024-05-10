@@ -16,19 +16,19 @@
 
 
                         <label for="service">Consultant</label>
-                        <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f['fullName'].errors }"
-                        formControlName="fullName" placeholder="Consultant Name" type="tel" required>
+                        <!-- <input class="form-control" [ngClass]="{ 'is-invalid': submitted && f['fullName'].errors }"
+                        formControlName="fullName" placeholder="Consultant Name" type="tel" required> -->
 
-                        <!-- <select class="form-control form-select" formControlName="fullName">
+                        <select class="form-control form-select" formControlName="fullName">
                             <option *ngFor='let item of consultantDetails' [value]="item.fullName">{{item.fullName }}
                             </option>
-                        </select> -->
+                        </select>
 
-                        <div *ngIf="submitted && f['fullName'].errors" class="invalid-feedback">
+                        <!-- <div *ngIf="submitted && f['fullName'].errors" class="invalid-feedback">
                             <div *ngIf="f['fullName'].errors && f['fullName'].errors['required']">Name is required</div>
                             <div *ngIf="f['fullName'].errors && f['fullName'].errors['minlength']">Enter a valid name
                                 (should contain at least 3 characters)</div>
-                        </div>
+                        </div> -->
 
 
                     </div>
