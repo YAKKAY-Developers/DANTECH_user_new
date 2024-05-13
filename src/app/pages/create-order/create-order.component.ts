@@ -825,30 +825,55 @@ console.log('My form data', formPayload);
   }
 
   upload(idx: number, file: File): void {
-    this.progressInfos[idx] = { value: 0, fileName: file.name };
+    // this.progressInfos[idx] = { value: 0, fileName: file.name };
+
+
+    // if (file) {
+    //   this.uploadService.upload(file).pipe(first()).subscribe({ 
+        
+    //     next: (event: any)  => {
+
+    //       if (event.type === HttpEventType.UploadProgress) {
+    //             this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
+    //           }
+    //            else if (event instanceof HttpResponse) {
+    //             const msg = file.name + ": Successful!";
+    //             this.message.push(msg);
+    //             this.imageInfos = this.uploadService.getFiles();
+    //           }
+    //   },
+
 
     if (file) {
       this.uploadService.upload(file).subscribe({
+
         next: (event: any) => {
-          if (event.type === HttpEventType.UploadProgress) {
-            this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
-          } else if (event instanceof HttpResponse) {
-            const msg = file.name + ": Successful!";
-            this.message.push(msg);
-            this.imageInfos = this.uploadService.getFiles();
-          }
+          // if (event.type === HttpEventType.UploadProgress) {
+          //   this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
+          // }
+          //  else if (event instanceof HttpResponse) {
+          //   const msg = file.name + ": Successful!";
+          //   this.message.push(msg);
+          //   this.imageInfos = this.uploadService.getFiles();
+            
+          // }
         },
-        error: (err: any) => {
-          this.progressInfos[idx].value = 0;
-          let msg = file.name + ": Failed!";
+        // error: (err: any) => {
+        //   this.progressInfos[idx].value = 0;
+        //   let msg = file.name + ": Failed!";
 
-          if (err.error && err.error.message) {
-            msg += " " + err.error.message;
-          }
+        //   if (err.error && err.error.message) {
+        //     msg += " " + err.error.message;
+        //   }
 
-          this.message.push(msg);
-          this.imageInfos = this.uploadService.getFiles();
-        }});
+        //   this.message.push(msg);
+        //   console.log("Test",msg)
+        //   this.imageInfos = this.uploadService.getFiles();
+        // }
+      
+      }
+      
+      );
     }
   }
 
