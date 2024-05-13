@@ -58,7 +58,35 @@ export class OrderService {
 
 
 
-  //Justto check
+  
+  
+  
+  
+  
+  // createOrder(userToken: any, accessToken: any, form: any, formdata: any, selected_tooth: any, filename: string) {
+  //   let headers = new HttpHeaders({
+  //     'x-access-token': `${accessToken}`
+  //   });
+  //   const body = {
+  //     userToken: userToken,
+  //     form: form,
+  //     formdata: formdata,
+  //     tooth: selected_tooth,
+  //     filename: filename // Include the filename in the request body
+  //   };
+    
+  //   return this.http.post(`${environment.apiUrl}/api/order/createOrder`, body , { headers });
+  // }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   submitSurvey(userToken: any, accessToken: any, surveyResponse: any): Observable<any> {
     let headers = new HttpHeaders({
       'x-access-token': `${accessToken}`
