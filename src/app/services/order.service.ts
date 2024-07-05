@@ -40,7 +40,7 @@ export class OrderService {
 
 
   createOrder(userToken: any, accessToken: any, form: any, formdata: any, selected_tooth: any) {
-    console.log("I am in createorder service service")
+    console.log("I am in createorder service service printing formData", formdata)
    
     let headers = new HttpHeaders({
       'x-access-token': `${accessToken}`

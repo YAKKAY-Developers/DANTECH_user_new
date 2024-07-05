@@ -135,6 +135,12 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   imageInfos?: Observable<any>;
 
 
+
+  //Image 
+ 
+  fileNames: string[] = [];
+
+
   // questions
   type1Checkboxes = [
     'Wax-Up',
@@ -679,6 +685,8 @@ console.log("My selectedTeeth value OnSubmit is ", selectedTeeth)
         type18: 'Comments',
         type19: 'Pontic Design',
         option19: selectedOptionsType19,
+        file: this.fileNames.join(", ")  
+
       },
     };
 
@@ -785,13 +793,15 @@ console.log('My form data', formPayload);
     });
   }
 
-
   selectFiles(event: any): void {
     this.message = [];
     this.progressInfos = [];
     this.selectedFiles = event.target.files;
-  
+    const files = event.target.files;
+
     this.previews = [];
+    this.fileNames = [];
+
     if (this.selectedFiles && this.selectedFiles.length > 0) {
       for (let i = 0; i < this.selectedFiles.length; i++) {
         const file = this.selectedFiles[i];
@@ -805,24 +815,28 @@ console.log('My form data', formPayload);
            'model/ply'];
         
         if (!allowedTypes.includes(fileType)) {
-          //this.message.push(`${file.name} is not a valid file type.`);
-         //Add a toaster message for invalid dat type
+          // Add a toaster message for invalid data type
           continue;
         }
-  
+
+        this.fileNames.push(file.name);
+
+
+        console.log("My file Name", this.fileNames)
+
         // Process the file if it's valid
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          console.log(e.target.result);
           this.previews.push(e.target.result);
         };
         reader.readAsDataURL(file);
-  
+
         // Immediately upload the file after selecting it
         this.upload(i, this.selectedFiles[i]);
       }
     }
   }
+
 
   upload(idx: number, file: File): void {
     // this.progressInfos[idx] = { value: 0, fileName: file.name };
