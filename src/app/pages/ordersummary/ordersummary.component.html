@@ -202,24 +202,11 @@
                                                                   </a>
                                                                 
 
-                                                                  <p><strong>Files: </strong></p>
                                                                 
-                                                                  <!-- <div class="files-container">
-                                                                    <div *ngFor="let file of fileArray">
-                                                                      <div class="file-item">
-                                                                        <ng-container *ngIf="isImage(file)">
-                                                                          <img [src]="getFilePath(file)" alt="File Thumbnail" width="100" class="img-thumbnail">
-                                                                        </ng-container>
-                                                                        <ng-container *ngIf="!isImage(file)">
-                                                                          <a [href]="getFilePath(file)" download>{{ file }}</a>
-                                                                        </ng-container>
-                                                                      </div>
-                                                                    </div>
-                                                                  </div>
-                                                     -->
 
-
-                                                     <div class="files-container">
+                                                     <div *ngIf="fileArray && fileArray.length > 0" class="files-container">
+                                                        
+                                                        <p><strong>Files: </strong></p>
                                                         <div *ngFor="let file of fileArray">
                                                           <div class="file-item">
                                                             <ng-container *ngIf="isImage(file)">
