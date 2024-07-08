@@ -34,7 +34,7 @@ export class OrdersummaryComponent {
   consultantDetails: any;
   consultantCount: any;
   userresult:any
-
+  fileArray: string[] = [];
   // refinedResult:any
 
   constructor(
@@ -76,6 +76,9 @@ export class OrdersummaryComponent {
    
 
      console.log("Result:", this.result)
+     if (this.result.file) {
+      this.fileArray = this.result.file.split(',').map(file => file.trim());
+    }
   
     },
    error: (error) => {
@@ -103,6 +106,15 @@ export class OrdersummaryComponent {
  
 
 
+  }
+
+  isImage(fileName: string): boolean {
+    const ext = fileName.split('.').pop()?.toLowerCase();
+    return ['jpg', 'jpeg', 'png', 'gif'].includes(ext ?? '');
+  }
+
+  getFilePath(fileName: string): string {
+    return `assets/images/uploads/${fileName}`;
   }
 
 
