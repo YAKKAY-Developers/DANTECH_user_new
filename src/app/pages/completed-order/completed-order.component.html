@@ -44,7 +44,7 @@
                     <tr *ngFor='let ts of filteredData'>
                         <!-- <ng-container *ngIf="ts.userOrder.orderStatusId === 4&& (filteredData && filteredData.length > 0); else noOrders">
                         -->
-                            <ng-container *ngIf="ts.userOrder.orderStatusId === 4">
+                            <ng-container *ngIf="ts.userOrder.orderStatusId === 4 || ts.userOrder.orderStatusId === 7 ">
                        
                        
                             <td>...{{ts.userOrder.workOrderNumber.slice(-3)}}</td>
@@ -55,6 +55,7 @@
                             <span class="badge rounded-pill bg-warning" *ngSwitchCase="3">Order In Progress</span>
                             <span class="badge rounded-pill bg-success" *ngSwitchCase="4">Order Completed</span>
                             <span class="badge rounded-pill bg-danger" *ngSwitchCase="5">Order Rejected</span>
+                            <span class="badge rounded-pill bg-warning" *ngSwitchCase="7">Production Completed</span>
                         </ng-container>
                         </td>
 
