@@ -34,8 +34,9 @@ function calculatePercentageCompletion(userObject: any): number {
     userObject.basicInfo.address &&
     userObject.basicInfo.city &&
     userObject.basicInfo.pincode &&
-    userObject.basicInfo.country &&
-    userObject.basicInfo.photo
+    userObject.basicInfo.country 
+    //&&
+    //userObject.basicInfo.photo
   ) {
     filledFields++;
   }

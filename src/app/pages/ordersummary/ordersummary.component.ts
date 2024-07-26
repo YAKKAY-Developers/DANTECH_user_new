@@ -114,7 +114,8 @@ export class OrdersummaryComponent {
   }
 
   getFilePath(fileName: string): string {
-    return `assets/images/uploads/${fileName}`;
+   // return `assets/images/uploads/${fileName}`;
+   return `http://dantechlab.yakkaytech.co.in:81/Image/${fileName}`
   }
 
 

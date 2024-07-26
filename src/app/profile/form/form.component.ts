@@ -142,7 +142,7 @@ export class FormComponent {
 
 
     this.form = this.formBuilder.group({
-      photo: ['',[Validators.required]],
+     // photo: ['',[Validators.required]],
       name: [
         '',
         [
