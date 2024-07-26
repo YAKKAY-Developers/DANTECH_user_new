@@ -664,7 +664,13 @@
                         <!-- <input class="form-control" type="file" value="">
                         <p>Acceptable file formats - images, pdf, stl, ply</p> -->
 
-                        <input class="form-control" type="file" accept="image/*,.pdf,.stl,.ply" multiple (change)="selectFiles($event)" />
+                        <div class="drag-drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+                            <input class="form-control" type="file" accept="image/*,.pdf,.stl,.ply" multiple (change)="selectFiles($event)" />
+                            <p>Acceptable file formats - images, pdf, stl, ply</p>
+                        </div>
+
+
+                        <!-- <input class="form-control" type="file" accept="image/*,.pdf,.stl,.ply" multiple (change)="selectFiles($event)" /> -->
 
                         <div>
                             <img *ngFor="let preview of previews" [src]="preview" class="preview" />

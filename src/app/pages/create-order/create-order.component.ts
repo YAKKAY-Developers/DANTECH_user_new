@@ -794,102 +794,81 @@ console.log('My form data', formPayload);
   }
 
   selectFiles(event: any): void {
+    this.handleFiles(event.target.files);
+}
+
+onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.handleFiles(event.dataTransfer?.files);
+}
+
+onDragOver(event: DragEvent) {
+    event.preventDefault();
+    const dragDropArea = event.currentTarget as HTMLElement;
+    dragDropArea.classList.add('drag-over');
+}
+
+onDragLeave(event: DragEvent) {
+    const dragDropArea = event.currentTarget as HTMLElement;
+    dragDropArea.classList.remove('drag-over');
+}
+
+handleFiles(files: FileList | null) {
+    if (!files) return;
+    
     this.message = [];
     this.progressInfos = [];
-    this.selectedFiles = event.target.files;
-    const files = event.target.files;
-
+    this.selectedFiles = files;
     this.previews = [];
     this.fileNames = [];
 
     if (this.selectedFiles && this.selectedFiles.length > 0) {
-      for (let i = 0; i < this.selectedFiles.length; i++) {
-        const file = this.selectedFiles[i];
-        const fileType = file.type;
-        const allowedTypes = [
-          'image/jpeg',
-          'image/jpg', 
-          'image/png', 
-          'application/pdf',
-           'model/stl', 
-           'model/ply'];
-        
-        if (!allowedTypes.includes(fileType)) {
-          // Add a toaster message for invalid data type
-          continue;
+        for (let i = 0; i < this.selectedFiles.length; i++) {
+            const file = this.selectedFiles[i];
+            const fileType = file.type;
+            const allowedTypes = [
+                'image/jpeg',
+                'image/jpg', 
+                'image/png', 
+                'application/pdf',
+                'model/stl', 
+                'model/ply'
+            ];
+
+            if (!allowedTypes.includes(fileType)) {
+                // Add a toaster message for invalid data type
+                continue;
+            }
+
+            this.fileNames.push(file.name);
+
+            console.log("My file Name", this.fileNames);
+
+            // Process the file if it's valid
+            const reader = new FileReader();
+            reader.onload = (e: any) => {
+                this.previews.push(e.target.result);
+            };
+            reader.readAsDataURL(file);
+
+            // Immediately upload the file after selecting it
+            this.upload(i, this.selectedFiles[i]);
         }
-
-        this.fileNames.push(file.name);
-
-
-        console.log("My file Name", this.fileNames)
-
-        // Process the file if it's valid
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.previews.push(e.target.result);
-        };
-        reader.readAsDataURL(file);
-
-        // Immediately upload the file after selecting it
-        this.upload(i, this.selectedFiles[i]);
-      }
     }
-  }
+}
 
-
-  upload(idx: number, file: File): void {
-    // this.progressInfos[idx] = { value: 0, fileName: file.name };
-
-
-    // if (file) {
-    //   this.uploadService.upload(file).pipe(first()).subscribe({ 
-        
-    //     next: (event: any)  => {
-
-    //       if (event.type === HttpEventType.UploadProgress) {
-    //             this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
-    //           }
-    //            else if (event instanceof HttpResponse) {
-    //             const msg = file.name + ": Successful!";
-    //             this.message.push(msg);
-    //             this.imageInfos = this.uploadService.getFiles();
-    //           }
-    //   },
-
-
+upload(idx: number, file: File): void {
     if (file) {
-      this.uploadService.upload(file).subscribe({
-
-        next: (event: any) => {
-          // if (event.type === HttpEventType.UploadProgress) {
-          //   this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
-          // }
-          //  else if (event instanceof HttpResponse) {
-          //   const msg = file.name + ": Successful!";
-          //   this.message.push(msg);
-          //   this.imageInfos = this.uploadService.getFiles();
-            
-          // }
-        },
-        // error: (err: any) => {
-        //   this.progressInfos[idx].value = 0;
-        //   let msg = file.name + ": Failed!";
-
-        //   if (err.error && err.error.message) {
-        //     msg += " " + err.error.message;
-        //   }
-
-        //   this.message.push(msg);
-        //   console.log("Test",msg)
-        //   this.imageInfos = this.uploadService.getFiles();
-        // }
-      
-      }
-      
-      );
+        this.uploadService.upload(file).subscribe({
+            next: (event: any) => {
+                // Handle upload success
+            },
+            error: (err: any) => {
+                // Handle upload error
+            }
+        });
     }
-  }
+}
 
   
  
