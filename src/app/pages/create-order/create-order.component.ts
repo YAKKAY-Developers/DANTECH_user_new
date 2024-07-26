@@ -135,6 +135,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   previews: { src: string, type: string }[] = [];
   imageInfos?: Observable<any>;
 
+  todays_date: string;
+
 
 
   //Image 
@@ -261,6 +263,19 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   
     this.today_date = this.getTodayDate();
     this.initializeForm();
+
+    this.today_date = new Date().toISOString().split('T')[0]; // Set today's date
+
+    this.form.get('priority')?.valueChanges.subscribe((checked: boolean) => {
+      if (checked) {
+        this.setRequiredDate();
+      } else {
+        this.form.get('requiredDate')?.setValue('');
+      }
+    });
+
+
+    
     this.populateCheckboxes();
   
     // Get user details
@@ -360,7 +375,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
           Validators.pattern('[0-9]+'),
         ],
       ],
-      priority:[''],
+      priority:[false],
       patientGender: ['', [Validators.required]],
       mobileNumber: [
         '',
@@ -442,6 +457,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
         // Validators.required
       ),
     });
+    
   }
 
   ngOnDestroy(): void {
@@ -812,6 +828,13 @@ onDragOver(event: DragEvent) {
 onDragLeave(event: DragEvent) {
     const dragDropArea = event.currentTarget as HTMLElement;
     dragDropArea.classList.remove('drag-over');
+}
+
+setRequiredDate() {
+  const today = new Date();
+  today.setDate(today.getDate() + 3);
+  const requiredDate = today.toISOString().split('T')[0];
+  this.form.get('requiredDate')?.setValue(requiredDate);
 }
 
 handleFiles(files: FileList | null) {

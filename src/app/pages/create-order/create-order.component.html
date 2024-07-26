@@ -168,42 +168,37 @@
 
             <div class="wd100 colleft question-checkbox" style="padding:2%">
                 <div class="row">
-                    <div class="col-6">
-                        <div class="row">
-                            <label style="margin-bottom:8px;">Service</label>
-
-                            <select formControlName="service" class="form-control form-select d-inline-flex p-2"
-                                [ngClass]="{ 'is-invalid': submitted && f['service'].errors }"
-                                style="padding-right:15px;">
-                                <!-- <option value="Offline - Tooth Support Cercon Crown & Bridges">Offline - Tooth Support Cercon Crown & Bridges </option>
-                                <option value="Online - Tooth Support Cercon Crown & Bridges">Online - Tooth Support Cercon Crown & Bridges </option>
-                                -->
-                                <option *ngFor='let item of workflowResult' [value]="item.workflowName">{{item.workflowName }}
-                                </option>
-                            </select>
-                        </div>
+                  <div class="col-6">
+                    <div class="row">
+                      <label style="margin-bottom:8px;">Service</label>
+                      <select formControlName="service" class="form-control form-select d-inline-flex p-2"
+                        [ngClass]="{ 'is-invalid': submitted && f['service'].errors }"
+                        style="padding-right:15px;">
+                        <option *ngFor='let item of workflowResult' [value]="item.workflowName">
+                          {{item.workflowName }}
+                        </option>
+                      </select>
                     </div>
-                    <div class="col-3">
-                        &nbsp;
-                        <label name="">Order Date</label>
-                        <input class="form-control" formControlName="orderDate"
-                            [ngClass]="{ 'is-invalid': submitted && f['orderDate'].errors }" placeholder="Order Date"
-                            type="date" [(ngModel)]="today_date" readonly>
-                    </div>
-                    <div class="col-3">
-                        &nbsp;
-                        <label name="">Required Date</label>
-                        <input class="form-control" formControlName="requiredDate"
-                            [ngClass]="{ 'is-invalid': submitted && f['requiredDate'].errors }" placeholder="DD/MM/YYYY"
-                            type="date" [min]="getTodayDate()">
-                    </div>
-
-
-
+                  </div>
+                  <div class="col-3">
+                    &nbsp;
+                    <label name="">Order Date</label>
+                    <input class="form-control" formControlName="orderDate"
+                      [ngClass]="{ 'is-invalid': submitted && f['orderDate'].errors }"
+                      placeholder="Order Date" type="date" [(ngModel)]="today_date" readonly>
+                  </div>
+                  <div class="col-3">
+                    &nbsp;
+                    <label name="">Required Date</label>
+                    <input class="form-control" formControlName="requiredDate"
+                      [ngClass]="{ 'is-invalid': submitted && f['requiredDate'].errors }"
+                      placeholder="DD/MM/YYYY" type="date" [min]="getTodayDate()">
+                  </div>
                 </div>
                 <input type="checkbox" id="priority" name="priority" value="priority" formControlName="priority">
                 <label for="priority"> Check the option if you want the order to be delivered within 3 days </label><br>
-            </div>
+              </div>
+              
 
             <div class=" wd100">
                 <hr>
