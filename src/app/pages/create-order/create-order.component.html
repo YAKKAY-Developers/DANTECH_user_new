@@ -660,21 +660,24 @@
                     <h4 class="card-title">Notes</h4>
                     <div class="row">
                         <br>
+    <!-- Drag and Drop Area -->
+    <div class="drag-drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+        <input class="form-control" type="file" accept="image/*,.pdf,.stl,.ply" multiple (change)="selectFiles($event)" />
+        <p>Acceptable file formats - images, pdf, stl, ply</p>
+    </div>
 
-                        <!-- <input class="form-control" type="file" value="">
-                        <p>Acceptable file formats - images, pdf, stl, ply</p> -->
-
-                        <div class="drag-drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
-                            <input class="form-control" type="file" accept="image/*,.pdf,.stl,.ply" multiple (change)="selectFiles($event)" />
-                            <p>Acceptable file formats - images, pdf, stl, ply</p>
-                        </div>
-
-
-                        <!-- <input class="form-control" type="file" accept="image/*,.pdf,.stl,.ply" multiple (change)="selectFiles($event)" /> -->
-
-                        <div>
-                            <img *ngFor="let preview of previews" [src]="preview" class="preview" />
-                          </div>
+    <div class="previews">
+        <div *ngFor="let preview of previews">
+            <ng-container *ngIf="preview.type.startsWith('image/'); else fileIcon">
+                <img [src]="preview.src" class="preview" />
+            </ng-container>
+            <ng-template #fileIcon>
+                <img [src]="preview.src" class="file-icon-preview" />
+            </ng-template>
+        </div>
+    </div>
+    
+    
 
                         <br><br>
 

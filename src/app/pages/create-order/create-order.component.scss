@@ -786,3 +786,38 @@ input[type="checkbox"]:checked+label {
 .drag-drop-area.drag-over {
     background-color: #e9ecef;
 }
+
+
+
+.previews {
+    display: flex; /* or display: grid; */
+    flex-wrap: wrap; /* or grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); */
+    gap: 10px;
+}
+
+.preview, .file-icon-preview {
+    max-width: 150px; /* or max-width: 100%; */
+    max-height: 150px;
+    object-fit: cover;
+    margin: 5px;
+}
+
+.preview, .file-icon-preview {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+@media (max-width: 600px) {
+    .preview, .file-icon-preview {
+        max-width: 100px; /* Adjust for smaller screens */
+        max-height: 100px;
+    }
+}
+
+@media (min-width: 601px) {
+    .preview, .file-icon-preview {
+        max-width: 150px; /* Adjust for larger screens */
+        max-height: 150px;
+    }
+}
+

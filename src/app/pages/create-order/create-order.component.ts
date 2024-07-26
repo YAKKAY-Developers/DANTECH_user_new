@@ -131,7 +131,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
   progressInfos: any[] = [];
   message: string[] = [];
 
-  previews: string[] = [];
+  //previews: string[] = [];
+  previews: { src: string, type: string }[] = [];
   imageInfos?: Observable<any>;
 
 
@@ -814,48 +815,64 @@ onDragLeave(event: DragEvent) {
 }
 
 handleFiles(files: FileList | null) {
-    if (!files) return;
-    
-    this.message = [];
-    this.progressInfos = [];
-    this.selectedFiles = files;
-    this.previews = [];
-    this.fileNames = [];
+  if (!files) return;
 
-    if (this.selectedFiles && this.selectedFiles.length > 0) {
-        for (let i = 0; i < this.selectedFiles.length; i++) {
-            const file = this.selectedFiles[i];
-            const fileType = file.type;
-            const allowedTypes = [
-                'image/jpeg',
-                'image/jpg', 
-                'image/png', 
-                'application/pdf',
-                'model/stl', 
-                'model/ply'
-            ];
+  this.message = [];
+  this.progressInfos = [];
+  this.selectedFiles = files;
+  this.previews = [];
+  this.fileNames = [];
 
-            if (!allowedTypes.includes(fileType)) {
-                // Add a toaster message for invalid data type
-                continue;
-            }
+  if (this.selectedFiles && this.selectedFiles.length > 0) {
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+          const file = this.selectedFiles[i];
+          const fileType = file.type;
+          const allowedTypes = [
+              'image/jpeg',
+              'image/jpg', 
+              'image/png', 
+              'application/pdf',
+              'model/stl', 
+              'model/ply'
+          ];
 
-            this.fileNames.push(file.name);
+          if (!allowedTypes.includes(fileType)) {
+              // Add a toaster message for invalid data type
+              continue;
+          }
 
-            console.log("My file Name", this.fileNames);
+          this.fileNames.push(file.name);
 
-            // Process the file if it's valid
-            const reader = new FileReader();
-            reader.onload = (e: any) => {
-                this.previews.push(e.target.result);
-            };
-            reader.readAsDataURL(file);
+          console.log("My file Name", this.fileNames);
 
-            // Immediately upload the file after selecting it
-            this.upload(i, this.selectedFiles[i]);
-        }
-    }
+          // Process the file if it's valid
+          const reader = new FileReader();
+          reader.onload = (e: any) => {
+              let previewSrc = '';
+              if (fileType.startsWith('image/')) {
+                  previewSrc = e.target.result;
+              } else if (fileType === 'application/pdf') {
+                  previewSrc = 'assets/images/files/pdf-icon.png'; // Ensure this path is correct
+              } else if (fileType === 'model/stl' || fileType === 'model/ply') {
+                  previewSrc = 'assets/images/files/3d-icon.png'; // Ensure this path is correct
+              } else {
+                  previewSrc = 'assets/images/files/file-icon.png'; // Default file icon path
+              }
+              this.previews.push({ src: previewSrc, type: fileType });
+          };
+          // For non-image files, you don't need to use readAsDataURL, just use the placeholder icon
+          if (fileType.startsWith('image/')) {
+              reader.readAsDataURL(file);
+          } else {
+              reader.readAsDataURL(new Blob([file], { type: fileType }));
+          }
+
+          // Immediately upload the file after selecting it
+          this.upload(i, this.selectedFiles[i]);
+      }
+  }
 }
+
 
 upload(idx: number, file: File): void {
     if (file) {
@@ -869,6 +886,11 @@ upload(idx: number, file: File): void {
         });
     }
 }
+
+
+
+
+
 
   
  
