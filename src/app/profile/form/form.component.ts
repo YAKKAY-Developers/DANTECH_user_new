@@ -157,9 +157,12 @@ export class FormComponent {
       mobileNumber: ['', [Validators.required, 
         Validators.pattern('[0-9]{10}'
         )]],
-        alternatePhoneNumber: [
-        '',
-        [Validators.required, Validators.pattern('[0-9]{10}')],
+      //   alternatePhoneNumber: [
+      //   '',
+      //   [Validators.required, Validators.pattern('[0-9]{10}')],
+      // ],
+      alternatePhoneNumber: [
+        ''
       ],
       address: ['', [Validators.required, Validators.maxLength(100)]],
       city: ['', [Validators.required, Validators.min(3)]],

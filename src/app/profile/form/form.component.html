@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <!-- Form Group (last name)-->
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <label for="inputLastName">Alternate number</label>
                         <input type="text" formControlName="alternatePhoneNumber" class="form-control"
                             value="{{ basicInfo?.alternatePhoneNumber }}"
@@ -102,7 +102,25 @@
                                 Should contain
                                 only numerals(10)</div>
                         </div>
+                    </div> -->
+                
+                    <div class="col-md-6">
+                        <label for="inputLastName">Alternate number</label>
+                        <input type="text" formControlName="alternatePhoneNumber" class="form-control"
+                            value="{{ basicInfo?.alternatePhoneNumber }}"
+                            [ngClass]="{ 'is-invalid': submitted && f['alternatePhoneNumber'].errors }"
+                            [(ngModel)]="basicInfo.alternatePhoneNumber" placeholder="Enter Alternative number" />
+                        <div *ngIf="submitted && f['alternatePhoneNumber'].errors" class="invalid-feedback">
+                            <!-- You can remove this 'required' check since the field is not required -->
+                            <!-- No need to display error for required -->
+                        </div>
                     </div>
+                    
+                
+                
+                
+                
+                
                 </div>
                 <!-- Form Group (address)-->
                 <div class="mb-3">
