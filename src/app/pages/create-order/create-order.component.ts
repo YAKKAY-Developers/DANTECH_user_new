@@ -379,11 +379,11 @@ export class CreateOrderComponent implements OnInit, AfterViewInit, OnDestroy {
       patientGender: ['', [Validators.required]],
       mobileNumber: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(10),
-        ],
+        // [
+        //   Validators.required,
+        //   Validators.minLength(10),
+        //   Validators.maxLength(10),
+        // ],
        
       ],
       
